@@ -1,0 +1,41 @@
+{
+    "meta": {
+        "version": "1.0.0",
+        "description": "恶意行为及后门检测规则",
+        "last_updated": "2026-05-19"
+    },
+    "rules": [
+        {
+            "check_name": "suspicious_cron",
+            "suspicious_keywords": [
+                "bash -i >& /dev/tcp/",
+                "nc -e /bin/sh",
+                "curl.*|.*bash",
+                "wget.*|.*sh",
+                "python -c 'import socket'",
+                "perl -e '",
+                "ruby -rsocket",
+                "ncat",
+                "socat",
+                "reverse shell"
+            ],
+            "severity": "critical",
+            "remediation": "立即删除可疑cron任务，检查系统是否已被入侵。"
+        },
+        {
+            "check_name": "unauthorized_ssh_keys",
+            "severity": "high",
+            "remediation": "删除可疑的authorized_keys文件内容，并重新配置SSH密钥认证。"
+        },
+        {
+            "check_name": "recent_suid_files",
+            "severity": "medium",
+            "remediation": "审查最近设置的SUID文件，若非必要则移除SUID位。"
+        },
+        {
+            "check_name": "suspicious_tmp_executables",
+            "severity": "medium",
+            "remediation": "删除/tmp目录中的可疑可执行文件，并检查系统是否被植入后门。"
+        }
+    ]
+}

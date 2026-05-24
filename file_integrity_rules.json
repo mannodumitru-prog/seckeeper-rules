@@ -1,0 +1,37 @@
+{
+    "meta": {
+        "version": "1.0.0",
+        "description": "敏感文件权限基线",
+        "last_updated": "2026-05-19"
+    },
+    "rules": [
+        {
+            "file_path": "/etc/shadow",
+            "expected_permission": "600",
+            "severity": "critical",
+            "check_type": "more_strict",
+            "remediation": "执行 `sudo chmod 600 /etc/shadow` 或更严格权限。"
+        },
+        {
+            "file_path": "/etc/passwd",
+            "expected_permission": "644",
+            "severity": "high",
+            "check_type": "exact",
+            "remediation": "执行 `sudo chmod 644 /etc/passwd` 恢复正确权限。"
+        },
+        {
+            "file_path": "/etc/sudoers",
+            "expected_permission": "440",
+            "severity": "critical",
+            "check_type": "exact",
+            "remediation": "执行 `sudo chmod 440 /etc/sudoers`。"
+        },
+        {
+            "file_path": "/root",
+            "expected_permission": "700",
+            "severity": "high",
+            "check_type": "more_strict",
+            "remediation": "执行 `sudo chmod 700 /root` 限制仅root访问。"
+        }
+    ]
+}

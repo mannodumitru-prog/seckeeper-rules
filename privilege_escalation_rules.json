@@ -1,0 +1,47 @@
+{
+    "meta": {
+        "version": "1.0.0",
+        "description": "提权风险检测规则",
+        "last_updated": "2026-05-19"
+    },
+    "rules": [
+        {
+            "check_name": "dangerous_suid_files",
+            "dangerous_binaries": [
+                "find",
+                "vim",
+                "bash",
+                "zsh",
+                "nano",
+                "less",
+                "more",
+                "awk",
+                "perl",
+                "python",
+                "python3",
+                "ruby",
+                "php",
+                "gdb",
+                "strace",
+                "mount",
+                "umount",
+                "passwd",
+                "chsh",
+                "chfn",
+                "su"
+            ],
+            "severity": "high",
+            "remediation": "使用 `chmod u-s <文件路径>` 移除SUID位，或使用 `chmod 755` 恢复普通权限。"
+        },
+        {
+            "check_name": "sudoers_dangerous_config",
+            "dangerous_patterns": [
+                "NOPASSWD:",
+                "!authenticate",
+                "SETENV:"
+            ],
+            "severity": "high",
+            "remediation": "编辑 /etc/sudoers，删除所有包含 NOPASSWD 或 !authenticate 的行，强制要求密码认证。"
+        }
+    ]
+}
