@@ -2,6 +2,7 @@ import os
 import json
 import hashlib
 from datetime import datetime
+from utils.osv_fetcher import fetch_osv_vulnerabilities
 
 MANIFEST_FILE = "manifest.json"
 
@@ -83,5 +84,39 @@ def transform_osv_to_seckeeper(osv_data):
     }
 
 
+def sync_cve_rules():
+    print("🔄 开始从 OSV 获取最新 CVE 情报...")
+    # 1. 抓取 (以 openssl 为例，您可以扩展到更多组件)
+    raw_vulns = fetch_osv_vulnerabilities("openssl", ecosystem="Debian")
+    new_rules = [transform_osv_to_seckeeper(v) for v in raw_vulns]
+    
+    # 2. 读取并合并现有规则
+    rule_file = "cve_rules.json"
+    with open(rule_file, "r", encoding="utf-8") as f:
+        data = json.load(f)
+        
+    existing_ids = {r['cve_id'] for r in data.get('rules', [])}
+    added = 0
+    for rule in new_rules:
+        if rule['cve_id'] not in existing_ids:
+            data['rules'].append(rule)
+            existing_ids.add(rule['cve_id'])
+            added += 1
+            
+    # 3. 更新 meta 信息
+    data["meta"]["last_updated"] = datetime.now().strftime("%Y-%m-%d")
+    data["meta"]["total_rules"] = len(data['rules'])
+    
+    # 4. 写回文件
+    with open(rule_file, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=4, ensure_ascii=False)
+    print(f"✅ 完成合并，新增 {added} 条 CVE 规则。")
+
+
+
 if __name__ == "__main__":
+    # 1. 先进行漏洞数据库的自动扩充
+    sync_cve_rules()
+    
+    # 2. 最后计算全库哈希并更新 manifest.json
     update_manifest()
