@@ -1,7 +1,15 @@
 {
-    "version": "1.0.1",
-    "last_updated": "2026-05-24T08:10:55.913193",
+    "version": "1.0.2",
+    "last_updated": "2026-05-24T08:19:14.161926",
     "files": {
+        "cve_rules.json": {
+            "version": "1.0.0",
+            "sha256": "13ee657120ec1c2ced3e16cda8400c3f86eddc3307d00a43c7b6b9eafad67864"
+        },
+        "config_rules.json": {
+            "version": "1.0.0",
+            "sha256": "8ea0f495c13b3695b47af519299cf76b3c00b2acd33d345ba6d7ba68137091b4"
+        },
         "file_integrity_rules.json": {
             "version": "1.0.0",
             "sha256": "92dc01d360c61b99d04a22b23eec3e069a45e256bace1b1e62d96bf71bf826b7"
@@ -9,6 +17,10 @@
         "threat_rules.json": {
             "version": "1.0.0",
             "sha256": "9209ce71e8facca2e9de15d33aaf9777f28f034620b479417b7ff7a3cc661eab"
+        },
+        "service_rules.json": {
+            "version": "1.0.0",
+            "sha256": "daca6dae81d58e16a48df30b537d304929d30f7e12c12e2f83548b14fa1a879c"
         },
         "privilege_escalation_rules.json": {
             "version": "1.0.0",
