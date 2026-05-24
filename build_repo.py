@@ -58,5 +58,30 @@ def update_manifest():
         
     print(f"✅ Manifest 已自动更新至版本: {new_version}")
 
+
+def transform_osv_to_seckeeper(osv_data):
+    """
+    将 OSV 复杂的 JSON 转换为您项目需要的精简格式
+    """
+    cve_id = osv_data.get('upstream', [osv_data.get('id')])[0] # 优先提取真实 CVE ID
+    
+    # 提取修复版本信息
+    fixed_version = "unknown"
+    for item in osv_data.get('affected', []):
+        for range_item in item.get('ranges', []):
+            for event in range_item.get('events', []):
+                if 'fixed' in event:
+                    fixed_version = event['fixed']
+    
+    # 映射为 SecKeeper 格式
+    return {
+        "cve_id": cve_id,
+        "severity": "high", # 可以根据详情中的 urgency 字段进一步优化
+        "description": osv_data.get('details', 'No description'),
+        "fixed_version": fixed_version,
+        "references": [ref['url'] for ref in osv_data.get('references', [])]
+    }
+
+
 if __name__ == "__main__":
     update_manifest()
