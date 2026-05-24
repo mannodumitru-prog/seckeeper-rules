@@ -1,0 +1,47 @@
+name: Auto Update Manifest
+
+# 触发条件：只要有人往 main 分支推送了 .json 结尾的规则文件，就触发流水线
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**.json'
+      - '!manifest.json' # 排除 manifest 自身的修改，防止死循环
+
+jobs:
+  update-manifest:
+    runs-on: ubuntu-latest
+    
+    # 授予机器人写入仓库的权限
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Run Build Script (自动算哈希、升版本)
+        run: |
+          # 这里调用您之前写的 build_repo.py 脚本
+          # 它会遍历当前所有的 json 规则，并生成最新的 manifest.json
+          python build_repo.py
+
+      - name: Commit and Push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          
+          # 检查是否有文件发生变化（比如 manifest.json 被更新了）
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git add manifest.json
+            git commit -m "chore: 🤖 自动更新 manifest.json (哈希与版本同步)"
+            git push
+          else
+            echo "没有需要更新的变更。"
+          fi
