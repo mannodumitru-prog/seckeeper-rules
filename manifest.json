@@ -1,23 +1,18 @@
 {
-    "version": "1.0.0",
-    "last_updated": "2026-05-24T15:15:37.443168",
-    "rules_breakdown": {
-        "privilege_escalation": 2,
-        "threat": 4,
-        "file_integrity": 4
-    },
+    "version": "1.0.1",
+    "last_updated": "2026-05-24T08:10:55.913193",
     "files": {
-        "privilege_escalation_rules.json": {
-            "version": "1.0.0",
-            "sha256": "c78bb9df0849e9342e065aedab4fc7f1aef58b96afa84d574d3dc5115e036df8"
-        },
-        "threat_rules.json": {
-            "version": "1.0.0",
-            "sha256": "131fb03bbeae41ed8f1c5f9cf6f092e7d0088fcf64d54c416579c0952becba82"
-        },
         "file_integrity_rules.json": {
             "version": "1.0.0",
             "sha256": "92dc01d360c61b99d04a22b23eec3e069a45e256bace1b1e62d96bf71bf826b7"
+        },
+        "threat_rules.json": {
+            "version": "1.0.0",
+            "sha256": "9209ce71e8facca2e9de15d33aaf9777f28f034620b479417b7ff7a3cc661eab"
+        },
+        "privilege_escalation_rules.json": {
+            "version": "1.0.0",
+            "sha256": "c78bb9df0849e9342e065aedab4fc7f1aef58b96afa84d574d3dc5115e036df8"
         }
     }
 }
