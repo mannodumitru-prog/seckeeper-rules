@@ -1,0 +1,59 @@
+{
+    "meta": {
+        "version": "1.0.0",
+        "description": "常见服务安全配置基线",
+        "last_updated": "2026-05-12"
+    },
+    "rules": [
+        {
+            "service": "ssh",
+            "config_file": "/etc/ssh/sshd_config",
+            "checks": [
+                {
+                    "name": "禁止空密码登录",
+                    "directive": "PermitEmptyPasswords",
+                    "expected": "no",
+                    "severity": "high",
+                    "description": "允许空密码登录可导致未授权访问",
+                    "remediation": "设置 PermitEmptyPasswords no"
+                },
+                {
+                    "name": "最大认证尝试次数",
+                    "directive": "MaxAuthTries",
+                    "expected": "3",
+                    "severity": "medium",
+                    "description": "认证尝试次数过多，易被暴力破解",
+                    "remediation": "设置 MaxAuthTries 为 3"
+                }
+            ]
+        },
+        {
+            "service": "nginx",
+            "config_file": "/etc/nginx/nginx.conf",
+            "checks": [
+                {
+                    "name": "隐藏版本号",
+                    "directive": "server_tokens",
+                    "expected": "off",
+                    "severity": "low",
+                    "description": "显示Nginx版本号会暴露漏洞信息",
+                    "remediation": "在 http 块中添加 server_tokens off;"
+                }
+            ]
+        },
+        {
+            "service": "mysql",
+            "config_file": "/etc/mysql/my.cnf",
+            "checks": [
+                {
+                    "name": "本地绑定地址",
+                    "directive": "bind-address",
+                    "expected": "127.0.0.1",
+                    "severity": "high",
+                    "description": "MySQL监听所有接口，增加被攻击面",
+                    "remediation": "设置 bind-address = 127.0.0.1 或使用防火墙限制"
+                }
+            ]
+        }
+    ]
+}

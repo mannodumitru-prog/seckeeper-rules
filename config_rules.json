@@ -1,0 +1,59 @@
+{
+    "meta": {
+        "version": "1.0.0",
+        "description": "系统安全配置合规检查规则",
+        "last_updated": "2026-05-12"
+    },
+    "rules": [
+        {
+            "check_name": "SSH Root登录禁用",
+            "check_type": "file",
+            "target": "/etc/ssh/sshd_config",
+            "expected": {"contains": "PermitRootLogin no"},
+            "severity": "high",
+            "category": "ssh",
+            "description": "允许root直接SSH登录会增加被暴力破解的风险",
+            "remediation": "在 /etc/ssh/sshd_config 中设置 PermitRootLogin no 并重启 sshd"
+        },
+        {
+            "check_name": "SSH密码认证",
+            "check_type": "file",
+            "target": "/etc/ssh/sshd_config",
+            "expected": {"contains": "PasswordAuthentication no"},
+            "severity": "high",
+            "category": "ssh",
+            "description": "启用密码认证可能遭受密码爆破攻击，建议使用密钥认证",
+            "remediation": "设置 PasswordAuthentication no，改用公钥认证"
+        },
+        {
+            "check_name": "防火墙状态",
+            "check_type": "command",
+            "target": "systemctl is-active ufw || systemctl is-active firewalld",
+            "expected": "active",
+            "severity": "high",
+            "category": "firewall",
+            "description": "防火墙未运行，系统暴露于网络攻击风险中",
+            "remediation": "启动防火墙并配置规则"
+        },
+        {
+            "check_name": "密码最小长度",
+            "check_type": "command",
+            "target": "grep '^minlen' /etc/security/pwquality.conf | awk '{print $3}'",
+            "expected": "8",
+            "severity": "medium",
+            "category": "password_policy",
+            "description": "密码最小长度不足8位，容易被破解",
+            "remediation": "在 /etc/security/pwquality.conf 中设置 minlen=8"
+        },
+        {
+            "check_name": "ICMP重定向禁用",
+            "check_type": "sysctl",
+            "target": "net.ipv4.conf.all.accept_redirects",
+            "expected": "0",
+            "severity": "low",
+            "category": "network",
+            "description": "ICMP重定向可能被用于中间人攻击",
+            "remediation": "设置 net.ipv4.conf.all.accept_redirects=0"
+        }
+    ]
+}
