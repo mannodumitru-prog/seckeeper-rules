@@ -1,0 +1,24 @@
+name: Test OSV Fetcher
+
+on:
+  workflow_dispatch: # 允许您在 GitHub 界面手动触发此测试
+
+jobs:
+  test-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run OSV Fetcher Test
+        run: |
+          # 直接运行您的 utils/osv_fetcher.py
+          python utils/osv_fetcher.py
