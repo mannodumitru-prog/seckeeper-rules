@@ -1,24 +1,38 @@
 name: Test OSV Fetcher
 
 on:
-  workflow_dispatch: # 允许您在 GitHub 界面手动触发此测试
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+  schedule:
+    - cron: '30 19 * * *'
 
 jobs:
-  test-api:
+  build-and-sync:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.9'
+          python-version: '3.11'
 
-      - name: Install dependencies
-        run: pip install requests
-
-      - name: Run OSV Fetcher Test
+      - name: Install Dependencies
         run: |
-          # 直接运行您的 utils/osv_fetcher.py
-          python utils/osv_fetcher.py
+          python -m pip install --upgrade pip
+          pip install requests cvss
+
+      - name: Run Engine & Update Manifest
+        run: |
+          python build_repo.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add cve_rules.json manifest.json
+          git commit -m "chore: 🤖 自动同步最新高危漏洞规则库 [skip ci]" || exit 0
+          git push
