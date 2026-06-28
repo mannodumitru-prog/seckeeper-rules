@@ -1,6 +1,6 @@
 {
-    "version": "1.0.12",
-    "last_updated": "2026-06-27T20:38:25.095493",
+    "version": "1.0.13",
+    "last_updated": "2026-06-28T09:23:16.990715",
     "files": {
         "privilege_escalation_rules.json": {
             "version": "1.0.0",
@@ -14,9 +14,13 @@
             "version": "1.0.0",
             "sha256": "92dc01d360c61b99d04a22b23eec3e069a45e256bace1b1e62d96bf71bf826b7"
         },
+        "weak_password_rules.json": {
+            "version": "1.0.0",
+            "sha256": "94f5be161e0d3b4966cce3c21a5a6c71256e93689dfd9a73646cff57bdaac40d"
+        },
         "cve_rules.json": {
             "version": "1.0.0",
-            "sha256": "592b9a5c9414fc8ffe2f65436f2780986414eedc6b96cc28136ea1659d135d3d"
+            "sha256": "d0f7b06bbd05906daa49112ce2d6868a34c1255daa3bdb5eb9110870d122a174"
         },
         "service_rules.json": {
             "version": "1.0.0",

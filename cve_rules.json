@@ -1,8 +1,8 @@
 {
     "meta": {
         "version": "1.0.0",
-        "total_rules": 4187,
-        "last_updated": "2026-06-27"
+        "total_rules": 4189,
+        "last_updated": "2026-06-28"
     },
     "rules": [
         {
@@ -49914,6 +49914,32 @@
             "remediation": "Upgrade target components to fixed secure version."
         },
         {
+            "cve_id": "CVE-2026-53250",
+            "severity": "high",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  xsk: cache csum_start/csum_offset to fix TOCTOU in xsk_skb_metadata()  The TX metadata area resides in the UMEM buffer which is memory-mapped and concurrently writable by userspace. In xsk_skb_metadata(), csum_start and csum_offset",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.0.13-1"
+                }
+            ],
+            "remediation": "Upgrade target components to fixed secure version."
+        },
+        {
+            "cve_id": "CVE-2026-53265",
+            "severity": "high",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  dm cache policy smq: check allocation under invalidate lock  commit 2d1f7b65f5de (\"dm cache policy smq: fix missing locks in invalidating cache blocks\") added mq->lock around the destructive part of smq_invalidate_mapping(), but le",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.0.13-1"
+                }
+            ],
+            "remediation": "Upgrade target components to fixed secure version."
+        },
+        {
             "cve_id": "CVE-2026-53274",
             "severity": "high",
             "cvss_score": 7.8,
@@ -49922,6 +49948,10 @@
                 {
                     "name": "linux",
                     "version_end_excluding": "6.12.94-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.0.13-1"
                 }
             ],
             "remediation": "Upgrade target components to fixed secure version."
