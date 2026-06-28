@@ -1,26 +1,10 @@
 {
-    "version": "1.0.21",
-    "last_updated": "2026-06-28T15:41:19.615468",
+    "version": "1.0.22",
+    "last_updated": "2026-06-28T15:48:53.507758",
     "files": {
-        "privilege_escalation_rules.json": {
-            "version": "1.0.0",
-            "sha256": "c78bb9df0849e9342e065aedab4fc7f1aef58b96afa84d574d3dc5115e036df8"
-        },
         "threat_rules.json": {
             "version": "1.0.0",
             "sha256": "9209ce71e8facca2e9de15d33aaf9777f28f034620b479417b7ff7a3cc661eab"
-        },
-        "file_integrity_rules.json": {
-            "version": "1.0.0",
-            "sha256": "92dc01d360c61b99d04a22b23eec3e069a45e256bace1b1e62d96bf71bf826b7"
-        },
-        "weak_password_rules.json": {
-            "version": "1.0.0",
-            "sha256": "94f5be161e0d3b4966cce3c21a5a6c71256e93689dfd9a73646cff57bdaac40d"
-        },
-        "cve_rules.json": {
-            "version": "1.0.0",
-            "sha256": "d0f7b06bbd05906daa49112ce2d6868a34c1255daa3bdb5eb9110870d122a174"
         },
         "service_rules.json": {
             "version": "1.0.0",
@@ -30,9 +14,21 @@
             "version": "1.0.0",
             "sha256": "8ea0f495c13b3695b47af519299cf76b3c00b2acd33d345ba6d7ba68137091b4"
         },
-        "yaml_pocs/cve-test-1234.yaml": {
+        "privilege_escalation_rules.json": {
             "version": "1.0.0",
-            "sha256": "b75b88b4d2a17b8c41efacaa80d278bb0cfadb4ecc50d4acfe9313b1a372b60e"
+            "sha256": "c78bb9df0849e9342e065aedab4fc7f1aef58b96afa84d574d3dc5115e036df8"
+        },
+        "file_integrity_rules.json": {
+            "version": "1.0.0",
+            "sha256": "92dc01d360c61b99d04a22b23eec3e069a45e256bace1b1e62d96bf71bf826b7"
+        },
+        "cve_rules.json": {
+            "version": "1.0.0",
+            "sha256": "d0f7b06bbd05906daa49112ce2d6868a34c1255daa3bdb5eb9110870d122a174"
+        },
+        "weak_password_rules.json": {
+            "version": "1.0.0",
+            "sha256": "94f5be161e0d3b4966cce3c21a5a6c71256e93689dfd9a73646cff57bdaac40d"
         },
         "pocs/CVE-2021-3156.py": {
             "version": "1.0.0",
@@ -41,6 +37,10 @@
         "pocs/CVE-2021-4034.py": {
             "version": "1.0.0",
             "sha256": "89591ebddb14eb5141d9ffb020ee70abb2bb2b1d85c4b4e79dc901fae1912295"
+        },
+        "yaml_pocs/cve-test-1234.yaml": {
+            "version": "1.0.0",
+            "sha256": "b75b88b4d2a17b8c41efacaa80d278bb0cfadb4ecc50d4acfe9313b1a372b60e"
         }
     }
 }
