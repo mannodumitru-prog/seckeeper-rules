@@ -1,6 +1,6 @@
 {
-    "version": "1.0.27",
-    "last_updated": "2026-06-29T07:57:57.622909",
+    "version": "1.0.28",
+    "last_updated": "2026-06-29T07:58:37.502811",
     "files": {
         "privilege_escalation_rules.json": {
             "version": "1.0.0",
@@ -41,6 +41,10 @@
         "yaml_pocs/cve-test-1234.yaml": {
             "version": "1.0.0",
             "sha256": "b75b88b4d2a17b8c41efacaa80d278bb0cfadb4ecc50d4acfe9313b1a372b60e"
+        },
+        "pocs/re": {
+            "version": "1.0.0",
+            "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
         }
     }
 }
