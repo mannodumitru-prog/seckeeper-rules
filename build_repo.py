@@ -136,4 +136,5 @@ def sync_cve_rules():
                 resp = requests.post(OSV_QUERY_API, json=payload, timeout=15)
                 # 大声报错机制
                 if resp.status_code != 200: 
-                    print(f"⚠️ 抓取 [{pkg}] 失败！OSV 拒绝请求:
+                    print(f"⚠️ 抓取 [{pkg}] 失败！OSV 拒绝请求:{resp.status_code} - {resp.text}")
+                    break
