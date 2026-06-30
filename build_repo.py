@@ -18,32 +18,35 @@ def get_hash(fp):
     return s.hexdigest()
 
 def sync_and_build():
-    print("🚀 启动自动化情报熔炼流水线...")
+    print("🚀 启动严苛模式：执行高危情报熔炼...")
     raw_list = []
-    # 1. 高速拉取与解压
     for url in DUMP_ZIPS:
         try:
-            print(f"  -> 正在载入: {url.split('/')[-2]} 生态情报...")
             r = requests.get(url, timeout=60)
             with zipfile.ZipFile(io.BytesIO(r.content)) as z:
                 for fn in z.namelist():
                     if fn.endswith(".json"): raw_list.append(json.loads(z.read(fn)))
         except Exception as e: print(f"  [!] 获取失败: {e}")
 
-    # 2. 高危漏斗过滤
     reg = {}
     for v in raw_list:
+        # 严格筛选：CVE ID 必须存在且 >= 2016 年
         cve = next((c for c in v.get("aliases",[])+[v.get("id","")] if re.search(r"CVE-(\d{4})-", str(c))), None)
         if not cve or int(re.search(r"CVE-(\d{4})-", cve).group(1)) < 2016: continue
         
+        # 严格筛选：只允许明确拥有 CVSS V3 分数的漏洞
         score = None
         for s in v.get("severity",[]):
-            try:
-                if s["type"]=="CVSS_V3": score = CVSS3(s["score"]).scores()[0]
-            except: pass
-        if not score or float(score) < 7.0: continue
+            if s["type"] == "CVSS_V3" and "score" in s:
+                try:
+                    score = CVSS3(s["score"]).scores()[0]
+                    break
+                except: continue
         
-        # 【鲁棒性修改】：防御性编程处理缺失字段
+        # 只有真正 >= 7.0 的高危漏洞才入库，拒绝任何模糊匹配
+        if score is None or float(score) < 7.0: continue
+        
+        # 精准清洗：只有在 TARGETS 列表里的组件才会被记录
         affected_list = []
         for aff in v.get("affected", []):
             pkg_data = aff.get("package")
@@ -52,6 +55,8 @@ def sync_and_build():
                 if pkg_name in TARGETS:
                     affected_list.append({"name": pkg_name})
         
+        if not affected_list: continue # 如果漏洞不影响核心组件，则剔除
+        
         reg[cve] = {
             "cve_id": cve, 
             "cvss_score": round(float(score), 1),
@@ -59,11 +64,11 @@ def sync_and_build():
             "affected_software": affected_list
         }
     
-    # 3. 写入规则库
+    # 写入规则库
     rules = sorted(reg.values(), key=lambda x: x["cvss_score"], reverse=True)
     with open("cve_rules.json", "w") as f:
         json.dump({"meta": {"total": len(rules), "updated": str(datetime.now())}, "rules": rules}, f, indent=4)
-    print(f"✅ 熔炼完成，存留 {len(rules)} 条高危情报。")
+    print(f"🎯 熔炼完成！已精简至 {len(rules)} 条核心高危漏洞。")
 
 def build_manifest():
     payloads = {}
