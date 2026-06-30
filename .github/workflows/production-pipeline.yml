@@ -3,9 +3,11 @@ name: SecKeeper Production Pipeline
 on:
   push:
     branches: [ main ]
-    paths: [ '**.json', '!manifest.json' ]
+    paths:
+      - '**.json'       # 规则源变动
+      - 'pocs/**.py'    # 探测探针变动
   schedule:
-    - cron: '30 19 * * *' # 每日 UTC 19:30 (北京时间 03:30)
+    - cron: '30 19 * * *'
   workflow_dispatch:
 
 jobs:
@@ -30,20 +32,22 @@ jobs:
 
       - name: Fetch & Build Intelligence
         run: |
-          # 1. 先抓取最新情报
+          # 1. OSV 情报抓取逻辑保持不变
           python3 utils/osv_fetcher.py
-          # 2. 再进行熔炼构建
+          # 2. 规则熔炼逻辑
           python3 build_repo.py
+          # 3. 新增：自动计算并同步 PoC 指纹
+          python3 update_manifest.py
 
       - name: Commit and Push Changes
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          # 检查是否有变更
+          # 检查清单或数据是否有变动
           if [[ -n "$(git status --porcelain)" ]]; then
             git add .
-            git commit -m "chore: 🤖 SecKeeper 情报流水线自动更新 [$(date +'%Y-%m-%d')]"
+            git commit -m "chore: 🤖 自动化生产：同步情报规则与 PoC 指纹 [$(date +'%Y-%m-%d')]"
             git push
           else
-            echo "情报无变动，跳过同步。"
+            echo "无变更，跳过同步。"
           fi
