@@ -43,10 +43,20 @@ def sync_and_build():
             except: pass
         if not score or float(score) < 7.0: continue
         
+        # 【鲁棒性修改】：防御性编程处理缺失字段
+        affected_list = []
+        for aff in v.get("affected", []):
+            pkg_data = aff.get("package")
+            if pkg_data and isinstance(pkg_data, dict):
+                pkg_name = pkg_data.get("name")
+                if pkg_name in TARGETS:
+                    affected_list.append({"name": pkg_name})
+        
         reg[cve] = {
-            "cve_id": cve, "cvss_score": round(float(score), 1),
+            "cve_id": cve, 
+            "cvss_score": round(float(score), 1),
             "description": (v.get("summary") or v.get("details") or "")[:200],
-            "affected_software": [{"name": aff["package"]["name"]} for aff in v.get("affected",[]) if aff["package"]["name"] in TARGETS]
+            "affected_software": affected_list
         }
     
     # 3. 写入规则库
