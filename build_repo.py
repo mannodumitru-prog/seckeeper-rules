@@ -72,15 +72,17 @@ def sync_and_build():
 
 def build_manifest():
     payloads = {}
-    for root, _, files in os.walk("."):
+    for root, dirs, files in os.walk("."):
+        # 【关键修正】：使用原地过滤，把 .git 以及任何以 . 开头的目录剔除
+        dirs[:] = [d for d in dirs if not d.startswith('.')]
+        
         for file in files:
-            if file in IGNORE_FILES or file.startswith('.'): continue
+            # 同样跳过隐藏文件（比如 .gitignore）
+            if file.startswith('.'): continue
+            if file in IGNORE_FILES: continue
+            
             path = os.path.join(root, file).replace("\\", "/")
             payloads[path] = {"sha256": get_hash(path)}
-    
-    with open("manifest.json", "w") as f:
-        json.dump({"version": "1.0.1", "files": payloads}, f, indent=4)
-    print("✅ 全量清单指纹已更新。")
 
 if __name__ == "__main__":
     sync_and_build()
