@@ -1,19 +1,21 @@
 name: Auto Update Manifest
 
-# 触发条件：只要有人往 main 分支推送了 .json 结尾的规则文件，就触发流水线
 on:
+  # 保持原有的手动提交触发
   push:
-    branches:
-      - main
-    paths:
-      - '**.json'
-      - '!manifest.json' # 排除 manifest 自身的修改，防止死循环
+    branches: [ main ]
+    paths: [ '**.json', '!manifest.json' ]
+    
+  # 新增：每日北京时间凌晨 03:00 自动检查（Cron 使用 UTC 时间，03:00 对应 UTC 19:00）
+  schedule:
+    - cron: '0 19 * * *' 
+  
+  # 新增：允许在 GitHub 网页手动点按钮触发
+  workflow_dispatch:
 
 jobs:
   update-manifest:
     runs-on: ubuntu-latest
-    
-    # 授予机器人写入仓库的权限
     permissions:
       contents: write
 
@@ -26,22 +28,22 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Run Build Script (自动算哈希、升版本)
+      # 新增：运行情报获取脚本 (确保 OSV 抓取逻辑在这里执行)
+      - name: Fetch New Vulnerabilities
         run: |
-          # 这里调用您之前写的 build_repo.py 脚本
-          # 它会遍历当前所有的 json 规则，并生成最新的 manifest.json
-          python build_repo.py
+          python3 utils/osv_fetcher.py 
+
+      - name: Run Build Script
+        run: python3 build_repo.py
 
       - name: Commit and Push changes
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          
-          # 检查是否有文件发生变化（比如 manifest.json 被更新了）
           if [[ -n "$(git status --porcelain)" ]]; then
-            git add manifest.json
-            git commit -m "chore: 🤖 自动更新 manifest.json (哈希与版本同步)"
+            git add .
+            git commit -m "chore: 🤖 每日情报自动更新 [$(date +'%Y-%m-%d')]"
             git push
           else
-            echo "没有需要更新的变更。"
+            echo "当前情报源无更新，跳过同步。"
           fi
