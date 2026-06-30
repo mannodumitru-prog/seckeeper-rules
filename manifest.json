@@ -1,74 +1,230 @@
 {
     "version": "1.0.1",
-    "last_updated": "2026-06-30T15:15:42.584330",
     "files": {
-        "privilege_escalation_rules.json": {
-            "version": "1.0.0",
+        "./privilege_escalation_rules.json": {
             "sha256": "c78bb9df0849e9342e065aedab4fc7f1aef58b96afa84d574d3dc5115e036df8"
         },
-        "update_manifest.py": {
-            "version": "1.0.0",
-            "sha256": "2ebe3e9f5c047962ef0907bcb01b21738dbd7459c8f2e2d0cd44990d6d328279"
-        },
-        "threat_rules.json": {
-            "version": "1.0.0",
+        "./threat_rules.json": {
             "sha256": "9209ce71e8facca2e9de15d33aaf9777f28f034620b479417b7ff7a3cc661eab"
         },
-        "file_integrity_rules.json": {
-            "version": "1.0.0",
+        "./file_integrity_rules.json": {
             "sha256": "92dc01d360c61b99d04a22b23eec3e069a45e256bace1b1e62d96bf71bf826b7"
         },
-        "weak_password_rules.json": {
-            "version": "1.0.0",
+        "./weak_password_rules.json": {
             "sha256": "94f5be161e0d3b4966cce3c21a5a6c71256e93689dfd9a73646cff57bdaac40d"
         },
-        "cve_rules.json": {
-            "version": "1.0.0",
-            "sha256": "83b254e8e0c6b22a15bc6dc7226820a67fe36a10eddcbfaa79e73fa546ea3a75"
+        "./cve_rules.json": {
+            "sha256": "19b6288880777001b227f53ed0cc4a62154828496a678f16ced0f53f3fc2c113"
         },
-        "service_rules.json": {
-            "version": "1.0.0",
+        "./service_rules.json": {
             "sha256": "daca6dae81d58e16a48df30b537d304929d30f7e12c12e2f83548b14fa1a879c"
         },
-        "config_rules.json": {
-            "version": "1.0.0",
+        "./config_rules.json": {
             "sha256": "8ea0f495c13b3695b47af519299cf76b3c00b2acd33d345ba6d7ba68137091b4"
         },
-        "yaml_pocs/cve-test-1234.yaml": {
-            "version": "1.0.0",
+        "./utils/osv_fetcher.py": {
+            "sha256": "c3f68e5be9f2cbd9aabc3005e09b7070b6f62c281c13f64f433bf92bfe9d5944"
+        },
+        "./.git/index": {
+            "sha256": "bb2a9e0d6f721f1bd58920f49fc32ce7bec1e5615d26cfaea79258a5e493557e"
+        },
+        "./.git/HEAD": {
+            "sha256": "28d25bf82af4c0e2b72f50959b2beb859e3e60b9630a5e8c603dad4ddb2b6e80"
+        },
+        "./.git/shallow": {
+            "sha256": "6142edfe72efe557b9e85b9f9e0f8d2975aac8015c009a60ff1d04422b56f39d"
+        },
+        "./.git/config": {
+            "sha256": "f23aa04b5c45c830014a23760fd9b79fc49f6f3da9cdacfbe44ca14477e60df8"
+        },
+        "./.git/description": {
+            "sha256": "85ab6c163d43a17ea9cf7788308bca1466f1b0a8d1cc92e26e9bf63da4062aee"
+        },
+        "./.git/config.worktree": {
+            "sha256": "443a5f645c23c3d0c0aa09f634b2ad111d46ef61946b598a2fb311678ab47454"
+        },
+        "./.git/FETCH_HEAD": {
+            "sha256": "279a8d7246a5db90bf59c791441c17d5ff0a465ee3b91442252125fc7aa44ebd"
+        },
+        "./.git/logs/HEAD": {
+            "sha256": "87488c806484072ccdc171044245da368c831d59f290e865b1fcadc79de38524"
+        },
+        "./.git/logs/refs/remotes/origin/main": {
+            "sha256": "f42176c261e36957ef31770095e4e9167217d3cdc6afe93490330697bfecda60"
+        },
+        "./.git/logs/refs/heads/main": {
+            "sha256": "930300a45da724c42348bac0694b31ce2de45da9950e3ddb9bb3d55450557f41"
+        },
+        "./.git/info/exclude": {
+            "sha256": "6671fe83b7a07c8932ee89164d1f2793b2318058eb8b98dc5c06ee0a5a3b0ec1"
+        },
+        "./.git/hooks/pre-commit.sample": {
+            "sha256": "57185b7b9f05239d7ab52db045f5b89eb31348d7b2177eab214f5eb872e1971b"
+        },
+        "./.git/hooks/push-to-checkout.sample": {
+            "sha256": "a53d0741798b287c6dd7afa64aee473f305e65d3f49463bb9d7408ec3b12bf5f"
+        },
+        "./.git/hooks/pre-applypatch.sample": {
+            "sha256": "e15c5b469ea3e0a695bea6f2c82bcf8e62821074939ddd85b77e0007ff165475"
+        },
+        "./.git/hooks/sendemail-validate.sample": {
+            "sha256": "44ebfc923dc5466bc009602f0ecf067b9c65459abfe8868ddc49b78e6ced7a92"
+        },
+        "./.git/hooks/prepare-commit-msg.sample": {
+            "sha256": "e9ddcaa4189fddd25ed97fc8c789eca7b6ca16390b2392ae3276f0c8e1aa4619"
+        },
+        "./.git/hooks/update.sample": {
+            "sha256": "8d5f2fa83e103cf08b57eaa67521df9194f45cbdbcb37da52ad586097a14d106"
+        },
+        "./.git/hooks/pre-rebase.sample": {
+            "sha256": "4febce867790052338076f4e66cc47efb14879d18097d1d61c8261859eaaa7b3"
+        },
+        "./.git/hooks/applypatch-msg.sample": {
+            "sha256": "0223497a0b8b033aa58a3a521b8629869386cf7ab0e2f101963d328aa62193f7"
+        },
+        "./.git/hooks/commit-msg.sample": {
+            "sha256": "efc1401b0e99d1ff51494d154d98b46c1e99059bcd8bf9f73cecde19fd3eb23b"
+        },
+        "./.git/hooks/pre-receive.sample": {
+            "sha256": "a4c3d2b9c7bb3fd8d1441c31bd4ee71a595d66b44fcf49ddb310252320169989"
+        },
+        "./.git/hooks/fsmonitor-watchman.sample": {
+            "sha256": "9159720099ad5595b8e66645cbfd47763c1e920f46e0b50ae75e642bbec57ef0"
+        },
+        "./.git/hooks/post-update.sample": {
+            "sha256": "81765af2daef323061dcbc5e61fc16481cb74b3bac9ad8a174b186523586f6c5"
+        },
+        "./.git/hooks/pre-merge-commit.sample": {
+            "sha256": "d3825a70337940ebbd0a5c072984e13245920cdf8898bd225c8d27a6dfc9cb53"
+        },
+        "./.git/hooks/pre-push.sample": {
+            "sha256": "ecce9c7e04d3f5dd9d8ada81753dd1d549a9634b26770042b58dda00217d086a"
+        },
+        "./.git/objects/bc/38c4b859dfd38a3291514672c344fe79caac3e": {
+            "sha256": "c7df05f422e0ae92ec53b62a9737748c4cbb79df3cf2e6be2e8ed953b5697000"
+        },
+        "./.git/objects/b8/0bd083c9aab26b9a7e8e6946d4187b9c23070d": {
+            "sha256": "ab415d4ca15357989824b001eb47c33685c7bd69a8e55d1fd4fa2a6c94a3908a"
+        },
+        "./.git/objects/95/ffd25aa90036a313e7fa3dd223da76eb7fb6a7": {
+            "sha256": "fb4149eba532b5b43c10acbc6dd309f549b1dff478f29b0fd1c7f1b05bb33434"
+        },
+        "./.git/objects/3a/f6cfce042a780c9e74854080c30a9a3d3e83a4": {
+            "sha256": "5d5d1216952d3eacd7b2df80f4f3dcc44d8aec4abd830e27e67e770e92946f84"
+        },
+        "./.git/objects/8e/08cfe8e263a653cd238eb0ff2e678ae86e5d43": {
+            "sha256": "26cdb3415fa0838087b04f5ccabcd01e717e5cfa40b76cb1a3632898e223ce13"
+        },
+        "./.git/objects/8e/337c38a8a2552de5260ed50221c86c3b15effd": {
+            "sha256": "f8bca83ba306d893260ce39c16d1b267261bfa3b1a27b6a17cd1d7a9be313a0c"
+        },
+        "./.git/objects/e2/9d935c12fce31bb15e6c943f27f3dd197814ee": {
+            "sha256": "eb70e5040d7fb9a3a9f48425f5f45170cea29421a4a382d47792a3ac314b0965"
+        },
+        "./.git/objects/b7/650a4a505ed472b6e3f7d54c1b9bd90214a8a4": {
+            "sha256": "2e32c1f6a3af3b9d188664eee6dd08f3b942e6560822d1778bc28f902564db87"
+        },
+        "./.git/objects/fd/1f99d5b2f0caf98ab1235f4809ab0ff4d251ca": {
+            "sha256": "bc36f0836fb8e65527f6ce19c947ffcad74ae20582590af08d75b14dd734893e"
+        },
+        "./.git/objects/d4/87f48f8cf0f4e690c2256e55580aa19047862a": {
+            "sha256": "8ca11959800531094d96cc9cf339fc73004dafbcce7f63868c47b2332f490a9c"
+        },
+        "./.git/objects/2c/45c1403757f2faf4bb6f9cdbec559040daf709": {
+            "sha256": "579a17cfd3cb9c915a16433b89b806397d5efe3c539c6da455c472ef64711c15"
+        },
+        "./.git/objects/9a/06eed283eaeafa7ca07a2a452b4029c0a9f2e0": {
+            "sha256": "c0abe5a502905047e8790c1fc59bf9e41f5d43f788a81c8c929f3b93b2ff94cb"
+        },
+        "./.git/objects/da/d0c0bec32e75538fc59d8d943d5184b2da40f4": {
+            "sha256": "e32ad44a619034afa7417998c2f0a701bd25468322fa9e61eccb1e7b76844489"
+        },
+        "./.git/objects/35/f6a741c94cb651c34de6d0e6958af499c50af6": {
+            "sha256": "7facf1000b1a0cb8cce6d47e46003d489fcae0431ab66ec39a897549af0935ca"
+        },
+        "./.git/objects/69/7ef0cfd03ecd8329b224f10eebaa0fec1ccebc": {
+            "sha256": "24fcb8bfbb81885cc0c54bccb1c80bdbe08f88c82211c6f3f659eed3bf7c1715"
+        },
+        "./.git/objects/55/a48ddd36019950a5676d9a3b06ed13d9ae134a": {
+            "sha256": "aa1f9be76a33d1bf37bbe51e41b63470b1ab0e44c5cc3569046c857f33fc3709"
+        },
+        "./.git/objects/75/918599546a85ddb7849f0338aeb6cc3d85f153": {
+            "sha256": "9a76c2895cdb3d385133bd48b1060494c70e03d207e2967173bc884cee78d5b5"
+        },
+        "./.git/objects/1e/5c4e408638cc8af3e63c65094351f409acdd60": {
+            "sha256": "c2b8dd306f8a7f31726c19b586c751c88a11c46eeaa0c10073d71019175ce073"
+        },
+        "./.git/objects/30/873babb9b3d911429c6e131c4a1d170a77e7f5": {
+            "sha256": "0fc9ef2404cab0e3b1edf0e475265b6a4839f73c80169003a9f3d3c852c4b1f2"
+        },
+        "./.git/objects/15/dfbbde2e03ec264b18e4bdbd92a375ec621a36": {
+            "sha256": "e01c17661bfe90a58abf238054cf4e0fd48ddbe5bdd4c30dd7ceaaecb07f5183"
+        },
+        "./.git/objects/2e/9d11c7a9086b0b0b5322fa91b2be770d8f35cc": {
+            "sha256": "195e216a5ea21aeaa570e634f8f0b0645408fe5964dc23edd36ba6dba6019396"
+        },
+        "./.git/objects/04/e884f72086e8846b9a65008f9234944760aaa3": {
+            "sha256": "4f4ab0287686195b1bb7e7b85708b70c759425b492443d02fc70afd54d2fcfe1"
+        },
+        "./.git/objects/8b/4d64ca2cbe4b6ef7d49a022d01bfc8cfb24ac1": {
+            "sha256": "48bec7877c309955d3a6771afdf96fc9c69f32486004880d948146ac2e9dedd9"
+        },
+        "./.git/objects/af/02c8a8ba72dfd65881b9fae39f015c3e8f11d0": {
+            "sha256": "e1b59b0d548f8ee502505d415b083fde2b0c516211cc853bd8f5afcab6e1173b"
+        },
+        "./.git/objects/2a/eb0d5843c5508db7bc49a78c72a7814c8bf4c5": {
+            "sha256": "3dec7779d551d9b472d3a3c841d5c961b8032cd43e710864a65636f2510ceeff"
+        },
+        "./.git/objects/52/49ce11bb1c1e9c9c199f53805281918389a5e1": {
+            "sha256": "e046cecceca8e2d4fa2271a846e85ed4c01efa460e4820b10744dfa6634ef962"
+        },
+        "./.git/objects/18/be9fdb59e074e56ded72c0d82bcd4302f23f16": {
+            "sha256": "0efd446f882e049067cd5dbd2506d0b315d2ac4ef45d395fa19fbe49e1c4f41d"
+        },
+        "./.git/objects/5b/cffae8f43e216b2a85bc867b28911a37253e64": {
+            "sha256": "6a944d46adcdc424efafce69853db9587d25c5546abc49d1d933e09e1354d7cd"
+        },
+        "./.git/objects/ff/22476051a919aefefeebf9e0fe119654960ada": {
+            "sha256": "c80fbf32834c8c26222c8927ac633635a50898eb48f37d4bf4ff8cdb1535804e"
+        },
+        "./.git/refs/remotes/origin/main": {
+            "sha256": "6142edfe72efe557b9e85b9f9e0f8d2975aac8015c009a60ff1d04422b56f39d"
+        },
+        "./.git/refs/heads/main": {
+            "sha256": "6142edfe72efe557b9e85b9f9e0f8d2975aac8015c009a60ff1d04422b56f39d"
+        },
+        "./yaml_pocs/cve-test-1234.yaml": {
             "sha256": "b75b88b4d2a17b8c41efacaa80d278bb0cfadb4ecc50d4acfe9313b1a372b60e"
         },
-        "pocs/CVE-2024-36031.py": {
-            "version": "1.0.0",
+        "./pocs/CVE-2024-36031.py": {
             "sha256": "9c5bf424b4128d802f8dc3894ef55129c67262190fb4246449bbe1d8b1d455c4"
         },
-        "pocs/CVE-2016-0705.py": {
-            "version": "1.0.0",
+        "./pocs/CVE-2016-0705.py": {
             "sha256": "03bd528d4ca683945d2de88156a26261dff99e5953ce9335be05fd4495a6c8a8"
         },
-        "pocs/CVE-2021-3156.py": {
-            "version": "1.0.0",
+        "./pocs/CVE-2021-3156.py": {
             "sha256": "b8aa049aa3ab5c1b37793a2ae171b7baf8c403bc4313487458deffac0487b9e6"
         },
-        "pocs/CVE-2025-68263.py": {
-            "version": "1.0.0",
+        "./pocs/CVE-2025-68263.py": {
             "sha256": "adbdcba70c18d6df82a9c64cfd956ae385d59fa883b57811d2315d12aec285b2"
         },
-        "pocs/CVE-2021-4034.py": {
-            "version": "1.0.0",
+        "./pocs/CVE-2021-4034.py": {
             "sha256": "50bd3443b0c011e21575b314723dd17141046b3b8e4f280a9290f9557815f67d"
         },
-        "pocs/CVE-2022-2274.py": {
-            "version": "1.0.0",
+        "./pocs/CVE-2022-2274.py": {
             "sha256": "0b75edb17e62ef6ac7219b65086904db6017ca197846f88e6f4466d8c450e140"
         },
-        "pocs/CVE-2026-31607.py": {
-            "version": "1.0.0",
+        "./pocs/CVE-2026-31607.py": {
             "sha256": "7aee7b4cac3879c8db45f50d4384e6731442604cde013f2683071c79938994fa"
         },
-        "pocs/CVE-2022-23218-23219.py": {
-            "version": "1.0.0",
+        "./pocs/CVE-2022-23218-23219.py": {
             "sha256": "8e865c939a05e6c4df2183a1477cf858be95ca44da37789abf9163a40b4bbd12"
+        },
+        "./.github/workflows/Test OSV Fetcher.yml": {
+            "sha256": "619404348730586d0d393e1ab684709233a80accab571f9c2373d85bc172c134"
+        },
+        "./.github/workflows/Auto Update Manifest.yml": {
+            "sha256": "3c1c3d18a2d29e1d8f259ff2ad6002e24cfed8b8b8bbcc37523902bc99e88eb0"
         }
     }
 }
