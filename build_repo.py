@@ -73,16 +73,26 @@ def sync_and_build():
 def build_manifest():
     payloads = {}
     for root, dirs, files in os.walk("."):
-        # 【关键修正】：使用原地过滤，把 .git 以及任何以 . 开头的目录剔除
         dirs[:] = [d for d in dirs if not d.startswith('.')]
-        
         for file in files:
-            # 同样跳过隐藏文件（比如 .gitignore）
             if file.startswith('.'): continue
             if file in IGNORE_FILES: continue
             
             path = os.path.join(root, file).replace("\\", "/")
-            payloads[path] = {"sha256": get_hash(path)}
+            # 【修复点】：显式添加 version 字段，使之符合消费端需求
+            payloads[path] = {
+                "version": "1.0.1", 
+                "sha256": get_hash(os.path.join(root, file))
+            }
+    
+    # 写入 manifest
+    manifest_data = {
+        "version": "1.0.1",
+        "last_updated": str(datetime.now()),
+        "files": payloads
+    }
+    with open("manifest.json", "w") as f:
+        json.dump(manifest_data, f, indent=4)
 
 if __name__ == "__main__":
     sync_and_build()
