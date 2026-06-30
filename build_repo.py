@@ -1,8 +1,5 @@
 """
 SecKeeper 中央规则仓库 - 情报熔炼与全量构建引擎
-功能：
-1. 自动从 OSV 抓取最新漏洞，严格执行生态适配、CVSS >= 7.0 及 10年内高危筛选。
-2. 深度遍历项目下所有规则、PoC、YAML，自动生成带有防篡改哈希的清单 (manifest.json)。
 """
 import os
 import json
@@ -17,15 +14,14 @@ TARGET_COMPONENTS = {
     "glibc", "libc6", "nginx", "docker", "docker.io", "containerd", "runc",
     "systemd", "bash", "curl", "libcurl4", "wget", "bind9", "dbus", "pam"
 }
-MIN_YEAR = 2016        # 筛选：2016年至今的漏洞 (10年内)
-MIN_CVSS_SCORE = 7.0   # 筛选：CVSS >= 7.0 高危门槛
+MIN_YEAR = 2016
+MIN_CVSS_SCORE = 7.0
 OSV_QUERY_API = "https://api.osv.dev/v1/query"
 
-# 严禁下发给客户端的“仓库内务文件”
 IGNORE_FILES = {'manifest.json', 'README.md', 'build_repo.py', '.gitignore', '.gitattributes'}
 IGNORE_DIRS = {'.git', '.github', 'utils', '__pycache__'}
 
-# ==================== 2. OSV 情报清洗辅助函数 ====================
+# ==================== 2. 工具辅助函数 ====================
 def _get_cve_id(vuln_raw: dict):
     vuln_id = vuln_raw.get("id", "")
     if vuln_id.startswith("CVE-"): return vuln_id
@@ -38,8 +34,7 @@ def _is_in_time_range(vuln_raw: dict) -> bool:
     if not pub_str: return False
     try:
         return int(pub_str[:4]) >= MIN_YEAR
-    except ValueError:
-        return False
+    except ValueError: return False
 
 def _calculate_cvss(vuln_raw: dict):
     score = None
@@ -52,18 +47,13 @@ def _calculate_cvss(vuln_raw: dict):
             elif sev["type"] == "CVSS_V2":
                 score = CVSS2(vec).scores()[0]
         except Exception: continue
-
     if score is None:
         db_spec = vuln_raw.get("database_specific", {})
-        if isinstance(db_spec.get("cvss"), dict):
-            score = db_spec["cvss"].get("score")
-            
-    # 【核心筛选逻辑】：拦截所有低于 7.0 或无分数的漏洞
-    if score is None or float(score) < MIN_CVSS_SCORE:
-        return None, None
-        
-    score = round(float(score), 1)
-    return score, ("critical" if score >= 9.0 else "high")
+        if isinstance(db_spec.get("cvss"), dict): score = db_spec["cvss"].get("score")
+    try:
+        if score is None or float(score) < MIN_CVSS_SCORE: return None, None
+        return round(float(score), 1), ("critical" if float(score) >= 9.0 else "high")
+    except (ValueError, TypeError): return None, None
 
 def _parse_ranges(vuln_raw: dict) -> list:
     software_list = []
@@ -76,68 +66,73 @@ def _parse_ranges(vuln_raw: dict) -> list:
             for event in r.get("events", []):
                 if "introduced" in event:
                     ver = event["introduced"]
-                    current_range = {"name": pkg_name}
                     if ver != "0": current_range["version_start_including"] = ver
                 elif "fixed" in event:
                     current_range["version_end_excluding"] = event["fixed"]
                     software_list.append(current_range.copy())
                     current_range = {"name": pkg_name}
-                elif "last_affected" in event:
-                    current_range["version_end_including"] = event["last_affected"]
-                    software_list.append(current_range.copy())
-                    current_range = {"name": pkg_name}
-            if len(current_range) > 1:
-                software_list.append(current_range.copy())
-                
-    unique = []
-    seen = set()
-    for item in software_list:
-        k = tuple(sorted(item.items()))
-        if k not in seen:
-            seen.add(k)
-            unique.append(item)
-    return unique
+            if len(current_range) > 1: software_list.append(current_range.copy())
+    return [dict(t) for t in {tuple(sorted(d.items())) for d in software_list}]
 
 def _gen_remediation(affected_list: list) -> str:
     fixes = [f"{i['name']} >= {i['version_end_excluding']}" for i in affected_list if "version_end_excluding" in i]
-    if fixes: return f"Upgrade vulnerable components: {', '.join(list(set(fixes))[:3])}."
-    return "Please refer to official Linux vendor security advisories for patches."
+    return f"Upgrade components: {', '.join(list(set(fixes))[:3])}." if fixes else "Refer to vendor advisories."
 
-# ==================== 3. 核心：情报拉取与合并 ====================
+# ==================== 3. 逻辑同步函数 ====================
 def sync_cve_rules():
     rule_file = "cve_rules.json"
     existing_data = {"meta": {"version": "1.0.0", "total_rules": 0}, "rules": []}
-    
     if os.path.exists(rule_file):
         try:
-            with open(rule_file, "r", encoding="utf-8") as f:
-                existing_data = json.load(f)
+            with open(rule_file, "r", encoding="utf-8") as f: existing_data = json.load(f)
         except Exception: pass
-
     registry = {r["cve_id"]: r for r in existing_data.get("rules", [])}
-    initial_count = len(registry)
     
-    print(f"🔄 开始向 OSV 检索 {len(TARGET_COMPONENTS)} 个核心组件的情报，执行严苛过滤...")
-
     for pkg in TARGET_COMPONENTS:
-        page_token = None
-        # 【生态适配补丁】：Linux 内核走 Linux 生态，其余组件走 Debian 生态
         ecosystem = "Linux" if pkg in ("linux", "kernel") else "Debian"
-        
+        page_token = None
         while True:
-            payload = {
-                "package": {
-                    "name": pkg,
-                    "ecosystem": ecosystem
-                }
-            }
+            payload = {"package": {"name": pkg, "ecosystem": ecosystem}}
             if page_token: payload["page_token"] = page_token
             try:
-                 resp = requests.post(OSV_QUERY_API, json=payload, timeout=15)
-                 if resp.status_code != 200: 
-                     print(f"⚠️ 抓取 [{pkg}] 失败！OSV 拒绝请求: {resp.status_code} - {resp.text}")
-                     break
-                 data = resp.json()
-             except Exception as e: 
-                 print(f"⚠️ 发生网络异常: {e}")
-                 break
+                resp = requests.post(OSV_QUERY_API, json=payload, timeout=15)
+                if resp.status_code != 200: break
+                data = resp.json()
+            except Exception: break
+            for v in data.get("vulns", []):
+                cve_id = _get_cve_id(v)
+                if not cve_id or not _is_in_time_range(v): continue
+                score, severity = _calculate_cvss(v)
+                if not score: continue
+                cleaned_software = _parse_ranges(v)
+                if not cleaned_software: continue
+                registry[cve_id] = {
+                    "cve_id": cve_id, "severity": severity, "cvss_score": score,
+                    "description": (v.get("summary") or "No description")[:300],
+                    "affected_software": cleaned_software, "remediation": _gen_remediation(cleaned_software)
+                }
+            page_token = data.get("next_page_token")
+            if not page_token: break
+
+    existing_data["rules"] = list(registry.values())
+    existing_data["meta"].update({"last_updated": datetime.datetime.now().strftime("%Y-%m-%d"), "total_rules": len(existing_data["rules"])})
+    with open(rule_file, "w", encoding="utf-8") as f: json.dump(existing_data, f, indent=4, ensure_ascii=False)
+
+def build_manifest():
+    payloads_map = {}
+    for root, dirs, files in os.walk("."):
+        dirs[:] = [d for d in dirs if d not in IGNORE_DIRS and not d.startswith('.')]
+        for file in files:
+            if file in IGNORE_FILES or file.startswith('.'): continue
+            full_path = os.path.join(root, file)
+            sha256 = hashlib.sha256()
+            with open(full_path, "rb") as f:
+                for b in iter(lambda: f.read(4096), b""): sha256.update(b)
+            payloads_map[os.path.relpath(full_path, start=".").replace("\\", "/")] = {"version": "1.0.0", "sha256": sha256.hexdigest()}
+    
+    with open("manifest.json", "w", encoding="utf-8") as f:
+        json.dump({"version": "1.0.1", "last_updated": datetime.datetime.now().isoformat(), "files": payloads_map}, f, indent=4, ensure_ascii=False)
+
+if __name__ == "__main__":
+    sync_cve_rules()
+    build_manifest()
