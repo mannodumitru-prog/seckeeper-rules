@@ -1,49 +1,49 @@
-name: Auto Update Manifest
+name: SecKeeper Production Pipeline
 
 on:
-  # 保持原有的手动提交触发
   push:
     branches: [ main ]
     paths: [ '**.json', '!manifest.json' ]
-    
-  # 新增：每日北京时间凌晨 03:00 自动检查（Cron 使用 UTC 时间，03:00 对应 UTC 19:00）
   schedule:
-    - cron: '0 19 * * *' 
-  
-  # 新增：允许在 GitHub 网页手动点按钮触发
+    - cron: '30 19 * * *' # 每日 UTC 19:30 (北京时间 03:30)
   workflow_dispatch:
 
 jobs:
-  update-manifest:
+  production-factory:
     runs-on: ubuntu-latest
     permissions:
       contents: write
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.11'
 
-      # 新增：运行情报获取脚本 (确保 OSV 抓取逻辑在这里执行)
-      - name: Fetch New Vulnerabilities
+      - name: Install Dependencies
         run: |
-          python3 utils/osv_fetcher.py 
+          python -m pip install --upgrade pip
+          pip install requests cvss
 
-      - name: Run Build Script
-        run: python3 build_repo.py
-
-      - name: Commit and Push changes
+      - name: Fetch & Build Intelligence
         run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
+          # 1. 先抓取最新情报
+          python3 utils/osv_fetcher.py
+          # 2. 再进行熔炼构建
+          python3 build_repo.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          # 检查是否有变更
           if [[ -n "$(git status --porcelain)" ]]; then
             git add .
-            git commit -m "chore: 🤖 每日情报自动更新 [$(date +'%Y-%m-%d')]"
+            git commit -m "chore: 🤖 SecKeeper 情报流水线自动更新 [$(date +'%Y-%m-%d')]"
             git push
           else
-            echo "当前情报源无更新，跳过同步。"
+            echo "情报无变动，跳过同步。"
           fi
