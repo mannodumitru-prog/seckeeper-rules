@@ -35,17 +35,17 @@ jobs:
           python build_repo.py
 
       - name: Commit and Push Changes
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
         run: |
+
           git config --global user.name 'github-actions[bot]'
+
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          
-          # 检查是否有文件改动，避免空提交导致的报错
+
           git add cve_rules.json manifest.json
-          if git diff --staged --quiet; then
-            echo "没有发现规则库更新，跳过同步。"
-          else
-            git commit -m "chore: 🤖 自动同步最新高危漏洞规则库 [skip ci]"
-            git push origin main
-          fi
+
+          git commit -m "chore: 🤖 自动同步最新高危漏洞规则库 [skip ci]" || exit 0
+
+          git push 
+
+
