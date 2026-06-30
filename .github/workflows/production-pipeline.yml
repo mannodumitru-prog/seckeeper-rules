@@ -6,6 +6,7 @@ on:
     paths:
       - '**.json'       # 规则源变动
       - 'pocs/**.py'    # 探测探针变动
+      - 'build_repo.py' # 加上脚本自身，方便调试触发
   schedule:
     - cron: '30 19 * * *'
   workflow_dispatch:
@@ -30,23 +31,21 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests cvss
 
+      # 🎯 终极拔管：只保留全能的 build_repo.py
       - name: Fetch & Build Intelligence
         run: |
-          # 1. OSV 情报抓取逻辑保持不变
-          python3 utils/osv_fetcher.py
-          # 2. 规则熔炼逻辑
           python3 build_repo.py
-          # 3. 新增：自动计算并同步 PoC 指纹
-          python3 update_manifest.py
 
       - name: Commit and Push Changes
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
           # 检查清单或数据是否有变动
           if [[ -n "$(git status --porcelain)" ]]; then
             git add .
-            git commit -m "chore: 🤖 自动化生产：同步情报规则与 PoC 指纹 [$(date +'%Y-%m-%d')]"
+            # 🛡️ 终极防御：加入 [skip ci] 防止流水线死循环自触发！
+            git commit -m "chore: 🤖 自动化生产：同步情报规则与 PoC 指纹 [$(date +'%Y-%m-%d')] [skip ci]"
             git push
           else
             echo "无变更，跳过同步。"
