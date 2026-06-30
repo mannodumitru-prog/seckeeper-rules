@@ -1,6 +1,6 @@
 {
-    "version": "1.0.38",
-    "last_updated": "2026-06-30T14:21:51.612089",
+    "version": "1.0.39",
+    "last_updated": "2026-06-30T14:26:05.427294",
     "files": {
         "privilege_escalation_rules.json": {
             "version": "1.0.0",
