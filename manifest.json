@@ -1,62 +1,74 @@
 {
     "version": "1.0.1",
+    "last_updated": "2026-06-30 16:32:08.644729",
     "files": {
         "./privilege_escalation_rules.json": {
+            "version": "1.0.1",
             "sha256": "c78bb9df0849e9342e065aedab4fc7f1aef58b96afa84d574d3dc5115e036df8"
         },
         "./threat_rules.json": {
+            "version": "1.0.1",
             "sha256": "9209ce71e8facca2e9de15d33aaf9777f28f034620b479417b7ff7a3cc661eab"
         },
         "./file_integrity_rules.json": {
+            "version": "1.0.1",
             "sha256": "92dc01d360c61b99d04a22b23eec3e069a45e256bace1b1e62d96bf71bf826b7"
         },
         "./weak_password_rules.json": {
+            "version": "1.0.1",
             "sha256": "94f5be161e0d3b4966cce3c21a5a6c71256e93689dfd9a73646cff57bdaac40d"
         },
         "./cve_rules.json": {
-            "sha256": "325701eb8122b4a304dfbac37de9bcdbaac1a2bd356fe2f300359516327f184c"
+            "version": "1.0.1",
+            "sha256": "b68d053bd412353c55f20abf4e3564d54318fb6ca86f369b78c697773a26f4bf"
         },
         "./service_rules.json": {
+            "version": "1.0.1",
             "sha256": "daca6dae81d58e16a48df30b537d304929d30f7e12c12e2f83548b14fa1a879c"
         },
         "./config_rules.json": {
+            "version": "1.0.1",
             "sha256": "8ea0f495c13b3695b47af519299cf76b3c00b2acd33d345ba6d7ba68137091b4"
         },
         "./utils/osv_fetcher.py": {
+            "version": "1.0.1",
             "sha256": "c3f68e5be9f2cbd9aabc3005e09b7070b6f62c281c13f64f433bf92bfe9d5944"
         },
         "./yaml_pocs/cve-test-1234.yaml": {
+            "version": "1.0.1",
             "sha256": "b75b88b4d2a17b8c41efacaa80d278bb0cfadb4ecc50d4acfe9313b1a372b60e"
         },
         "./pocs/CVE-2024-36031.py": {
+            "version": "1.0.1",
             "sha256": "9c5bf424b4128d802f8dc3894ef55129c67262190fb4246449bbe1d8b1d455c4"
         },
         "./pocs/CVE-2016-0705.py": {
-            "sha256": "03bd528d4ca683945d2de88156a26261dff99e5953ce9335be05fd4495a6c8a8"
+            "version": "1.0.1",
+            "sha256": "65bdaaceab81df7743259e66969f5517a041bb690dd81259ea4f2d727273183a"
         },
         "./pocs/CVE-2021-3156.py": {
+            "version": "1.0.1",
             "sha256": "b8aa049aa3ab5c1b37793a2ae171b7baf8c403bc4313487458deffac0487b9e6"
         },
         "./pocs/CVE-2025-68263.py": {
+            "version": "1.0.1",
             "sha256": "adbdcba70c18d6df82a9c64cfd956ae385d59fa883b57811d2315d12aec285b2"
         },
         "./pocs/CVE-2021-4034.py": {
+            "version": "1.0.1",
             "sha256": "50bd3443b0c011e21575b314723dd17141046b3b8e4f280a9290f9557815f67d"
         },
         "./pocs/CVE-2022-2274.py": {
+            "version": "1.0.1",
             "sha256": "0b75edb17e62ef6ac7219b65086904db6017ca197846f88e6f4466d8c450e140"
         },
         "./pocs/CVE-2026-31607.py": {
+            "version": "1.0.1",
             "sha256": "7aee7b4cac3879c8db45f50d4384e6731442604cde013f2683071c79938994fa"
         },
         "./pocs/CVE-2022-23218-23219.py": {
+            "version": "1.0.1",
             "sha256": "8e865c939a05e6c4df2183a1477cf858be95ca44da37789abf9163a40b4bbd12"
-        },
-        "./.github/workflows/Test OSV Fetcher.yml": {
-            "sha256": "619404348730586d0d393e1ab684709233a80accab571f9c2373d85bc172c134"
-        },
-        "./.github/workflows/Auto Update Manifest.yml": {
-            "sha256": "3c1c3d18a2d29e1d8f259ff2ad6002e24cfed8b8b8bbcc37523902bc99e88eb0"
         }
     }
 }
