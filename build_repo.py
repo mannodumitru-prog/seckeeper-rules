@@ -133,8 +133,11 @@ def sync_cve_rules():
             }
             if page_token: payload["page_token"] = page_token
             try:
-                resp = requests.post(OSV_QUERY_API, json=payload, timeout=15)
-                # 大声报错机制
-                if resp.status_code != 200: 
-                    print(f"⚠️ 抓取 [{pkg}] 失败！OSV 拒绝请求:{resp.status_code} - {resp.text}")
-                    break
+                 resp = requests.post(OSV_QUERY_API, json=payload, timeout=15)
+                 if resp.status_code != 200: 
+                     print(f"⚠️ 抓取 [{pkg}] 失败！OSV 拒绝请求: {resp.status_code} - {resp.text}")
+                     break
+                 data = resp.json()
+             except Exception as e: 
+                 print(f"⚠️ 发生网络异常: {e}")
+                 break
