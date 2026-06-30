@@ -1,8 +1,8 @@
 """
 SecKeeper 中央规则仓库 - 情报熔炼与全量构建引擎
 功能：
-1. 自动从 OSV 抓取最新漏洞，并严格执行 CVSS >= 7.0 及 10年内高危筛选。
-2. 深度遍历项目下所有规则、PoC、YAML，自动生成带有防篡改哈希的清单。
+1. 自动从 OSV 抓取最新漏洞，严格执行生态适配、CVSS >= 7.0 及 10年内高危筛选。
+2. 深度遍历项目下所有规则、PoC、YAML，自动生成带有防篡改哈希的清单 (manifest.json)。
 """
 import os
 import json
@@ -121,120 +121,19 @@ def sync_cve_rules():
 
     for pkg in TARGET_COMPONENTS:
         page_token = None
+        # 【生态适配补丁】：Linux 内核走 Linux 生态，其余组件走 Debian 生态
+        ecosystem = "Linux" if pkg in ("linux", "kernel") else "Debian"
+        
         while True:
-            payload = {"package": {"name": pkg}}
+            payload = {
+                "package": {
+                    "name": pkg,
+                    "ecosystem": ecosystem
+                }
+            }
             if page_token: payload["page_token"] = page_token
             try:
                 resp = requests.post(OSV_QUERY_API, json=payload, timeout=15)
-                if resp.status_code != 200: break
-                data = resp.json()
-            except Exception: break
-
-            for v in data.get("vulns", []):
-                cve_id = _get_cve_id(v)
-                
-                # 【防线 1】：验证 ID 与十年内时间约束
-                if not cve_id or not _is_in_time_range(v): continue
-                
-                # 【防线 2】：严格校验 CVSS 分数 >= 7.0
-                score, severity = _calculate_cvss(v)
-                if not score: continue
-                
-                # 【防线 3】：确保存在受影响的信创组件
-                cleaned_software = _parse_ranges(v)
-                if not cleaned_software: continue
-
-                desc = (v.get("summary") or v.get("details") or "No description").strip().replace("\n", " ")[:300]
-
-                if cve_id in registry:
-                    combined = registry[cve_id]["affected_software"] + cleaned_software
-                    seen = set(); deduped = []
-                    for s in combined:
-                        k = tuple(sorted(s.items()))
-                        if k not in seen:
-                            seen.add(k); deduped.append(s)
-                    registry[cve_id]["affected_software"] = deduped
-                else:
-                    registry[cve_id] = {
-                        "cve_id": cve_id, "severity": severity, "cvss_score": score,
-                        "description": desc, "affected_software": cleaned_software,
-                        "remediation": _gen_remediation(cleaned_software)
-                    }
-
-            page_token = data.get("next_page_token")
-            if not page_token: break
-
-    final_rules = list(registry.values())
-    final_rules.sort(key=lambda x: x["cvss_score"], reverse=True) 
-    added_count = len(final_rules) - initial_count
-
-    existing_data["rules"] = final_rules
-    existing_data["meta"]["last_updated"] = datetime.datetime.now().strftime("%Y-%m-%d")
-    existing_data["meta"]["total_rules"] = len(final_rules)
-
-    with open(rule_file, "w", encoding="utf-8") as f:
-        json.dump(existing_data, f, indent=4, ensure_ascii=False)
-        
-    print(f"✅ 情报熔炼完成！全库现存 {len(final_rules)} 条高危规则（净新增 {added_count} 条）。")
-
-# ==================== 4. 核心：全量清单构建 ====================
-def get_sha256(filepath: str) -> str:
-    sha256_hash = hashlib.sha256()
-    with open(filepath, "rb") as f:
-        for byte_block in iter(lambda: f.read(4096), b""):
-            sha256_hash.update(byte_block)
-    return sha256_hash.hexdigest()
-
-def build_manifest():
-    manifest_path = "manifest.json"
-    old_version = "1.0.0"
-
-    if os.path.exists(manifest_path):
-        try:
-            with open(manifest_path, "r", encoding="utf-8") as f:
-                old_version = json.load(f).get("version", "1.0.0")
-        except Exception: pass
-
-    v_parts = old_version.split('.')
-    if len(v_parts) == 3 and v_parts[2].isdigit():
-        v_parts[2] = str(int(v_parts[2]) + 1)
-        new_version = ".".join(v_parts)
-    else:
-        new_version = old_version
-
-    payloads_map = {}
-
-    for root, dirs, files in os.walk("."):
-        dirs[:] = [d for d in dirs if d not in IGNORE_DIRS and not d.startswith('.')]
-        for file in files:
-            if file in IGNORE_FILES or file.startswith('.'): continue
-
-            full_path = os.path.join(root, file)
-            rel_path = os.path.relpath(full_path, start=".")
-            rel_key = rel_path.replace("\\", "/")
-
-            payloads_map[rel_key] = {
-                "version": "1.0.0",
-                "sha256": get_sha256(full_path)
-            }
-
-    manifest_data = {
-        "version": new_version,
-        "last_updated": datetime.datetime.now().isoformat(),
-        "files": payloads_map
-    }
-
-    with open(manifest_path, "w", encoding="utf-8") as f:
-        json.dump(manifest_data, f, indent=4, ensure_ascii=False)
-
-    print(f"✅ 规则库清单签名完毕！版本自增至: v{new_version} | 纳管文件: {len(payloads_map)} 个")
-
-# ==================== 5. 流水线执行引擎 ====================
-if __name__ == "__main__":
-    print("🚀 启动 SecKeeper 中央规则库构建流水线...")
-    
-    # 步骤 1：拉取并应用严格过滤（找回了你的筛选逻辑）
-    sync_cve_rules()
-    
-    # 步骤 2：对所有最终产物进行指纹计算与统一打包（你写的精彩逻辑）
-    build_manifest()
+                # 大声报错机制
+                if resp.status_code != 200: 
+                    print(f"⚠️ 抓取 [{pkg}] 失败！OSV 拒绝请求:
