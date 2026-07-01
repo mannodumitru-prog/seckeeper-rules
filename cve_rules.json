@@ -1,7 +1,7 @@
 {
     "meta": {
         "total": 4370,
-        "updated": "2026-07-01 16:09:29.781768"
+        "updated": "2026-07-01 21:05:49.931785"
     },
     "rules": [
         {
@@ -59897,6 +59897,12 @@
             "cvss_score": 7.5,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  Revert \"wireguard: device: enable threaded NAPI\"  This reverts commit 933466fc50a8e4eb167acbd0d8ec96a078462e9c which is commit db9a",
             "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
                 {
                     "name": "linux"
                 }
