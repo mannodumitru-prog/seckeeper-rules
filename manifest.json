@@ -1,97 +1,97 @@
 {
-    "version": "1.0.1",
-    "last_updated": "2026-07-01 08:18:52.175421",
+    "version": "1.0.2",
+    "last_updated": "2026-07-01 08:29:09.190067",
     "files": {
         "./privilege_escalation_rules.json": {
-            "version": "1.0.1",
+            "version": "1.0.2",
             "sha256": "c78bb9df0849e9342e065aedab4fc7f1aef58b96afa84d574d3dc5115e036df8"
         },
         "./threat_rules.json": {
-            "version": "1.0.1",
+            "version": "1.0.2",
             "sha256": "9209ce71e8facca2e9de15d33aaf9777f28f034620b479417b7ff7a3cc661eab"
         },
         "./file_integrity_rules.json": {
-            "version": "1.0.1",
+            "version": "1.0.2",
             "sha256": "92dc01d360c61b99d04a22b23eec3e069a45e256bace1b1e62d96bf71bf826b7"
         },
         "./weak_password_rules.json": {
-            "version": "1.0.1",
+            "version": "1.0.2",
             "sha256": "94f5be161e0d3b4966cce3c21a5a6c71256e93689dfd9a73646cff57bdaac40d"
         },
         "./cve_rules.json": {
-            "version": "1.0.1",
-            "sha256": "154e68a7580e1fd99015a81858b82a12f83957c761fc770c0cf83c402dfa1bd6"
+            "version": "1.0.2",
+            "sha256": "0665368b93d83d7b37abff0890d0836bd41bafa89e055ddbf8b3e49fe4334b27"
         },
         "./service_rules.json": {
-            "version": "1.0.1",
+            "version": "1.0.2",
             "sha256": "daca6dae81d58e16a48df30b537d304929d30f7e12c12e2f83548b14fa1a879c"
         },
         "./config_rules.json": {
-            "version": "1.0.1",
+            "version": "1.0.2",
             "sha256": "8ea0f495c13b3695b47af519299cf76b3c00b2acd33d345ba6d7ba68137091b4"
         },
         "./utils/osv_fetcher.py": {
-            "version": "1.0.1",
+            "version": "1.0.2",
             "sha256": "c3f68e5be9f2cbd9aabc3005e09b7070b6f62c281c13f64f433bf92bfe9d5944"
         },
         "./yaml_pocs/cve-test-1234.yaml": {
-            "version": "1.0.1",
+            "version": "1.0.2",
             "sha256": "b75b88b4d2a17b8c41efacaa80d278bb0cfadb4ecc50d4acfe9313b1a372b60e"
         },
         "./pocs/CVE-2024-36031.py": {
-            "version": "1.0.1",
+            "version": "1.0.2",
             "sha256": "9c5bf424b4128d802f8dc3894ef55129c67262190fb4246449bbe1d8b1d455c4"
         },
         "./pocs/CVE-2023-4911.py": {
-            "version": "1.0.1",
+            "version": "1.0.2",
             "sha256": "3c0483c688395ccaecc1b1e917810ff64c71740f1ce27882fbc3eda26b5c1cc0"
         },
         "./pocs/CVE-2016-0705.py": {
-            "version": "1.0.1",
+            "version": "1.0.2",
             "sha256": "65bdaaceab81df7743259e66969f5517a041bb690dd81259ea4f2d727273183a"
         },
         "./pocs/CVE-2016-5195.py": {
-            "version": "1.0.1",
+            "version": "1.0.2",
             "sha256": "ddcb5c279258b1725c31b58a45e09b5442cbfcb8379a76a274b83f00f59005c0"
         },
         "./pocs/CVE-2022-2588.py": {
-            "version": "1.0.1",
+            "version": "1.0.2",
             "sha256": "a9d158409294510650345edd7ef8ab1d0544f21b74e10dce5975085a25ab48f2"
         },
         "./pocs/CVE-2021-3156.py": {
-            "version": "1.0.1",
+            "version": "1.0.2",
             "sha256": "b8aa049aa3ab5c1b37793a2ae171b7baf8c403bc4313487458deffac0487b9e6"
         },
         "./pocs/CVE-2023-0386.py": {
-            "version": "1.0.1",
+            "version": "1.0.2",
             "sha256": "407651285e43ca9b052be3bd826710eeca04245275859609ddf9018539706924"
         },
         "./pocs/CVE-2024-1086.py": {
-            "version": "1.0.1",
+            "version": "1.0.2",
             "sha256": "e61874fba5d6c0ad624135bb8e3cc10052279137bff6cf02e3b23bbca8893368"
         },
         "./pocs/CVE-2025-68263.py": {
-            "version": "1.0.1",
+            "version": "1.0.2",
             "sha256": "adbdcba70c18d6df82a9c64cfd956ae385d59fa883b57811d2315d12aec285b2"
         },
         "./pocs/CVE-2021-4034.py": {
-            "version": "1.0.1",
+            "version": "1.0.2",
             "sha256": "50bd3443b0c011e21575b314723dd17141046b3b8e4f280a9290f9557815f67d"
         },
         "./pocs/CVE-2022-2274.py": {
-            "version": "1.0.1",
+            "version": "1.0.2",
             "sha256": "0b75edb17e62ef6ac7219b65086904db6017ca197846f88e6f4466d8c450e140"
         },
         "./pocs/CVE-2021-3493.py": {
-            "version": "1.0.1",
+            "version": "1.0.2",
             "sha256": "a8adb30ea26c88dd65c3cbe9e4c04b2ca8f8b4b8b8d98e193899f628fcc9704f"
         },
         "./pocs/CVE-2026-31607.py": {
-            "version": "1.0.1",
+            "version": "1.0.2",
             "sha256": "7aee7b4cac3879c8db45f50d4384e6731442604cde013f2683071c79938994fa"
         },
         "./pocs/CVE-2022-23218-23219.py": {
-            "version": "1.0.1",
+            "version": "1.0.2",
             "sha256": "8e865c939a05e6c4df2183a1477cf858be95ca44da37789abf9163a40b4bbd12"
         }
     }
