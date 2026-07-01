@@ -1,7 +1,7 @@
 {
     "meta": {
-        "total": 4362,
-        "updated": "2026-06-30 21:14:08.455780"
+        "total": 4370,
+        "updated": "2026-07-01 06:41:23.713720"
     },
     "rules": [
         {
@@ -47073,6 +47073,25 @@
             ]
         },
         {
+            "cve_id": "DEBIAN-CVE-2026-27784",
+            "cvss_score": 7.8,
+            "description": "The 32-bit implementation of NGINX Open Source has a vulnerability in the ngx_http_mp4_module module, which might allow an attacker to over-read or over-write NGINX worker memory resulting in its term",
+            "affected_software": [
+                {
+                    "name": "nginx"
+                },
+                {
+                    "name": "nginx"
+                },
+                {
+                    "name": "nginx"
+                },
+                {
+                    "name": "nginx"
+                }
+            ]
+        },
+        {
             "cve_id": "DEBIAN-CVE-2026-31389",
             "cvss_score": 7.8,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  spi: fix use-after-free on controller registration failure  Make sure to deregister from driver core also in the unlikely event tha",
@@ -75841,6 +75860,124 @@
             "cve_id": "DEBIAN-CVE-2026-46299",
             "cvss_score": 7.0,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  hfsplus: fix held lock freed on hfsplus_fill_super()  hfsplus_fill_super() calls hfs_find_init() to initialize a search structure, ",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-46309",
+            "cvss_score": 7.0,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  drm/xe/uapi: Reject coh_none PAT index for CPU cached memory in madvise  Add validation in xe_vm_madvise_ioctl() to reject PAT indi",
+            "affected_software": [
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-52969",
+            "cvss_score": 7.0,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  KVM: Reject wrapped offset in kvm_reset_dirty_gfn()  kvm_reset_dirty_gfn() guards the gfn range with  \tif (!memslot || (offset + __",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-52972",
+            "cvss_score": 7.0,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  crypto: af_alg - Cap AEAD AD length to 0x80000000  In order to prevent arithmetic overflows when checking the TX buffer size, cap t",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53059",
+            "cvss_score": 7.0,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  dm log: fix out-of-bounds write due to region_count overflow  The local variable region_count in create_log_context() is declared a",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53143",
+            "cvss_score": 7.0,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  drm/amdkfd: Fix buffer overflow in SDMA queue checkpoint/restore on GFX11  The v11 MQD manager incorrectly assigned the CP-compute ",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53148",
+            "cvss_score": 7.0,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  thunderbolt: Clamp XDomain response data copy to allocation size  tb_xdp_properties_request() derives the per-packet copy length fr",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53196",
+            "cvss_score": 7.0,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  USB: serial: io_ti: fix heap overflow in get_manuf_info()  get_manuf_info() reads le16_to_cpu(rom_desc->Size) bytes from the device",
             "affected_software": [
                 {
                     "name": "linux"

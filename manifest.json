@@ -1,6 +1,6 @@
 {
     "version": "1.0.1",
-    "last_updated": "2026-06-30 21:14:09.042301",
+    "last_updated": "2026-07-01 06:41:24.345803",
     "files": {
         "./privilege_escalation_rules.json": {
             "version": "1.0.1",
@@ -20,7 +20,7 @@
         },
         "./cve_rules.json": {
             "version": "1.0.1",
-            "sha256": "186ea434c674f5fbb4f69683d9565da203495ef92e92eaa6f16a4f3a8f844e32"
+            "sha256": "0ea7607c6bbe2792f4470cf1e2d0d3cb57ae5dde4f4e62168cb282a34bcef0f8"
         },
         "./service_rules.json": {
             "version": "1.0.1",
@@ -41,6 +41,10 @@
         "./pocs/CVE-2024-36031.py": {
             "version": "1.0.1",
             "sha256": "9c5bf424b4128d802f8dc3894ef55129c67262190fb4246449bbe1d8b1d455c4"
+        },
+        "./pocs/CVE-2023-4911.py": {
+            "version": "1.0.1",
+            "sha256": "3c0483c688395ccaecc1b1e917810ff64c71740f1ce27882fbc3eda26b5c1cc0"
         },
         "./pocs/CVE-2016-0705.py": {
             "version": "1.0.1",
