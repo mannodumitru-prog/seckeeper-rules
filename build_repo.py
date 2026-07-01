@@ -71,6 +71,20 @@ def sync_and_build():
     print(f"🎯 熔炼完成！已精简至 {len(rules)} 条核心高危漏洞。")
 
 def build_manifest():
+    # 1. 尝试读取现有版本，如果没有，默认为 1.0.0
+    current_version = "1.0.0"
+    if os.path.exists("manifest.json"):
+        try:
+            with open("manifest.json", "r") as f:
+                old_data = json.load(f)
+                current_version = old_data.get("version", "1.0.0")
+        except: pass
+    
+    # 2. 版本号递增逻辑 (简单处理：将最后一位加 1)
+    v_parts = current_version.split('.')
+    v_parts[-1] = str(int(v_parts[-1]) + 1)
+    new_version = ".".join(v_parts)
+    
     payloads = {}
     for root, dirs, files in os.walk("."):
         dirs[:] = [d for d in dirs if not d.startswith('.')]
@@ -79,21 +93,22 @@ def build_manifest():
             if file in IGNORE_FILES: continue
             
             path = os.path.join(root, file).replace("\\", "/")
-            # 【修复点】：显式添加 version 字段，使之符合消费端需求
+            # 现在的 version 使用递增后的新版本号
             payloads[path] = {
-                "version": "1.0.1", 
+                "version": new_version, 
                 "sha256": get_hash(os.path.join(root, file))
             }
     
-    # 写入 manifest
+    # 3. 写入 manifest
     manifest_data = {
-        "version": "1.0.1",
+        "version": new_version,
         "last_updated": str(datetime.now()),
         "files": payloads
     }
     with open("manifest.json", "w") as f:
         json.dump(manifest_data, f, indent=4)
-
+    print(f"✅ 规则清单已构建，当前版本: {new_version}")
+    
 if __name__ == "__main__":
     sync_and_build()
     build_manifest()
