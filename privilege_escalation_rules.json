@@ -1,8 +1,8 @@
 {
     "meta": {
-        "version": "1.0.0",
-        "description": "提权风险检测规则",
-        "last_updated": "2026-05-19"
+        "version": "2.0.0",
+        "description": "提权风险检测规则 - 含内核CVE行为验证",
+        "last_updated": "2026-06-29"
     },
     "rules": [
         {
@@ -31,7 +31,11 @@
                 "su"
             ],
             "severity": "high",
-            "remediation": "使用 `chmod u-s <文件路径>` 移除SUID位，或使用 `chmod 755` 恢复普通权限。"
+            "remediation": "使用 `chmod u-s <文件路径>` 移除SUID位，或使用 `chmod 755` 恢复普通权限。",
+            "verification_method": "local",
+            "verification_engine": "state_check",
+            "verification_safety": "safe_probe",
+            "offline_supported": true
         },
         {
             "check_name": "sudoers_dangerous_config",
@@ -41,7 +45,91 @@
                 "SETENV:"
             ],
             "severity": "high",
-            "remediation": "编辑 /etc/sudoers，删除所有包含 NOPASSWD 或 !authenticate 的行，强制要求密码认证。"
+            "remediation": "编辑 /etc/sudoers，删除所有包含 NOPASSWD 或 !authenticate 的行，强制要求密码认证。",
+            "verification_method": "local",
+            "verification_engine": "state_check",
+            "verification_safety": "safe_probe",
+            "offline_supported": true
+        },
+        {
+            "check_name": "kernel_cve_behavior",
+            "description": "通过行为验证检测内核提权漏洞，绕过版本号比对的局限性",
+            "cves": [
+                {
+                    "cve_id": "CVE-2021-4034",
+                    "name": "PwnKit - polkit pkexec 本地提权",
+                    "severity": "critical",
+                    "cvss_score": 7.8,
+                    "description": "polkit的pkexec组件存在内存破坏漏洞，任意本地用户可提权至root，影响几乎所有主流Linux发行版（含银河麒麟、UOS）。",
+                    "check_method": "polkit_version_and_patch",
+                    "remediation": "升级polkit至修复版本：Ubuntu/麒麟执行 `sudo apt update && sudo apt upgrade policykit-1 polkit`，或临时执行 `chmod 0755 /usr/bin/pkexec` 移除SUID位缓解风险。",
+                    "references": [
+                        "https://nvd.nist.gov/vuln/detail/CVE-2021-4034"
+                    ],
+                    "verification_method": "local",
+                    "verification_engine": "python_probe",
+                    "verification_safety": "environment_probe",
+                    "offline_supported": true,
+                    "poc_file": "pocs/CVE-2021-4034.py"
+                },
+                {
+                    "cve_id": "CVE-2022-0847",
+                    "name": "Dirty Pipe - 内核管道权限提升",
+                    "severity": "high",
+                    "cvss_score": 7.8,
+                    "description": "Linux内核5.8-5.16.11存在管道缓冲区标志位初始化缺陷，普通用户可覆盖只读文件内容并提权至root。银河麒麟若使用5.x内核需重点关注。",
+                    "check_method": "kernel_version_range",
+                    "affected_kernel_min": "5.8",
+                    "affected_kernel_max": "5.16.11",
+                    "remediation": "升级内核至5.16.11以上，或执行 `sudo apt update && sudo apt upgrade linux-image-generic`。",
+                    "references": [
+                        "https://nvd.nist.gov/vuln/detail/CVE-2022-0847"
+                    ],
+                    "verification_method": "local",
+                    "verification_engine": "python_probe",
+                    "verification_safety": "environment_probe",
+                    "offline_supported": true
+                },
+                {
+                    "cve_id": "CVE-2021-3156",
+                    "name": "Baron Samedit - sudo堆溢出提权",
+                    "severity": "critical",
+                    "cvss_score": 7.8,
+                    "description": "sudo在解析命令行参数时存在堆溢出漏洞（off-by-one），本地用户无需sudo权限即可提权至root，影响sudo 1.8.2-1.9.5p1。",
+                    "check_method": "sudo_version",
+                    "remediation": "升级sudo至1.9.5p2或以上：`sudo apt update && sudo apt upgrade sudo`。",
+                    "references": [
+                        "https://nvd.nist.gov/vuln/detail/CVE-2021-3156"
+                    ],
+                    "verification_method": "local",
+                    "verification_engine": "python_probe",
+                    "verification_safety": "safe_probe",
+                    "offline_supported": true,
+                    "poc_file": "pocs/CVE-2021-3156.py"
+                },
+                {
+                    "cve_id": "CVE-2023-0386",
+                    "name": "OverlayFS - 内核文件系统提权",
+                    "severity": "high",
+                    "cvss_score": 7.8,
+                    "description": "Linux内核OverlayFS实现中存在非特权用户将具有特权能力的文件复制到目标目录的漏洞，可导致本地提权。影响内核版本<6.2。",
+                    "check_method": "kernel_version_range",
+                    "affected_kernel_max": "6.2.0",
+                    "remediation": "升级内核至6.2.0以上，或禁用unprivileged user namespaces：`echo 0 > /proc/sys/kernel/unprivileged_userns_clone`（临时缓解）。",
+                    "references": [
+                        "https://nvd.nist.gov/vuln/detail/CVE-2023-0386"
+                    ],
+                    "verification_method": "local",
+                    "verification_engine": "python_probe",
+                    "verification_safety": "environment_probe",
+                    "offline_supported": true,
+                    "poc_file": "pocs/CVE-2023-0386.py"
+                }
+            ],
+            "verification_method": "local",
+            "verification_engine": "python_probe",
+            "verification_safety": "environment_probe",
+            "offline_supported": true
         }
     ]
 }

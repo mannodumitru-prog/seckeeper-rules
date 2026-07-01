@@ -1,15 +1,18 @@
 {
     "meta": {
-        "version": "1.0.0",
-        "description": "系统安全配置合规检查规则",
-        "last_updated": "2026-05-12"
+        "version": "2.0.0",
+        "description": "系统静态安全配置与服务基线全局规则库",
+        "last_updated": "2026-06-30",
+        "last_reviewed": "2026-07-01",
+        "compatibility": "SecKeeper ConfigDetector safe-check-types"
     },
     "rules": [
         {
             "check_name": "SSH Root登录禁用",
-            "check_type": "file",
+            "check_type": "file_directive",
             "target": "/etc/ssh/sshd_config",
-            "expected": {"contains": "PermitRootLogin no"},
+            "directive": "PermitRootLogin",
+            "expected": "no",
             "severity": "high",
             "category": "ssh",
             "description": "允许root直接SSH登录会增加被暴力破解的风险",
@@ -17,19 +20,69 @@
         },
         {
             "check_name": "SSH密码认证",
-            "check_type": "file",
+            "check_type": "file_directive",
             "target": "/etc/ssh/sshd_config",
-            "expected": {"contains": "PasswordAuthentication no"},
+            "directive": "PasswordAuthentication",
+            "expected": "no",
             "severity": "high",
             "category": "ssh",
             "description": "启用密码认证可能遭受密码爆破攻击，建议使用密钥认证",
             "remediation": "设置 PasswordAuthentication no，改用公钥认证"
         },
         {
+            "check_name": "SSH禁止空密码登录",
+            "check_type": "file_directive",
+            "target": "/etc/ssh/sshd_config",
+            "directive": "PermitEmptyPasswords",
+            "expected": "no",
+            "severity": "high",
+            "category": "ssh",
+            "description": "允许空密码登录可导致未授权访问",
+            "remediation": "设置 PermitEmptyPasswords no"
+        },
+        {
+            "check_name": "SSH最大认证尝试次数",
+            "check_type": "file_directive",
+            "target": "/etc/ssh/sshd_config",
+            "directive": "MaxAuthTries",
+            "expected": "3",
+            "severity": "medium",
+            "category": "ssh",
+            "description": "认证尝试次数过多，易被暴力破解",
+            "remediation": "设置 MaxAuthTries 为 3"
+        },
+        {
+            "check_name": "Nginx隐藏版本号",
+            "check_type": "file_directive",
+            "target": "/etc/nginx/nginx.conf",
+            "directive": "server_tokens",
+            "expected": "off",
+            "severity": "low",
+            "category": "nginx",
+            "description": "显示Nginx版本号会暴露漏洞信息",
+            "remediation": "在 http 块中添加 server_tokens off;"
+        },
+        {
+            "check_name": "MySQL本地绑定地址",
+            "check_type": "file_directive",
+            "target": "/etc/mysql/my.cnf",
+            "directive": "bind-address",
+            "expected": "127.0.0.1",
+            "severity": "high",
+            "category": "mysql",
+            "description": "MySQL监听所有接口，增加被攻击面",
+            "remediation": "设置 bind-address = 127.0.0.1 或使用防火墙限制"
+        },
+        {
             "check_name": "防火墙状态",
-            "check_type": "command",
-            "target": "systemctl is-active ufw || systemctl is-active firewalld",
-            "expected": "active",
+            "check_type": "service_any",
+            "target": [
+                "ufw",
+                "firewalld"
+            ],
+            "expected": {
+                "contains": "active"
+            },
             "severity": "high",
             "category": "firewall",
             "description": "防火墙未运行，系统暴露于网络攻击风险中",
@@ -37,13 +90,16 @@
         },
         {
             "check_name": "密码最小长度",
-            "check_type": "command",
-            "target": "grep '^minlen' /etc/security/pwquality.conf | awk '{print $3}'",
-            "expected": "8",
+            "check_type": "file_directive",
+            "target": "/etc/security/pwquality.conf",
+            "expected": {
+                "greater_equal": 8
+            },
             "severity": "medium",
             "category": "password_policy",
             "description": "密码最小长度不足8位，容易被破解",
-            "remediation": "在 /etc/security/pwquality.conf 中设置 minlen=8"
+            "remediation": "在 /etc/security/pwquality.conf 中设置 minlen=8",
+            "directive": "minlen"
         },
         {
             "check_name": "ICMP重定向禁用",
@@ -54,6 +110,66 @@
             "category": "network",
             "description": "ICMP重定向可能被用于中间人攻击",
             "remediation": "设置 net.ipv4.conf.all.accept_redirects=0"
+        },
+        {
+            "check_name": "达梦数据库(DM8)默认管理端口暴露风险",
+            "check_type": "file_directive",
+            "target": "/etc/dm_svc.conf",
+            "directive": "PORT_NUM",
+            "expected": {
+                "contains": "5236"
+            },
+            "severity": "medium",
+            "category": "xinchuang_baseline",
+            "description": "检测到达梦数据库使用了默认的 5236 端口。在政务信创环境中，建议修改默认端口以规避自动化扫描攻击。",
+            "remediation": "修改 dm_svc.conf 或 dm.ini 中的 PORT_NUM 参数，并重启数据库服务。"
+        },
+        {
+            "check_name": "人大金仓(KingbaseES)配置文件权限过大",
+            "check_type": "file_permission",
+            "target": "/opt/Kingbase/ES/V8/data/kingbase.conf",
+            "expected": {
+                "regex": "^(600|640|not_found)$"
+            },
+            "severity": "high",
+            "category": "xinchuang_baseline",
+            "description": "人大金仓核心配置文件权限应严格限制为 600 或 640，防止普通用户读取敏感配置。",
+            "remediation": "执行 chmod 600 /opt/Kingbase/ES/V8/data/kingbase.conf"
+        },
+        {
+            "check_name": "东方通(TongWeb)出厂默认后台路径未修改",
+            "check_type": "file_search",
+            "target": "/opt/TongWeb*/conf/tongweb.xml",
+            "expected": {
+                "equals": "not_found"
+            },
+            "severity": "low",
+            "category": "xinchuang_baseline",
+            "description": "东方通中间件若仍存在默认 console 管理控制台路径，可能增加暴露面。建议配合网络层策略限制访问。",
+            "remediation": "在 tongweb.xml 中修改 <admin-console> 配置项或通过网关限制访问源。",
+            "directive": "console"
+        },
+        {
+            "check_name": "国产操作系统审计服务状态 (Auditd)",
+            "check_type": "service",
+            "target": "auditd",
+            "expected": {
+                "contains": "active"
+            },
+            "severity": "medium",
+            "category": "xinchuang_baseline",
+            "description": "等保2.0要求信创主机必须开启核心审计服务，记录系统行为。"
+        },
+        {
+            "check_name": "国产操作系统关键目录权限审计",
+            "check_type": "file_permission",
+            "target": "/etc/shadow",
+            "expected": {
+                "regex": "^(000|400|600|640)$"
+            },
+            "severity": "high",
+            "category": "xinchuang_baseline",
+            "description": "检查系统密码凭证文件权限是否被恶意放宽。通常应为 000/400/600/640 等严格权限。"
         }
     ]
 }
