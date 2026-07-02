@@ -1,7 +1,7 @@
 {
     "meta": {
-        "total": 4370,
-        "updated": "2026-07-02 07:55:18.784587"
+        "total": 4369,
+        "updated": "2026-07-02 20:40:57.544696"
     },
     "rules": [
         {
@@ -42724,9 +42724,6 @@
                 },
                 {
                     "name": "linux"
-                },
-                {
-                    "name": "linux"
                 }
             ]
         },
@@ -48438,15 +48435,6 @@
             "affected_software": [
                 {
                     "name": "linux"
-                },
-                {
-                    "name": "linux"
-                },
-                {
-                    "name": "linux"
-                },
-                {
-                    "name": "linux"
                 }
             ]
         },
@@ -51869,9 +51857,6 @@
             "cvss_score": 7.8,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  eventpoll: fix ep_remove struct eventpoll / struct file UAF  ep_remove() (via ep_remove_file()) cleared file->f_ep under file->f_lo",
             "affected_software": [
-                {
-                    "name": "linux"
-                },
                 {
                     "name": "linux"
                 },
@@ -59897,9 +59882,6 @@
             "cvss_score": 7.5,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  Revert \"wireguard: device: enable threaded NAPI\"  This reverts commit 933466fc50a8e4eb167acbd0d8ec96a078462e9c which is commit db9a",
             "affected_software": [
-                {
-                    "name": "linux"
-                },
                 {
                     "name": "linux"
                 },
@@ -75965,25 +75947,6 @@
             "cve_id": "DEBIAN-CVE-2026-53148",
             "cvss_score": 7.0,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  thunderbolt: Clamp XDomain response data copy to allocation size  tb_xdp_properties_request() derives the per-packet copy length fr",
-            "affected_software": [
-                {
-                    "name": "linux"
-                },
-                {
-                    "name": "linux"
-                },
-                {
-                    "name": "linux"
-                },
-                {
-                    "name": "linux"
-                }
-            ]
-        },
-        {
-            "cve_id": "DEBIAN-CVE-2026-53196",
-            "cvss_score": 7.0,
-            "description": "In the Linux kernel, the following vulnerability has been resolved:  USB: serial: io_ti: fix heap overflow in get_manuf_info()  get_manuf_info() reads le16_to_cpu(rom_desc->Size) bytes from the device",
             "affected_software": [
                 {
                     "name": "linux"
