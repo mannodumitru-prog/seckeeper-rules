@@ -1,7 +1,7 @@
 {
     "meta": {
-        "total": 4369,
-        "updated": "2026-07-02 20:40:57.544696"
+        "total": 4368,
+        "updated": "2026-07-03 20:37:44.019968"
     },
     "rules": [
         {
@@ -75893,25 +75893,6 @@
             "cve_id": "DEBIAN-CVE-2026-52972",
             "cvss_score": 7.0,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  crypto: af_alg - Cap AEAD AD length to 0x80000000  In order to prevent arithmetic overflows when checking the TX buffer size, cap t",
-            "affected_software": [
-                {
-                    "name": "linux"
-                },
-                {
-                    "name": "linux"
-                },
-                {
-                    "name": "linux"
-                },
-                {
-                    "name": "linux"
-                }
-            ]
-        },
-        {
-            "cve_id": "DEBIAN-CVE-2026-53059",
-            "cvss_score": 7.0,
-            "description": "In the Linux kernel, the following vulnerability has been resolved:  dm log: fix out-of-bounds write due to region_count overflow  The local variable region_count in create_log_context() is declared a",
             "affected_software": [
                 {
                     "name": "linux"
