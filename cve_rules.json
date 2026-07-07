@@ -1,7 +1,7 @@
 {
     "meta": {
-        "total": 4368,
-        "updated": "2026-07-06 21:10:22.499877"
+        "total": 4391,
+        "updated": "2026-07-07 21:05:41.344980"
     },
     "rules": [
         {
@@ -1742,6 +1742,44 @@
             ]
         },
         {
+            "cve_id": "DEBIAN-CVE-2026-10536",
+            "cvss_score": 9.8,
+            "description": "A use-after-free vulnerability exists in libcurl when an application configures an HTTP/2 stream-dependency tree via `CURLOPT_STREAM_DEPENDS` or `CURLOPT_STREAM_DEPENDS_E`, subsequently invokes `curl_",
+            "affected_software": [
+                {
+                    "name": "curl"
+                },
+                {
+                    "name": "curl"
+                },
+                {
+                    "name": "curl"
+                },
+                {
+                    "name": "curl"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-11856",
+            "cvss_score": 9.8,
+            "description": "Successfully using libcurl to do a transfer to a specific HTTP origin (`hostA`) with **Digest** authentication and then changing the origin to a different one (`hostB`) for a second transfer, reusing ",
+            "affected_software": [
+                {
+                    "name": "curl"
+                },
+                {
+                    "name": "curl"
+                },
+                {
+                    "name": "curl"
+                },
+                {
+                    "name": "curl"
+                }
+            ]
+        },
+        {
             "cve_id": "DEBIAN-CVE-2026-23112",
             "cvss_score": 9.8,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  nvmet-tcp: add bounds checks in nvmet_tcp_build_pdu_iovec  nvmet_tcp_build_pdu_iovec() could walk past cmd->req.sg when a PDU lengt",
@@ -3134,6 +3172,29 @@
             ]
         },
         {
+            "cve_id": "DEBIAN-CVE-2026-8925",
+            "cvss_score": 9.8,
+            "description": "The curl logic that works with SASL authentication could end up cleaning up the GSASL context *twice* without clearing the pointer in between, making it `free()` the same pointer twice.",
+            "affected_software": [
+                {
+                    "name": "curl"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-9079",
+            "cvss_score": 9.8,
+            "description": "libcurl had a flaw that when instructed to clear proxy authentication credentials which made it not do so, leaving the old credentials around to get used for subsequent transfers that should not know ",
+            "affected_software": [
+                {
+                    "name": "curl"
+                },
+                {
+                    "name": "curl"
+                }
+            ]
+        },
+        {
             "cve_id": "DEBIAN-CVE-2026-31448",
             "cvss_score": 9.4,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  ext4: avoid infinite loops caused by residual data  On the mkdir/mknod path, when mapping logical blocks to physical blocks, if ins",
@@ -3728,6 +3789,16 @@
             ]
         },
         {
+            "cve_id": "DEBIAN-CVE-2026-11564",
+            "cvss_score": 9.1,
+            "description": "libcurl keeps previously used connections in a connection pool for subsequent transfers to reuse if one of them matches the setup.  An easy handle that first uses default native CA trust can continue ",
+            "affected_software": [
+                {
+                    "name": "curl"
+                }
+            ]
+        },
+        {
             "cve_id": "DEBIAN-CVE-2026-23455",
             "cvss_score": 9.1,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  netfilter: nf_conntrack_h323: check for zero length in DecodeQ931()  In DecodeQ931(), the UserUserIE code path reads a 16-bit lengt",
@@ -4103,6 +4174,57 @@
                 },
                 {
                     "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-8924",
+            "cvss_score": 9.1,
+            "description": "A flaw in curl\u2019s cookie parsing logic allows a malicious HTTP server to set 'super cookies' that bypass the Public Suffix List check. This enables an attacker-controlled origin to inject cookies that ",
+            "affected_software": [
+                {
+                    "name": "curl"
+                },
+                {
+                    "name": "curl"
+                },
+                {
+                    "name": "curl"
+                },
+                {
+                    "name": "curl"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-8926",
+            "cvss_score": 9.1,
+            "description": "When asking curl to use a `.netrc` file to find credentials and at the same time specifying a URL with a username(without a password), like `https://user@example.com/`, curl could wrongly get and use ",
+            "affected_software": [
+                {
+                    "name": "curl"
+                },
+                {
+                    "name": "curl"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-8927",
+            "cvss_score": 9.1,
+            "description": "When reusing a libcurl handle for sequential transfers driven by environment-variable proxy configuration, libcurl fails to clear the proxy authentication state between requests. Specifically, if the ",
+            "affected_software": [
+                {
+                    "name": "curl"
+                },
+                {
+                    "name": "curl"
+                },
+                {
+                    "name": "curl"
+                },
+                {
+                    "name": "curl"
                 }
             ]
         },
@@ -8360,6 +8482,25 @@
                 },
                 {
                     "name": "openssl"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-8286",
+            "cvss_score": 8.1,
+            "description": "A vulnerability exists where a new transfer that uses STARTTLS to upgrade the connection might reuse an existing live connection even though the TLS configuration mismatches so it should not.",
+            "affected_software": [
+                {
+                    "name": "curl"
+                },
+                {
+                    "name": "curl"
+                },
+                {
+                    "name": "curl"
+                },
+                {
+                    "name": "curl"
                 }
             ]
         },
@@ -52865,6 +53006,25 @@
             ]
         },
         {
+            "cve_id": "DEBIAN-CVE-2026-53129",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  fs/mbcache: cancel shrink work before destroying the cache  mb_cache_destroy() calls shrinker_free() and then frees all cache entri",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
             "cve_id": "DEBIAN-CVE-2026-53130",
             "cvss_score": 7.8,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  fs/omfs: reject s_sys_blocksize smaller than OMFS_DIR_START  omfs_fill_super() rejects oversized s_sys_blocksize values (> PAGE_SIZ",
@@ -52917,6 +53077,25 @@
             "cvss_score": 7.8,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  mm/list_lru: drain before clearing xarray entry on reparent  memcg_reparent_list_lrus() clears the dying memcg's xarray entry with ",
             "affected_software": [
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53156",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  nvmem: core: fix use-after-free bugs in error paths  Fix several instances of error paths in which we call __nvmem_device_put() - w",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
                 {
                     "name": "linux"
                 }
@@ -53094,6 +53273,25 @@
             "cve_id": "DEBIAN-CVE-2026-53194",
             "cvss_score": 7.8,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  USB: serial: kl5kusb105: fix bulk-out buffer overflow  klsi_105_prepare_write_buffer() is called by the generic write path with the",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53195",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  USB: serial: io_ti: fix heap overflow in build_i2c_fw_hdr()  build_i2c_fw_hdr() allocates a fixed-size buffer of (16*1024 - 512) + ",
             "affected_software": [
                 {
                     "name": "linux"
@@ -58529,6 +58727,45 @@
             ]
         },
         {
+            "cve_id": "DEBIAN-CVE-2026-11352",
+            "cvss_score": 7.5,
+            "description": "An issue in curl\u2019s QUIC UDP receive function allows a malicious HTTP/3 server to trigger a remote denial of service against a curl or libcurl client. Because the helper function discards zero-length U",
+            "affected_software": [
+                {
+                    "name": "curl"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-11586",
+            "cvss_score": 7.5,
+            "description": "By default, curl automatically responds to WebSocket PING frames. Because curl lacks an upper bound on memory allocation for unacknowledged frames, a malicious server can exhaust all available memory ",
+            "affected_software": [
+                {
+                    "name": "curl"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-12064",
+            "cvss_score": 7.5,
+            "description": "When a user invokes curl using a schemeless URL combined with `--proto-default` sftp (or scp), a disconnect occurs between the tool layer and libcurl. The tool layer incorrectly infers the URL scheme,",
+            "affected_software": [
+                {
+                    "name": "curl"
+                },
+                {
+                    "name": "curl"
+                },
+                {
+                    "name": "curl"
+                },
+                {
+                    "name": "curl"
+                }
+            ]
+        },
+        {
             "cve_id": "DEBIAN-CVE-2026-1519",
             "cvss_score": 7.5,
             "description": "If a BIND resolver is performing DNSSEC validation and encounters a maliciously crafted zone, the resolver may consume excessive CPU. Authoritative-only servers are generally unaffected, although ther",
@@ -60326,6 +60563,25 @@
             ]
         },
         {
+            "cve_id": "DEBIAN-CVE-2026-8932",
+            "cvss_score": 7.5,
+            "description": "libcurl would reuse a previously created connection even when some mTLS config related option had been changed that should have prohibited reuse.  libcurl keeps previously used connections in a connec",
+            "affected_software": [
+                {
+                    "name": "curl"
+                },
+                {
+                    "name": "curl"
+                },
+                {
+                    "name": "curl"
+                },
+                {
+                    "name": "curl"
+                }
+            ]
+        },
+        {
             "cve_id": "DEBIAN-CVE-2026-9076",
             "cvss_score": 7.5,
             "description": "Issue summary: When CMS password-based decryption (RFC 3211 / PWRI key unwrap) processes attacker-supplied CMS data, an attacker-chosen stream-mode KEK cipher can trigger a heap out-of-bounds read in ",
@@ -60341,6 +60597,29 @@
                 },
                 {
                     "name": "openssl"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-9545",
+            "cvss_score": 7.5,
+            "description": "In this scenario, libcurl first uses a proper HTTP/3 server for the initial transfers, and when it makes a second transfer to the same site it has been replaced by the attacker's impostor machine - wi",
+            "affected_software": [
+                {
+                    "name": "curl"
+                },
+                {
+                    "name": "curl"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-9546",
+            "cvss_score": 7.5,
+            "description": "A vulnerability in libcurl caused the HTTP `Referer:` header to persist even when explicitly cleared. While the documentation states that passing NULL to `CURLOPT_REFERER` suppresses the header, the o",
+            "affected_software": [
+                {
+                    "name": "curl"
                 }
             ]
         },
@@ -60875,6 +61154,25 @@
             ]
         },
         {
+            "cve_id": "DEBIAN-CVE-2026-9547",
+            "cvss_score": 7.4,
+            "description": "When a libcurl-based application performs transfers via `SCP://` or `SFTP://` and utilizes the `CURLOPT_SSH_KEYFUNCTION` callback, it may silently accept an untrusted server. This vulnerability occurs",
+            "affected_software": [
+                {
+                    "name": "curl"
+                },
+                {
+                    "name": "curl"
+                },
+                {
+                    "name": "curl"
+                },
+                {
+                    "name": "curl"
+                }
+            ]
+        },
+        {
             "cve_id": "DEBIAN-CVE-2016-0755",
             "cvss_score": 7.3,
             "description": "The ConnectionExists function in lib/url.c in libcurl before 7.47.0 does not properly re-use NTLM-authenticated proxy connections, which might allow remote attackers to authenticate as other users via",
@@ -61208,6 +61506,19 @@
                 },
                 {
                     "name": "glibc"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-9080",
+            "cvss_score": 7.3,
+            "description": "Calling `curl_easy_pause()` within the event-based `CURLMOPT_SOCKETFUNCTION` callback triggers a use-after-free vulnerability, where libcurl attempts to store a flag using a dangling struct pointer im",
+            "affected_software": [
+                {
+                    "name": "curl"
+                },
+                {
+                    "name": "curl"
                 }
             ]
         },
@@ -71773,6 +72084,41 @@
             ]
         },
         {
+            "cve_id": "DEBIAN-CVE-2026-53149",
+            "cvss_score": 7.1,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  thunderbolt: Bound root directory content to block size  __tb_property_parse_dir() does not check that content_offset + content_len",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53179",
+            "cvss_score": 7.1,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  staging: rtl8723bs: fix buffer over-read in rtw_update_protection  rtw_update_protection() is called with a pointer offset into the",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
             "cve_id": "DEBIAN-CVE-2026-53187",
             "cvss_score": 7.1,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  RDMA/core: Validate cpu_id against nr_cpu_ids in DMAH alloc  The cpu_id attribute supplied by user space through UVERBS_ATTR_ALLOC_",
@@ -71831,6 +72177,25 @@
             "cve_id": "DEBIAN-CVE-2026-53253",
             "cvss_score": 7.1,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  Bluetooth: bnep: reject short frames before parsing  A BNEP peer can send a short BNEP SDU. bnep_rx_frame() reads the packet type b",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53303",
+            "cvss_score": 7.1,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  f2fs: protect extension_list reading with sb_lock in f2fs_sbi_show()  In f2fs_sbi_show(), the extension_list, extension_count and h",
             "affected_software": [
                 {
                     "name": "linux"
