@@ -1,7 +1,7 @@
 {
     "meta": {
-        "total": 4391,
-        "updated": "2026-07-07 21:05:41.344980"
+        "total": 4401,
+        "updated": "2026-07-08 20:43:17.733825"
     },
     "rules": [
         {
@@ -53063,6 +53063,44 @@
             ]
         },
         {
+            "cve_id": "DEBIAN-CVE-2026-53136",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  drm/amd/display: Clamp VBIOS HDMI retimer register count to array size  [Why & How] The VBIOS integrated info tables (v1_11 and v2_",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53137",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  drm/amd/display: Clamp HDMI HDCP2 rx_id_list read to buffer size  [Why & How] During HDCP 2.x repeater authentication over HDMI, th",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
             "cve_id": "DEBIAN-CVE-2026-53145",
             "cvss_score": 7.8,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  drm/gem: Try to fix change_handle ioctl, attempt 4  [airlied: just added some comments on how to reenable] On-list because the cat ",
@@ -53086,6 +53124,25 @@
             "cve_id": "DEBIAN-CVE-2026-53156",
             "cvss_score": 7.8,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  nvmem: core: fix use-after-free bugs in error paths  Fix several instances of error paths in which we call __nvmem_device_put() - w",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53157",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  net: phonet: free phonet_device after RCU grace period  phonet_device_destroy() removes a phonet_device from the per-net device lis",
             "affected_software": [
                 {
                     "name": "linux"
@@ -53366,6 +53423,19 @@
             ]
         },
         {
+            "cve_id": "DEBIAN-CVE-2026-53233",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  netdev: fix double-free in netdev_nl_bind_rx_doit()  Sashiko flags that genlmsg_reply() always consumes the skb. The error path cal",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
             "cve_id": "DEBIAN-CVE-2026-53239",
             "cvss_score": 7.8,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  xfrm: policy: fix use-after-free on inexact bin in xfrm_policy_bysel_ctx()  Fix the race by pruning the bin while still holding xfr",
@@ -53516,6 +53586,22 @@
             ]
         },
         {
+            "cve_id": "DEBIAN-CVE-2026-53272",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  erofs: fix use-after-free on sbi->sync_decompress  z_erofs_decompress_kickoff() can race with filesystem unmount, causing a use-aft",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
             "cve_id": "DEBIAN-CVE-2026-53273",
             "cvss_score": 7.8,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  tee: optee: prevent use-after-free when the client exits before the supplicant  Commit 70b0d6b0a199 (\"tee: optee: Fix supplicant wa",
@@ -53545,10 +53631,58 @@
             ]
         },
         {
+            "cve_id": "DEBIAN-CVE-2026-53286",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  idpf: fix double free and use-after-free in aux device error paths  When auxiliary_device_add() fails in idpf_plug_vport_aux_dev() ",
+            "affected_software": [
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
             "cve_id": "DEBIAN-CVE-2026-53290",
             "cvss_score": 7.8,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  drm/xe/eustall: Fix drm_dev_put called before stream disable in close  In xe_eu_stall_stream_close(), drm_dev_put() is called befor",
             "affected_software": [
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53294",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  mailbox: mailbox-test: don't free the reused channel  The RX channel can be aliased to the TX channel if it has a different MMIO. T",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53296",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  mailbox: mailbox-test: free channels on probe error  On probe error, free the previously obtained channels. This not only prevents ",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
                 {
                     "name": "linux"
                 }
@@ -53755,6 +53889,25 @@
             "affected_software": [
                 {
                     "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-60002",
+            "cvss_score": 7.7,
+            "description": "ssh in OpenSSH before 10.4 can have a use-after-free when a server changes its host key during a key re-exchange. (This outcome occurs only on the client side.)",
+            "affected_software": [
+                {
+                    "name": "openssh"
+                },
+                {
+                    "name": "openssh"
+                },
+                {
+                    "name": "openssh"
+                },
+                {
+                    "name": "openssh"
                 }
             ]
         },
@@ -72053,6 +72206,25 @@
             "cvss_score": 7.1,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  vsock/virtio: fix potential unbounded skb queue  virtio_transport_inc_rx_pkt() checks vvs->rx_bytes + len > vvs->buf_alloc.  virtio",
             "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53138",
+            "cvss_score": 7.1,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  drm/amd/display: Bound VBIOS record-chain walk loops  [Why & How] All record-chain walk loops in bios_parser.c and bios_parser2.c u",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
                 {
                     "name": "linux"
                 },
