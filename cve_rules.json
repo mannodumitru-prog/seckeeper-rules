@@ -1,7 +1,7 @@
 {
     "meta": {
-        "total": 4401,
-        "updated": "2026-07-08 20:43:17.733825"
+        "total": 4410,
+        "updated": "2026-07-09 21:03:10.626970"
     },
     "rules": [
         {
@@ -52161,9 +52161,70 @@
             ]
         },
         {
+            "cve_id": "DEBIAN-CVE-2026-46279",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  mm/alloc_tag: clear codetag for pages allocated before page_ext initialization  Due to initialization ordering, page_ext is allocat",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
             "cve_id": "DEBIAN-CVE-2026-46280",
             "cvss_score": 7.8,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  lib: test_hmm: evict device pages on file close to avoid use-after-free  Patch series \"Minor hmm_test fixes and cleanups\".  Two bug",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-46281",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  vmalloc: fix buffer overflow in vrealloc_node_align()  Commit 4c5d3365882d (\"mm/vmalloc: allow to set node and align in vrealloc\") ",
+            "affected_software": [
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-46285",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  mtd: docg3: fix use-after-free in docg3_release()  In docg3_release(), the docg3 pointer is obtained from cascade->floors[0]->priv ",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-46294",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  dm: fix a buffer overflow in ioctl processing  Tony Asleson (using Claude) found a buffer overflow in dm-ioctl in the function retr",
             "affected_software": [
                 {
                     "name": "linux"
@@ -52193,6 +52254,35 @@
                 {
                     "name": "linux"
                 },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-46301",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  spi: topcliff-pch: fix use-after-free on unbind  Give the driver a chance to flush its queue before releasing the DMA buffers on dr",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-46308",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  pmdomain: mediatek: fix use-after-free in scpsys_get_bus_protection_legacy()  In scpsys_get_bus_protection_legacy(), of_find_node_w",
+            "affected_software": [
                 {
                     "name": "linux"
                 }
@@ -53101,10 +53191,45 @@
             ]
         },
         {
+            "cve_id": "DEBIAN-CVE-2026-53143",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  drm/amdkfd: Fix buffer overflow in SDMA queue checkpoint/restore on GFX11  The v11 MQD manager incorrectly assigned the CP-compute ",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
             "cve_id": "DEBIAN-CVE-2026-53145",
             "cvss_score": 7.8,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  drm/gem: Try to fix change_handle ioctl, attempt 4  [airlied: just added some comments on how to reenable] On-list because the cat ",
             "affected_software": [
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53148",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  thunderbolt: Clamp XDomain response data copy to allocation size  tb_xdp_properties_request() derives the per-packet copy length fr",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
                 {
                     "name": "linux"
                 }
@@ -53426,6 +53551,19 @@
             "cve_id": "DEBIAN-CVE-2026-53233",
             "cvss_score": 7.8,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  netdev: fix double-free in netdev_nl_bind_rx_doit()  Sashiko flags that genlmsg_reply() always consumes the skb. The error path cal",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53234",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  net: ibm: emac: Fix use-after-free during device removal  The driver was using devm_register_netdev() which causes unregister_netde",
             "affected_software": [
                 {
                     "name": "linux"
@@ -71970,6 +72108,22 @@
             ]
         },
         {
+            "cve_id": "DEBIAN-CVE-2026-46293",
+            "cvss_score": 7.1,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  clk: microchip: mpfs-ccc: fix out of bounds access during output registration  UBSAN reported an out of bounds access during regist",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
             "cve_id": "DEBIAN-CVE-2026-46321",
             "cvss_score": 7.1,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  tun: free page on short-frame rejection in tun_xdp_one()  tun_xdp_one() returns -EINVAL on a frame shorter than ETH_HLEN without fr",
@@ -72349,6 +72503,25 @@
             "cve_id": "DEBIAN-CVE-2026-53253",
             "cvss_score": 7.1,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  Bluetooth: bnep: reject short frames before parsing  A BNEP peer can send a short BNEP SDU. bnep_rx_frame() reads the packet type b",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53255",
+            "cvss_score": 7.1,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  Bluetooth: MGMT: validate advertising TLV before type checks  tlv_data_is_valid() reads each advertising data field length from dat",
             "affected_software": [
                 {
                     "name": "linux"
@@ -76430,41 +76603,6 @@
             "cve_id": "DEBIAN-CVE-2026-52972",
             "cvss_score": 7.0,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  crypto: af_alg - Cap AEAD AD length to 0x80000000  In order to prevent arithmetic overflows when checking the TX buffer size, cap t",
-            "affected_software": [
-                {
-                    "name": "linux"
-                },
-                {
-                    "name": "linux"
-                },
-                {
-                    "name": "linux"
-                },
-                {
-                    "name": "linux"
-                }
-            ]
-        },
-        {
-            "cve_id": "DEBIAN-CVE-2026-53143",
-            "cvss_score": 7.0,
-            "description": "In the Linux kernel, the following vulnerability has been resolved:  drm/amdkfd: Fix buffer overflow in SDMA queue checkpoint/restore on GFX11  The v11 MQD manager incorrectly assigned the CP-compute ",
-            "affected_software": [
-                {
-                    "name": "linux"
-                },
-                {
-                    "name": "linux"
-                },
-                {
-                    "name": "linux"
-                }
-            ]
-        },
-        {
-            "cve_id": "DEBIAN-CVE-2026-53148",
-            "cvss_score": 7.0,
-            "description": "In the Linux kernel, the following vulnerability has been resolved:  thunderbolt: Clamp XDomain response data copy to allocation size  tb_xdp_properties_request() derives the per-packet copy length fr",
             "affected_software": [
                 {
                     "name": "linux"
