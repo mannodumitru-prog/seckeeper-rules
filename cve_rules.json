@@ -1,7 +1,7 @@
 {
     "meta": {
-        "total": 4410,
-        "updated": "2026-07-09 21:03:10.626970"
+        "total": 4412,
+        "updated": "2026-07-10 20:49:14.267267"
     },
     "rules": [
         {
@@ -3286,6 +3286,25 @@
                 },
                 {
                     "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-60002",
+            "cvss_score": 9.4,
+            "description": "ssh in OpenSSH before 10.4 can have a use-after-free when a server changes its host key during a key re-exchange. (This outcome occurs only on the client side.)",
+            "affected_software": [
+                {
+                    "name": "openssh"
+                },
+                {
+                    "name": "openssh"
+                },
+                {
+                    "name": "openssh"
+                },
+                {
+                    "name": "openssh"
                 }
             ]
         },
@@ -54031,25 +54050,6 @@
             ]
         },
         {
-            "cve_id": "DEBIAN-CVE-2026-60002",
-            "cvss_score": 7.7,
-            "description": "ssh in OpenSSH before 10.4 can have a use-after-free when a server changes its host key during a key re-exchange. (This outcome occurs only on the client side.)",
-            "affected_software": [
-                {
-                    "name": "openssh"
-                },
-                {
-                    "name": "openssh"
-                },
-                {
-                    "name": "openssh"
-                },
-                {
-                    "name": "openssh"
-                }
-            ]
-        },
-        {
             "cve_id": "DEBIAN-CVE-2026-43350",
             "cvss_score": 7.6,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  smb: client: require a full NFS mode SID before reading mode bits  parse_dacl() treats an ACE SID matching sid_unix_NFS_mode as an ",
@@ -60831,6 +60831,44 @@
                 },
                 {
                     "name": "bind9"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-59999",
+            "cvss_score": 7.5,
+            "description": "In sshd in OpenSSH before 10.4, DisableForwarding=yes was supposed to take precedence over PermitTunnel=yes, but did not.",
+            "affected_software": [
+                {
+                    "name": "openssh"
+                },
+                {
+                    "name": "openssh"
+                },
+                {
+                    "name": "openssh"
+                },
+                {
+                    "name": "openssh"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-60000",
+            "cvss_score": 7.5,
+            "description": "sshd in OpenSSH before 10.4 allows remote attackers to cause a denial of service (resource consumption from excessive authentication attempts) because MaxAuthTries was mishandled for GSSAPIAuthenticat",
+            "affected_software": [
+                {
+                    "name": "openssh"
+                },
+                {
+                    "name": "openssh"
+                },
+                {
+                    "name": "openssh"
+                },
+                {
+                    "name": "openssh"
                 }
             ]
         },
