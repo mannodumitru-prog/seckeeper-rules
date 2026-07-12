@@ -1,7 +1,7 @@
 {
     "meta": {
         "total": 4412,
-        "updated": "2026-07-11 20:22:22.434604"
+        "updated": "2026-07-12 20:12:55.937194"
     },
     "rules": [
         {
@@ -1746,9 +1746,6 @@
             "cvss_score": 9.8,
             "description": "A use-after-free vulnerability exists in libcurl when an application configures an HTTP/2 stream-dependency tree via `CURLOPT_STREAM_DEPENDS` or `CURLOPT_STREAM_DEPENDS_E`, subsequently invokes `curl_",
             "affected_software": [
-                {
-                    "name": "curl"
-                },
                 {
                     "name": "curl"
                 },
@@ -59050,9 +59047,6 @@
                 },
                 {
                     "name": "curl"
-                },
-                {
-                    "name": "curl"
                 }
             ]
         },
@@ -61487,12 +61481,6 @@
             "cvss_score": 7.4,
             "description": "When a libcurl-based application performs transfers via `SCP://` or `SFTP://` and utilizes the `CURLOPT_SSH_KEYFUNCTION` callback, it may silently accept an untrusted server. This vulnerability occurs",
             "affected_software": [
-                {
-                    "name": "curl"
-                },
-                {
-                    "name": "curl"
-                },
                 {
                     "name": "curl"
                 },
