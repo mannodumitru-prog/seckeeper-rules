@@ -1,7 +1,7 @@
 {
     "meta": {
         "total": 4412,
-        "updated": "2026-07-12 20:12:55.937194"
+        "updated": "2026-07-13 20:38:05.604873"
     },
     "rules": [
         {
@@ -61481,6 +61481,12 @@
             "cvss_score": 7.4,
             "description": "When a libcurl-based application performs transfers via `SCP://` or `SFTP://` and utilizes the `CURLOPT_SSH_KEYFUNCTION` callback, it may silently accept an untrusted server. This vulnerability occurs",
             "affected_software": [
+                {
+                    "name": "curl"
+                },
+                {
+                    "name": "curl"
+                },
                 {
                     "name": "curl"
                 },
