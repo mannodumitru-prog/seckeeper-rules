@@ -1,7 +1,7 @@
 {
     "meta": {
-        "total": 4412,
-        "updated": "2026-07-14 20:37:09.162492"
+        "total": 4414,
+        "updated": "2026-07-15 20:32:35.693450"
     },
     "rules": [
         {
@@ -47227,25 +47227,6 @@
             ]
         },
         {
-            "cve_id": "DEBIAN-CVE-2026-27784",
-            "cvss_score": 7.8,
-            "description": "The 32-bit implementation of NGINX Open Source has a vulnerability in the ngx_http_mp4_module module, which might allow an attacker to over-read or over-write NGINX worker memory resulting in its term",
-            "affected_software": [
-                {
-                    "name": "nginx"
-                },
-                {
-                    "name": "nginx"
-                },
-                {
-                    "name": "nginx"
-                },
-                {
-                    "name": "nginx"
-                }
-            ]
-        },
-        {
             "cve_id": "DEBIAN-CVE-2026-31389",
             "cvss_score": 7.8,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  spi: fix use-after-free on controller registration failure  Make sure to deregister from driver core also in the unlikely event tha",
@@ -52660,6 +52641,41 @@
             ]
         },
         {
+            "cve_id": "DEBIAN-CVE-2026-52962",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  ceph: fix a buffer leak in __ceph_setxattr()  The old_blob in __ceph_setxattr() can store ci->i_xattrs.prealloc_blob value during t",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-52969",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  KVM: Reject wrapped offset in kvm_reset_dirty_gfn()  kvm_reset_dirty_gfn() guards the gfn range with  \tif (!memslot || (offset + __",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
             "cve_id": "DEBIAN-CVE-2026-52971",
             "cvss_score": 7.8,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  net: ena: PHC: Fix potential use-after-free in get_timestamp  Move the phc->active check and resp pointer assignment to after acqui",
@@ -52741,10 +52757,48 @@
             ]
         },
         {
+            "cve_id": "DEBIAN-CVE-2026-52992",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  fs/adfs: validate nzones in adfs_validate_bblk()  Reject ADFS disc records with a zero zone count during boot block validation, bef",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
             "cve_id": "DEBIAN-CVE-2026-53000",
             "cvss_score": 7.8,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  netfilter: nat: use kfree_rcu to release ops  Florian Westphal says:  \"Historically this is not an issue, even for normal base hook",
             "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53004",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  sctp: fix OOB write to userspace in sctp_getsockopt_peer_auth_chunks  sctp_getsockopt_peer_auth_chunks() checks that the caller's o",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
                 {
                     "name": "linux"
                 },
@@ -72283,6 +72337,22 @@
             ]
         },
         {
+            "cve_id": "DEBIAN-CVE-2026-52968",
+            "cvss_score": 7.1,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  KVM: s390: pci: fix GAIT table indexing due to double-scaling pointer arithmetic  kvm_s390_pci_aif_enable(), kvm_s390_pci_aif_disab",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
             "cve_id": "DEBIAN-CVE-2026-52988",
             "cvss_score": 7.1,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  netfilter: nf_tables: join hook list via splice_list_rcu() in commit phase  Publish new hooks in the list into the basechain/flowta",
@@ -76610,41 +76680,6 @@
             "cvss_score": 7.0,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  drm/xe/uapi: Reject coh_none PAT index for CPU cached memory in madvise  Add validation in xe_vm_madvise_ioctl() to reject PAT indi",
             "affected_software": [
-                {
-                    "name": "linux"
-                }
-            ]
-        },
-        {
-            "cve_id": "DEBIAN-CVE-2026-52969",
-            "cvss_score": 7.0,
-            "description": "In the Linux kernel, the following vulnerability has been resolved:  KVM: Reject wrapped offset in kvm_reset_dirty_gfn()  kvm_reset_dirty_gfn() guards the gfn range with  \tif (!memslot || (offset + __",
-            "affected_software": [
-                {
-                    "name": "linux"
-                },
-                {
-                    "name": "linux"
-                },
-                {
-                    "name": "linux"
-                }
-            ]
-        },
-        {
-            "cve_id": "DEBIAN-CVE-2026-52972",
-            "cvss_score": 7.0,
-            "description": "In the Linux kernel, the following vulnerability has been resolved:  crypto: af_alg - Cap AEAD AD length to 0x80000000  In order to prevent arithmetic overflows when checking the TX buffer size, cap t",
-            "affected_software": [
-                {
-                    "name": "linux"
-                },
-                {
-                    "name": "linux"
-                },
-                {
-                    "name": "linux"
-                },
                 {
                     "name": "linux"
                 }
