@@ -1,7 +1,7 @@
 {
     "meta": {
-        "total": 4414,
-        "updated": "2026-07-16 20:26:16.929520"
+        "total": 4415,
+        "updated": "2026-07-17 20:27:08.811914"
     },
     "rules": [
         {
@@ -7518,6 +7518,25 @@
                 },
                 {
                     "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-60005",
+            "cvss_score": 8.2,
+            "description": "NGINX Plus and NGINX Open Source have a vulnerability in the ngx_http_slice_module module. When the slice\u00a0directive and unnamed regex captures are configured or when a background cache update happens,",
+            "affected_software": [
+                {
+                    "name": "nginx"
+                },
+                {
+                    "name": "nginx"
+                },
+                {
+                    "name": "nginx"
+                },
+                {
+                    "name": "nginx"
                 }
             ]
         },
