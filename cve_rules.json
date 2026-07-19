@@ -1,7 +1,7 @@
 {
     "meta": {
-        "total": 4415,
-        "updated": "2026-07-18 20:12:18.753027"
+        "total": 4428,
+        "updated": "2026-07-19 20:23:17.126601"
     },
     "rules": [
         {
@@ -3144,6 +3144,35 @@
                 {
                     "name": "linux"
                 },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53355",
+            "cvss_score": 9.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  net: rds: clear i_sends on setup unwind  The RDS IB connection teardown path is written so it can run during partial startup and on",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53363",
+            "cvss_score": 9.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  xfrm: iptfs: preserve shared-frag marker in iptfs_consume_frags()  iptfs_consume_frags() transfers paged fragments from one socket ",
+            "affected_software": [
                 {
                     "name": "linux"
                 }
@@ -6386,6 +6415,76 @@
             ]
         },
         {
+            "cve_id": "DEBIAN-CVE-2026-53354",
+            "cvss_score": 8.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  arm64: errata: Mitigate TLBI errata on various Arm CPUs  A number of CPUs developed by Arm suffer from errata whereby a broadcast T",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53358",
+            "cvss_score": 8.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  Bluetooth: L2CAP: use chan timer to close channels in cleanup_listen()  l2cap_chan_close() removes the channel from conn->chan_l, w",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53359",
+            "cvss_score": 8.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  KVM: x86: Fix shadow paging use-after-free due to unexpected role  Commit 0cb2af2ea66ad (\"KVM: x86: Fix shadow paging use-after-fre",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53360",
+            "cvss_score": 8.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  KVM: SEV: Require in-GHCB scratch area if GHCB v2+ is in use  As per the GHCB spec, when using GHCB v2+ require the software scratc",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
             "cve_id": "DEBIAN-CVE-2026-53230",
             "cvss_score": 8.7,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  net/mlx5: Fix slab-out-of-bounds in mlx5_query_nic_vport_mac_list  mlx5_query_nic_vport_mac_list() sizes its firmware command buffe",
@@ -8651,6 +8750,25 @@
             "cve_id": "DEBIAN-CVE-2026-53256",
             "cvss_score": 8.0,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  Bluetooth: RFCOMM: hold listener socket in rfcomm_connect_ind()  rfcomm_get_sock_by_channel() scans rfcomm_sk_list under the list l",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53357",
+            "cvss_score": 8.0,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  Bluetooth: fix UAF in l2cap_sock_cleanup_listen() vs l2cap_conn_del()  bt_accept_dequeue() unlinks a not-yet-accepted child from th",
             "affected_software": [
                 {
                     "name": "linux"
@@ -53926,6 +54044,70 @@
             ]
         },
         {
+            "cve_id": "DEBIAN-CVE-2026-53341",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  fhandle: fix UAF due to unlocked ->mnt_ns read in may_decode_fh()  may_decode_fh() accesses mount::mnt_ns without holding any locks",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53356",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  drm/i915/gem: Fix phys BO pread/pwrite with offset  sg_page() returns struct page pointer not (void *) so the scaling of pread/pwri",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53362",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  ipv6: account for fraggap on the paged allocation path  In __ip6_append_data(), when the paged-allocation branch is taken (MSG_MORE",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53366",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  ipv4: account for fraggap on the paged allocation path  In __ip_append_data(), when the paged-allocation branch is taken, alloclen ",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
             "cve_id": "DEBIAN-CVE-2018-1000026",
             "cvss_score": 7.7,
             "description": "Linux Linux kernel version at least v4.8 onwards, probably well before contains a Insufficient input validation vulnerability in bnx2x network card driver that can result in DoS: Network card firmware",
@@ -72678,6 +72860,22 @@
             ]
         },
         {
+            "cve_id": "DEBIAN-CVE-2026-53361",
+            "cvss_score": 7.1,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  af_unix: Set gc_in_progress to true in unix_gc().  Igor Ushakov reported that unix_gc() could run with gc_in_progress being false i",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
             "cve_id": "CVE-2024-50228",
             "cvss_score": 7.0,
             "description": "In the Linux kernel, the following vulnerability has been resolved:\n\nmm: shmem: fix data-race in shmem_getattr()\n\nI got the following KCSAN report during syzbot testing:\n\n=============================",
@@ -76699,6 +76897,25 @@
             "cvss_score": 7.0,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  drm/xe/uapi: Reject coh_none PAT index for CPU cached memory in madvise  Add validation in xe_vm_madvise_ioctl() to reject PAT indi",
             "affected_software": [
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53329",
+            "cvss_score": 7.0,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  drm/amd/display: Use krealloc_array() in dal_vector_reserve()  [Why & How] dal_vector_reserve() computes the allocation size as \"ca",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
                 {
                     "name": "linux"
                 }
