@@ -1,7 +1,7 @@
 {
     "meta": {
-        "total": 4692,
-        "updated": "2026-07-22 20:37:37.813042"
+        "total": 4700,
+        "updated": "2026-07-23 20:35:29.087441"
     },
     "rules": [
         {
@@ -8132,6 +8132,25 @@
             "cve_id": "DEBIAN-CVE-2025-40780",
             "cvss_score": 8.6,
             "description": "In specific circumstances, due to a weakness in the Pseudo Random Number Generator (PRNG) that is used, it is possible for an attacker to predict the source port and query ID that BIND will use. This ",
+            "affected_software": [
+                {
+                    "name": "bind9"
+                },
+                {
+                    "name": "bind9"
+                },
+                {
+                    "name": "bind9"
+                },
+                {
+                    "name": "bind9"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-13321",
+            "cvss_score": 8.6,
+            "description": "The BIND resolver accepts validly-signed NSEC records where the \"Next Domain Name\" field points outside the signer's zone. This issue affects BIND 9 versions 9.11.0 through 9.18.50, 9.20.0 through 9.2",
             "affected_software": [
                 {
                     "name": "bind9"
@@ -62852,6 +62871,25 @@
             ]
         },
         {
+            "cve_id": "DEBIAN-CVE-2026-11331",
+            "cvss_score": 7.5,
+            "description": "An attacker who knows (or guesses) that a resolver uses RPZ with wildcard CNAME policies can craft query names long enough to trigger a NAMETOOLONG error condition during RPZ processing. This is not h",
+            "affected_software": [
+                {
+                    "name": "bind9"
+                },
+                {
+                    "name": "bind9"
+                },
+                {
+                    "name": "bind9"
+                },
+                {
+                    "name": "bind9"
+                }
+            ]
+        },
+        {
             "cve_id": "DEBIAN-CVE-2026-11352",
             "cvss_score": 7.5,
             "description": "An issue in curl\u2019s QUIC UDP receive function allows a malicious HTTP/3 server to trigger a remote denial of service against a curl or libcurl client. Because the helper function discards zero-length U",
@@ -62872,6 +62910,63 @@
             ]
         },
         {
+            "cve_id": "DEBIAN-CVE-2026-11605",
+            "cvss_score": 7.5,
+            "description": "The issue is a resource exhaustion vulnerability associated with DNSSEC validation. BIND always validates all RRSIG records in an answer, even if they are not strictly needed. A query to an authoritat",
+            "affected_software": [
+                {
+                    "name": "bind9"
+                },
+                {
+                    "name": "bind9"
+                },
+                {
+                    "name": "bind9"
+                },
+                {
+                    "name": "bind9"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-11622",
+            "cvss_score": 7.5,
+            "description": "A DNSSEC validating resolver that is under a random subdomain attack against a DNSSEC-signed zone can suffer from runaway memory usage. The attacker needs to be able to send queries faster than the re",
+            "affected_software": [
+                {
+                    "name": "bind9"
+                },
+                {
+                    "name": "bind9"
+                },
+                {
+                    "name": "bind9"
+                },
+                {
+                    "name": "bind9"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-11721",
+            "cvss_score": 7.5,
+            "description": "It is possible for an attacker's zone to respond to a query with an RRSIG that has a smaller number of labels than the zone in which the RRSIG is contained. This causes `named` to produce a wildcard n",
+            "affected_software": [
+                {
+                    "name": "bind9"
+                },
+                {
+                    "name": "bind9"
+                },
+                {
+                    "name": "bind9"
+                },
+                {
+                    "name": "bind9"
+                }
+            ]
+        },
+        {
             "cve_id": "DEBIAN-CVE-2026-12064",
             "cvss_score": 7.5,
             "description": "When a user invokes curl using a schemeless URL combined with `--proto-default` sftp (or scp), a disconnect occurs between the tool layer and libcurl. The tool layer incorrectly infers the URL scheme,",
@@ -62884,6 +62979,44 @@
                 },
                 {
                     "name": "curl"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-12617",
+            "cvss_score": 7.5,
+            "description": "The issue is unexpected program termination based on ordering and/or specific content in responses to queries for CNAME or DNAME, and A records. Specifically, if a client queries for a DNAME and A rec",
+            "affected_software": [
+                {
+                    "name": "bind9"
+                },
+                {
+                    "name": "bind9"
+                },
+                {
+                    "name": "bind9"
+                },
+                {
+                    "name": "bind9"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-13204",
+            "cvss_score": 7.5,
+            "description": "If a provably insecure domain is covered by both an NSEC and NSEC3 record at the parent, and there exist an RRSIG for only one of these types, then BIND may exit unexpectedly with an assertion while v",
+            "affected_software": [
+                {
+                    "name": "bind9"
+                },
+                {
+                    "name": "bind9"
+                },
+                {
+                    "name": "bind9"
+                },
+                {
+                    "name": "bind9"
                 }
             ]
         },
@@ -76762,6 +76895,19 @@
                 {
                     "name": "linux"
                 },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53346",
+            "cvss_score": 7.1,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  rust: arm64: set uwtable llvm module flag for CONFIG_UNWIND_TABLES  Due to a rustc bug [1] the -Cforce-unwind-tables=y flag only em",
+            "affected_software": [
                 {
                     "name": "linux"
                 },
