@@ -1,7 +1,7 @@
 {
     "meta": {
-        "total": 4700,
-        "updated": "2026-07-23 20:35:29.087441"
+        "total": 4710,
+        "updated": "2026-07-24 20:46:10.373265"
     },
     "rules": [
         {
@@ -55172,6 +55172,25 @@
             ]
         },
         {
+            "cve_id": "DEBIAN-CVE-2026-53089",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  bpf: Fix use-after-free in offloaded map/prog info fill  When querying info for an offloaded BPF map or program, bpf_map_offload_in",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
             "cve_id": "DEBIAN-CVE-2026-53090",
             "cvss_score": 7.8,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  bpf: Fix ld_{abs,ind} failure path analysis in subprogs  Usage of ld_{abs,ind} instructions got extended into subprogs some time ag",
@@ -55259,10 +55278,138 @@
             ]
         },
         {
+            "cve_id": "DEBIAN-CVE-2026-53109",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  powerpc/pgtable-frag: Fix bad page state in pte_frag_destroy  powerpc uses pt_frag_refcount as a reference counter for tracking it'",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
             "cve_id": "DEBIAN-CVE-2026-53110",
             "cvss_score": 7.8,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  s390/bpf: Zero-extend bpf prog return values and kfunc arguments  s390x ABI requires callers to zero-extend unsigned arguments and ",
             "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53112",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  wifi: rtlwifi: pci: fix possible use-after-free caused by unfinished irq_prepare_bcn_tasklet  The irq_prepare_bcn_tasklet is initia",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53115",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  bus: fsl-mc: use generic driver_override infrastructure  When a driver is probed through __driver_attach(), the bus' match() callba",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53116",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  s390/ap: use generic driver_override infrastructure  When the AP masks are updated via apmask_store() or aqmask_store(), ap_bus_rev",
+            "affected_software": [
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53117",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  s390/cio: use generic driver_override infrastructure  When a driver is probed through __driver_attach(), the bus' match() callback ",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53118",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  vdpa: use generic driver_override infrastructure  When a driver is probed through __driver_attach(), the bus' match() callback is c",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53119",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  platform/wmi: use generic driver_override infrastructure  When a driver is probed through __driver_attach(), the bus' match() callb",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53120",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  PCI: use generic driver_override infrastructure  When a driver is probed through __driver_attach(), the bus' match() callback is ca",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
                 {
                     "name": "linux"
                 },
@@ -76888,6 +77035,25 @@
             "cve_id": "DEBIAN-CVE-2026-53303",
             "cvss_score": 7.1,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  f2fs: protect extension_list reading with sb_lock in f2fs_sbi_show()  In f2fs_sbi_show(), the extension_list, extension_count and h",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-53330",
+            "cvss_score": 7.1,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  drm/amd/display: Fix out-of-bounds read in dp_get_eq_aux_rd_interval()  [Why & How] The aux_rd_interval array in struct dc_lttpr_ca",
             "affected_software": [
                 {
                     "name": "linux"
