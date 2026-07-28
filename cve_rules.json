@@ -1,7 +1,7 @@
 {
     "meta": {
-        "total": 4854,
-        "updated": "2026-07-27 20:50:20.790116"
+        "total": 4855,
+        "updated": "2026-07-28 20:42:49.243805"
     },
     "rules": [
         {
@@ -3199,9 +3199,6 @@
             "cvss_score": 9.8,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  serial: 8250_dw: unregister 8250 port if clk_notifier_register() fails  dw8250_probe() registers the 8250 port via serial8250_regis",
             "affected_software": [
-                {
-                    "name": "linux"
-                },
                 {
                     "name": "linux"
                 },
@@ -33428,6 +33425,22 @@
                 {
                     "name": "linux"
                 },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2024-14040",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  net: nexthop: Increase weight to u16  In CLOS networks, as link failures occur at various points in the network, ECMP weights of th",
+            "affected_software": [
                 {
                     "name": "linux"
                 },
