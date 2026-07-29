@@ -1,7 +1,7 @@
 {
     "meta": {
         "total": 4855,
-        "updated": "2026-07-28 20:42:49.243805"
+        "updated": "2026-07-29 20:29:47.500252"
     },
     "rules": [
         {
@@ -81824,7 +81824,7 @@
         {
             "cve_id": "DEBIAN-CVE-2023-4244",
             "cvss_score": 7.0,
-            "description": "A use-after-free vulnerability in the Linux kernel's netfilter: nf_tables component can be exploited to achieve local privilege escalation.  Due to a race condition between nf_tables netlink control p",
+            "description": "A use-after-free vulnerability in the Linux kernel's netfilter: nf_tables component can be exploited to achieve local privilege escalation.    Due to a race condition between nf_tables netlink control",
             "affected_software": [
                 {
                     "name": "linux"
