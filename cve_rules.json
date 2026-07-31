@@ -1,7 +1,7 @@
 {
     "meta": {
-        "total": 5144,
-        "updated": "2026-07-30 20:42:37.806888"
+        "total": 5145,
+        "updated": "2026-07-31 20:41:17.329112"
     },
     "rules": [
         {
@@ -30211,7 +30211,7 @@
         {
             "cve_id": "DEBIAN-CVE-2023-3609",
             "cvss_score": 7.8,
-            "description": "A use-after-free vulnerability in the Linux kernel's net/sched: cls_u32 component can be exploited to achieve local privilege escalation.  If tcf_change_indev() fails, u32_set_parms() will immediately",
+            "description": "A use-after-free vulnerability in the Linux kernel's net/sched: cls_u32 component can be exploited to achieve local privilege escalation.    If tcf_change_indev() fails, u32_set_parms() will immediate",
             "affected_software": [
                 {
                     "name": "linux"
@@ -60979,6 +60979,25 @@
             ]
         },
         {
+            "cve_id": "DEBIAN-CVE-2026-63794",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  KVM: SVM: Fix page overflow in sev_dbg_crypt() for ENCRYPT path  In sev_dbg_crypt(), the per-iteration transfer length is bounded b",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
             "cve_id": "DEBIAN-CVE-2026-63799",
             "cvss_score": 7.8,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  sched/mmcid: Fix OOB clear_bit when CID is MM_CID_UNSET in fixup path  In mm_cid_fixup_cpus_to_tasks(), when rq->curr has the targe",
@@ -74160,7 +74179,7 @@
         {
             "cve_id": "DEBIAN-CVE-2022-3566",
             "cvss_score": 7.1,
-            "description": "A vulnerability, which was classified as problematic, was found in Linux Kernel. This affects the function tcp_getsockopt/tcp_setsockopt of the component TCP Handler. The manipulation leads to race co",
+            "description": "A vulnerability was identified in Linux Kernel up to 4.19.316/5.4.278/5.10.220/5.15.161. This impacts the function tcp_getsockopt/tcp_setsockopt of the component TCP Handler. Such manipulation leads t",
             "affected_software": [
                 {
                     "name": "linux"
