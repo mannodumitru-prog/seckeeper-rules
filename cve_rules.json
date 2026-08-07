@@ -1,7 +1,7 @@
 {
     "meta": {
-        "total": 5414,
-        "updated": "2026-08-05 20:43:33.469160"
+        "total": 5415,
+        "updated": "2026-08-07 00:46:58.399309"
     },
     "rules": [
         {
@@ -73635,9 +73635,6 @@
                 },
                 {
                     "name": "bind9"
-                },
-                {
-                    "name": "bind9"
                 }
             ]
         },
@@ -75474,6 +75471,16 @@
                 },
                 {
                     "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-54876",
+            "cvss_score": 7.5,
+            "description": "Issue summary: A malicious TLS server can cause a memory leak in a TLS client that has enabled OCSP response checking by sending an OCSP response that contains no single response entries.  Impact summ",
+            "affected_software": [
+                {
+                    "name": "openssl"
                 }
             ]
         },
