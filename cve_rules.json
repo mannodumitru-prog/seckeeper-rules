@@ -1,7 +1,7 @@
 {
     "meta": {
         "total": 5415,
-        "updated": "2026-08-07 00:46:58.399309"
+        "updated": "2026-08-07 20:04:56.686582"
     },
     "rules": [
         {
@@ -73627,6 +73627,9 @@
             "cvss_score": 7.5,
             "description": "The issue is unexpected program termination based on ordering and/or specific content in responses to queries for CNAME or DNAME, and A records. Specifically, if a client queries for a DNAME and A rec",
             "affected_software": [
+                {
+                    "name": "bind9"
+                },
                 {
                     "name": "bind9"
                 },
