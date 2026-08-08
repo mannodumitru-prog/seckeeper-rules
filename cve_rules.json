@@ -1,7 +1,7 @@
 {
     "meta": {
         "total": 5415,
-        "updated": "2026-08-07 20:04:56.686582"
+        "updated": "2026-08-08 19:53:19.248763"
     },
     "rules": [
         {
@@ -31422,7 +31422,7 @@
         {
             "cve_id": "DEBIAN-CVE-2023-2235",
             "cvss_score": 7.8,
-            "description": "A use-after-free vulnerability in the Linux Kernel Performance Events system can be exploited to achieve local privilege escalation.  The perf_group_detach function did not check the event's siblings'",
+            "description": "A use-after-free vulnerability in the Linux Kernel Performance Events system can be exploited to achieve local privilege escalation.    The perf_group_detach function did not check the event's sibling",
             "affected_software": [
                 {
                     "name": "linux"
@@ -38321,7 +38321,7 @@
         {
             "cve_id": "DEBIAN-CVE-2024-1086",
             "cvss_score": 7.8,
-            "description": "A use-after-free vulnerability in the Linux kernel's netfilter: nf_tables component can be exploited to achieve local privilege escalation.  The nft_verdict_init() function allows positive values as d",
+            "description": "A use-after-free vulnerability in the Linux kernel's netfilter: nf_tables component can be exploited to achieve local privilege escalation.    The nft_verdict_init() function allows positive values as",
             "affected_software": [
                 {
                     "name": "linux"
