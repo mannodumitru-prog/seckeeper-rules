@@ -1,7 +1,7 @@
 {
     "meta": {
-        "total": 5415,
-        "updated": "2026-08-08 19:53:19.248763"
+        "total": 5441,
+        "updated": "2026-08-09 19:56:50.679709"
     },
     "rules": [
         {
@@ -5054,6 +5054,48 @@
                 {
                     "name": "linux"
                 },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-64564",
+            "cvss_score": 9.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  sctp: don't free the ASCONF's own transport in DEL-IP processing  sctp_process_asconf() caches the transport the ASCONF chunk is pr",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-64566",
+            "cvss_score": 9.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  xfrm: iptfs: propagate SKBFL_SHARED_FRAG in iptfs_skb_add_frags()  When iptfs_skb_add_frags() copies frag references from the sourc",
+            "affected_software": [
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-64597",
+            "cvss_score": 9.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  smb: client: fix double-free in SMB2_close() replay  A response-bearing attempt can return a replayable error and free its response",
+            "affected_software": [
                 {
                     "name": "linux"
                 },
@@ -10697,6 +10739,76 @@
             ]
         },
         {
+            "cve_id": "DEBIAN-CVE-2026-64561",
+            "cvss_score": 8.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  KVM: x86: Check for invalid/obsolete root *after* making MMU pages available  Check for a \"stale\" page fault, i.e. for an invalid a",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-64562",
+            "cvss_score": 8.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  KVM: nVMX: Hide shadow VMCS right after VMCLEAR  free_nested() frees the shadow VMCS while vmcs01 still points to it. But because i",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-64586",
+            "cvss_score": 8.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  wifi: brcmfmac: drain bus_reset work on device removal  brcmf_fw_crashed() and the debugfs \"reset\" entry both schedule drvr->bus_re",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-64598",
+            "cvss_score": 8.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  smb/client: Fix error code in smb2_aead_req_alloc()  The \"*num_sgs\" variable is a u32 so \"ERR_PTR(*num_sgs)\" doesn't work. We would",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
             "cve_id": "DEBIAN-CVE-2026-53230",
             "cvss_score": 8.7,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  net/mlx5: Fix slab-out-of-bounds in mlx5_query_nic_vport_mac_list  mlx5_query_nic_vport_mac_list() sizes its firmware command buffe",
@@ -12471,6 +12583,22 @@
                 {
                     "name": "linux"
                 },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-64578",
+            "cvss_score": 8.2,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  ksmbd: validate compound request size before reading StructureSize2  When ksmbd validates a compound (chained) SMB2 request, ksmbd_",
+            "affected_software": [
                 {
                     "name": "linux"
                 },
@@ -67431,6 +67559,236 @@
             ]
         },
         {
+            "cve_id": "DEBIAN-CVE-2026-64563",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  rhashtable: clear stale iter->p on table restart  rhashtable_walk_start_check() has two restart paths when resuming a walk. When it",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-64567",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  btrfs: reject free space cache with more entries than pages  When loading a v1 free space cache, __load_free_space_cache() takes nu",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-64568",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  wifi: mac80211: fix unsol_bcast_probe_resp double free on alloc failure  ieee80211_set_unsol_bcast_probe_resp() calls kfree_rcu() o",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-64570",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  wifi: mac80211: fix fils_discovery double free on alloc failure  ieee80211_set_fils_discovery() calls kfree_rcu() on the old templa",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-64574",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  wifi: mac80211: tear down new links on vif update error path  When ieee80211_vif_update_links() adds new links it allocates a link ",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-64575",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  bpf: tcp: fix double sock release on batch realloc  bpf_iter_tcp_batch() releases the current batch via bpf_iter_tcp_put_batch(), w",
+            "affected_software": [
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-64580",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  xfrm6: clear dst.dev on error to avoid double netdev_put in xfrm6_fill_dst()  On the error path where in6_dev_get(dev) returns NULL",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-64581",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  xfrm: fix sk_dst_cache double-free in xfrm_user_policy()  xfrm_user_policy() clears the socket dst cache with __sk_dst_reset(), i.e",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-64582",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  RDMA/rxe: Fix a use-after-free problem in rxe_mmap  rxe_mmap() removes a rxe_mmap_info struct from the pending_mmaps list and relea",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-64583",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  usb: gadget: udc: bdc: free IRQ and drain func_wake_notify before teardown  The Broadcom BDC UDC driver registers its IRQ handler w",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-64584",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  usb: gadget: f_midi: cancel pending IN work before freeing the midi object  The f_midi driver embeds a work item (midi->work) whose",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-64585",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  can: esd_usb: kill anchored URBs before freeing netdevs  esd_usb_disconnect() frees each CAN netdev with free_candev() inside its p",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-64588",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  fuse-uring: fix data races on ring->ready  On weakly-ordered architectures, the store to fiq->ops can be reordered past the store t",
+            "affected_software": [
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-64599",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  crypto: amlogic - avoid double cleanup in meson_crypto_probe()  When meson_allocate_chanlist() fails after a partial allocation, it",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
             "cve_id": "DEBIAN-CVE-2026-64600",
             "cvss_score": 7.8,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  xfs: resample the data fork mapping after cycling ILOCK  xfs_reflink_fill_{cow_hole,delalloc} are both presented with an inode, a d",
@@ -67444,6 +67802,16 @@
                 {
                     "name": "linux"
                 },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-64601",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  ALSA: us144mkii: capture_urb_complete: redundant usb_anchor_urb corrupts anchor list on each resubmission  In capture_urb_complete(",
+            "affected_software": [
                 {
                     "name": "linux"
                 }
@@ -75899,6 +76267,22 @@
             "cve_id": "DEBIAN-CVE-2026-64545",
             "cvss_score": 7.5,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  net, bpf: check master for NULL in xdp_master_redirect()  xdp_master_redirect() dereferences the result of netdev_master_upper_dev_",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-64577",
+            "cvss_score": 7.5,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  gtp: check skb_pull_data() return in gtp1u_send_echo_resp()  gtp1u_send_echo_resp() ignores skb_pull_data()'s return value. Its cal",
             "affected_software": [
                 {
                     "name": "linux"
@@ -88727,6 +89111,22 @@
             ]
         },
         {
+            "cve_id": "DEBIAN-CVE-2026-64576",
+            "cvss_score": 7.1,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  nexthop: initialize extack in nh_res_bucket_migrate()  nh_res_bucket_migrate() passes an uninitialized netlink_ext_ack to call_next",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
             "cve_id": "CVE-2024-50228",
             "cvss_score": 7.0,
             "description": "In the Linux kernel, the following vulnerability has been resolved:\n\nmm: shmem: fix data-race in shmem_getattr()\n\nI got the following KCSAN report during syzbot testing:\n\n=============================",
@@ -93076,6 +93476,25 @@
             "cve_id": "DEBIAN-CVE-2026-64510",
             "cvss_score": 7.0,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  ACPI: NFIT: core: Fix acpi_nfit_init() error cleanup  If acpi_nfit_init() fails after adding the acpi_desc object to the acpi_descs",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-64587",
+            "cvss_score": 7.0,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  net: ethernet: arc: emac: quiesce interrupts before requesting IRQ  Normal RX/TX interrupts are enabled later, in arc_emac_open(), ",
             "affected_software": [
                 {
                     "name": "linux"
