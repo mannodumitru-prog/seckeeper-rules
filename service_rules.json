@@ -71,7 +71,7 @@
             "state_changing": false
         },
         {
-            "target_app": "java",
+            "target_app": "spring",
             "cve_id": "cve-2022-22947",
             "severity": "critical",
             "description": "Spring Cloud Gateway 远程代码执行漏洞",
@@ -84,7 +84,7 @@
             "state_changing": true
         },
         {
-            "target_app": "java",
+            "target_app": "spring",
             "cve_id": "cve-2022-22963",
             "severity": "critical",
             "description": "Spring Cloud Function 远程代码执行漏洞",
@@ -97,7 +97,7 @@
             "state_changing": false
         },
         {
-            "target_app": "java",
+            "target_app": "spring",
             "cve_id": "cve-2022-22965",
             "severity": "critical",
             "description": "Spring4Shell 核心框架远程代码执行漏洞",
@@ -110,7 +110,7 @@
             "state_changing": true
         },
         {
-            "target_app": "java",
+            "target_app": "spring",
             "cve_id": "springboot-env",
             "severity": "high",
             "description": "Spring Boot Actuator 环境配置未授权访问 (环境变量泄露)",
@@ -123,7 +123,7 @@
             "state_changing": false
         },
         {
-            "target_app": "java",
+            "target_app": "spring",
             "cve_id": "springboot-heapdump",
             "severity": "critical",
             "description": "Spring Boot Actuator Heapdump 未授权访问 (内存密码泄露)",
@@ -136,7 +136,7 @@
             "state_changing": false
         },
         {
-            "target_app": "java",
+            "target_app": "yonyou",
             "cve_id": "cnvd-2021-30167",
             "severity": "critical",
             "description": "【信创/政务】用友 NC BeanShell 远程代码执行漏洞",
@@ -149,7 +149,7 @@
             "state_changing": false
         },
         {
-            "target_app": "java",
+            "target_app": "shiro",
             "cve_id": "cve-2016-4437",
             "severity": "critical",
             "description": "Apache Shiro 550 默认密钥反序列化漏洞",
@@ -162,7 +162,7 @@
             "state_changing": false
         },
         {
-            "target_app": "java",
+            "target_app": "fastjson",
             "cve_id": "cve-2017-18349",
             "severity": "critical",
             "description": "Fastjson 1.2.24 反序列化漏洞 (政务系统高频漏洞)",
@@ -175,7 +175,7 @@
             "state_changing": false
         },
         {
-            "target_app": "java",
+            "target_app": "weblogic",
             "cve_id": "cve-2017-10271",
             "severity": "critical",
             "description": "WebLogic XMLDecoder 反序列化远程代码执行",
@@ -188,7 +188,7 @@
             "state_changing": false
         },
         {
-            "target_app": "java",
+            "target_app": "weblogic",
             "cve_id": "cve-2019-2725",
             "severity": "critical",
             "description": "WebLogic wls9-async 反序列化远程代码执行",
@@ -201,20 +201,20 @@
             "state_changing": false
         },
         {
-            "target_app": "java",
+            "target_app": "weblogic",
             "cve_id": "cve-2020-14882",
             "severity": "critical",
             "description": "WebLogic 控制台未授权访问权限绕过漏洞",
             "verification_method": "network",
             "verification_engine": "nuclei_yaml",
             "template": "yaml_pocs/cve-2020-14882.yaml",
-            "verification_safety": "safe_probe",
-            "requires_oob": false,
-            "offline_supported": true,
+            "verification_safety": "active_probe",
+            "requires_oob": true,
+            "offline_supported": false,
             "state_changing": false
         },
         {
-            "target_app": "java",
+            "target_app": "weblogic",
             "cve_id": "cve-2020-14883",
             "severity": "critical",
             "description": "WebLogic 认证后代码执行漏洞 (常与14882形成利用链)",
@@ -227,7 +227,7 @@
             "state_changing": false
         },
         {
-            "target_app": "java",
+            "target_app": "jboss",
             "cve_id": "cve-2017-12149",
             "severity": "critical",
             "description": "JBoss 5.x/6.x 反序列化远程代码执行漏洞",
@@ -240,7 +240,7 @@
             "state_changing": false
         },
         {
-            "target_app": "java",
+            "target_app": "struts",
             "cve_id": "cve-2017-5638",
             "severity": "critical",
             "description": "Apache Struts2 S2-045 远程代码执行漏洞",
@@ -253,7 +253,7 @@
             "state_changing": false
         },
         {
-            "target_app": "java",
+            "target_app": "struts",
             "cve_id": "cve-2017-9805",
             "severity": "critical",
             "description": "Apache Struts2 S2-052 远程代码执行漏洞",
@@ -266,7 +266,7 @@
             "state_changing": false
         },
         {
-            "target_app": "java",
+            "target_app": "rocketmq",
             "cve_id": "cve-2023-33246",
             "severity": "high",
             "description": "Apache RocketMQ 远程命令执行漏洞",
@@ -331,10 +331,10 @@
             "state_changing": false
         },
         {
-            "target_app": "postgres",
+            "target_app": "patroni",
             "cve_id": "postgresql-cluster-config",
             "severity": "medium",
-            "description": "PostgreSQL 集群配置信息泄露检测",
+            "description": "PostgreSQL Patroni 集群配置接口未授权访问检测",
             "verification_method": "network",
             "verification_engine": "nuclei_yaml",
             "template": "yaml_pocs/postgresql-cluster-config.yaml",
@@ -344,10 +344,10 @@
             "state_changing": false
         },
         {
-            "target_app": "oa_system",
+            "target_app": "fanwei",
             "cve_id": "cnvd-2019-32204",
             "severity": "critical",
-            "description": "【信创/政务】致远OA A8 远程命令执行漏洞",
+            "description": "【信创/政务】泛微 e-cology OA 远程命令执行漏洞",
             "verification_method": "network",
             "verification_engine": "nuclei_yaml",
             "template": "yaml_pocs/cnvd-2019-32204.yaml",
@@ -357,10 +357,10 @@
             "state_changing": false
         },
         {
-            "target_app": "oa_system",
+            "target_app": "sangfor",
             "cve_id": "cnvd-2020-46552",
             "severity": "critical",
-            "description": "【信创/政务】泛微OA相关远程代码执行漏洞",
+            "description": "【信创/政务】深信服 EDR 远程命令执行漏洞",
             "verification_method": "network",
             "verification_engine": "nuclei_yaml",
             "template": "yaml_pocs/cnvd-2020-46552.yaml",
@@ -370,7 +370,7 @@
             "state_changing": false
         },
         {
-            "target_app": "oa_system",
+            "target_app": "fanwei",
             "cve_id": "cnvd-2022-43245",
             "severity": "critical",
             "description": "【信创/政务】泛微OA相关敏感信息泄露或RCE漏洞",
