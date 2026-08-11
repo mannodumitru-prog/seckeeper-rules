@@ -70,44 +70,123 @@ def sync_and_build():
         json.dump({"meta": {"total": len(rules), "updated": str(datetime.now())}, "rules": rules}, f, indent=4)
     print(f"🎯 熔炼完成！已精简至 {len(rules)} 条核心高危漏洞。")
 
+ROOT_RULE_FILES = {
+    "cve_rules.json",
+    "file_integrity_rules.json",
+    "config_rules.json",
+    "weak_password_rules.json",
+    "service_rules.json",
+    "privilege_escalation_rules.json",
+    "threat_rules.json",
+}
+
+IGNORE_DIRS = {
+    ".git",
+    ".github",
+    "utils",
+    "__pycache__",
+}
+
+
 def build_manifest():
-    # 1. 尝试读取现有版本，如果没有，默认为 1.0.0
+    # 1. 读取现有版本
     current_version = "1.0.0"
+
     if os.path.exists("manifest.json"):
         try:
-            with open("manifest.json", "r") as f:
+            with open("manifest.json", "r", encoding="utf-8") as f:
                 old_data = json.load(f)
-                current_version = old_data.get("version", "1.0.0")
-        except: pass
-    
-    # 2. 版本号递增逻辑 (简单处理：将最后一位加 1)
-    v_parts = current_version.split('.')
-    v_parts[-1] = str(int(v_parts[-1]) + 1)
-    new_version = ".".join(v_parts)
-    
+
+            current_version = old_data.get("version", "1.0.0")
+        except (OSError, json.JSONDecodeError, ValueError):
+            pass
+
+    # 2. 递增最后一位版本号
+    try:
+        version_parts = current_version.split(".")
+        version_parts[-1] = str(int(version_parts[-1]) + 1)
+        new_version = ".".join(version_parts)
+    except (ValueError, IndexError):
+        new_version = "1.0.1"
+
     payloads = {}
+
     for root, dirs, files in os.walk("."):
-        dirs[:] = [d for d in dirs if not d.startswith('.')]
-        for file in files:
-            if file.startswith('.'): continue
-            if file in IGNORE_FILES: continue
-            
-            path = os.path.join(root, file).replace("\\", "/")
-            # 现在的 version 使用递增后的新版本号
-            payloads[path] = {
-                "version": new_version, 
-                "sha256": get_hash(os.path.join(root, file))
+        # 必须原地修改 dirs，阻止 os.walk 进入排除目录
+        dirs[:] = [
+            directory
+            for directory in dirs
+            if directory not in IGNORE_DIRS
+            and not directory.startswith(".")
+        ]
+
+        for filename in files:
+            full_path = os.path.join(root, filename)
+
+            # 生成不带 "./" 的规范相对路径
+            relative_path = os.path.relpath(
+                full_path,
+                "."
+            ).replace("\\", "/")
+
+            path_parts = relative_path.split("/")
+            suffix = os.path.splitext(filename)[1].lower()
+
+            should_include = False
+
+            # 根目录只允许明确列出的规则 JSON
+            if (
+                len(path_parts) == 1
+                and relative_path in ROOT_RULE_FILES
+            ):
+                should_include = True
+
+            # pocs 目录只允许直接存放的 Python PoC
+            elif (
+                len(path_parts) == 2
+                and path_parts[0] == "pocs"
+                and suffix == ".py"
+            ):
+                should_include = True
+
+            # yaml_pocs 目录只允许直接存放的 YAML
+            elif (
+                len(path_parts) == 2
+                and path_parts[0] == "yaml_pocs"
+                and suffix in {".yaml", ".yml"}
+            ):
+                should_include = True
+
+            if not should_include:
+                continue
+
+            payloads[relative_path] = {
+                "version": new_version,
+                "sha256": get_hash(full_path)
             }
-    
+
     # 3. 写入 manifest
     manifest_data = {
         "version": new_version,
-        "last_updated": str(datetime.now()),
-        "files": payloads
+        "last_updated": datetime.now().isoformat(
+            sep=" ",
+            timespec="seconds"
+        ),
+        "files": dict(sorted(payloads.items()))
     }
-    with open("manifest.json", "w") as f:
-        json.dump(manifest_data, f, indent=4)
-    print(f"✅ 规则清单已构建，当前版本: {new_version}")
+
+    with open("manifest.json", "w", encoding="utf-8") as f:
+        json.dump(
+            manifest_data,
+            f,
+            ensure_ascii=False,
+            indent=4
+        )
+
+    print(
+        f"✅ 规则清单已构建，当前版本: {new_version}，"
+        f"共纳入 {len(payloads)} 个文件。"
+    )
     
 if __name__ == "__main__":
     sync_and_build()
