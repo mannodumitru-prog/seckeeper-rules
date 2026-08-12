@@ -1,7 +1,7 @@
 {
     "meta": {
-        "total": 5440,
-        "updated": "2026-08-11 20:09:49.200922"
+        "total": 5444,
+        "updated": "2026-08-12 20:09:26.295612"
     },
     "rules": [
         {
@@ -66774,6 +66774,35 @@
             ]
         },
         {
+            "cve_id": "DEBIAN-CVE-2026-64224",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  octeontx2-pf: fix double free in rvu_rep_rsrc_init()  rvu_rep_rsrc_init() allocates queue memory before calling otx2_init_hw_resour",
+            "affected_software": [
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-64225",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  octeontx2-af: CGX: add bounds check to cgx_speed_mbps index  cgx_speed_mbps\u00a0has 13 elements but RESP_LINKSTAT_SPEED can yield value",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
             "cve_id": "DEBIAN-CVE-2026-64226",
             "cvss_score": 7.8,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  sched_ext: Avoid UAF in scx_root_enable_workfn() init failure path  In scx_root_enable_workfn(), put_task_struct(p) is called befor",
@@ -88780,6 +88809,26 @@
             "cve_id": "DEBIAN-CVE-2026-64172",
             "cvss_score": 7.1,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  KVM: SVM: Disable AVIC IPI virtualization on Hygon Family 18h (erratum #1235)  Hygon Family 18h CPUs are derived from AMD Family 17",
+            "affected_software": [
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-64186",
+            "cvss_score": 7.1,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  iommu/amd: Remove latent out-of-bounds access in IOMMU debugfs  In iommu_mmio_write() and iommu_capability_write(), the variables d",
+            "affected_software": [
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-64209",
+            "cvss_score": 7.1,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  phy: qcom: qmp-usbc: Fix out-of-bounds array access in dp swing config  swing_tbl and pre_emphasis_tbl are 4x4 arrays (valid indice",
             "affected_software": [
                 {
                     "name": "linux"
