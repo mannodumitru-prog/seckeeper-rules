@@ -1,7 +1,7 @@
 {
     "meta": {
-        "total": 5444,
-        "updated": "2026-08-12 20:09:26.295612"
+        "total": 5446,
+        "updated": "2026-08-13 20:04:16.046972"
     },
     "rules": [
         {
@@ -66525,6 +66525,25 @@
             ]
         },
         {
+            "cve_id": "DEBIAN-CVE-2026-64103",
+            "cvss_score": 7.8,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  scsi: isci: Fix use-after-free in device removal path  The ISCI completion tasklet is initialized in isci_host_alloc() (drivers/scs",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
             "cve_id": "DEBIAN-CVE-2026-64108",
             "cvss_score": 7.8,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  cifs: Fix busy dentry used after unmounting  Since commit 340cea84f691c (\"cifs: open files should not hold ref on superblock\"), cif",
@@ -88830,6 +88849,25 @@
             "cvss_score": 7.1,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  phy: qcom: qmp-usbc: Fix out-of-bounds array access in dp swing config  swing_tbl and pre_emphasis_tbl are 4x4 arrays (valid indice",
             "affected_software": [
+                {
+                    "name": "linux"
+                }
+            ]
+        },
+        {
+            "cve_id": "DEBIAN-CVE-2026-64237",
+            "cvss_score": 7.1,
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  Input: elan_i2c - validate firmware size before use  Ensure that the firmware file is large enough to contain the expected number o",
+            "affected_software": [
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
+                {
+                    "name": "linux"
+                },
                 {
                     "name": "linux"
                 }
