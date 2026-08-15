@@ -1,7 +1,7 @@
 {
     "meta": {
         "total": 5627,
-        "updated": "2026-08-15 13:52:22.863737"
+        "updated": "2026-08-15 19:45:01.043091"
     },
     "rules": [
         {
@@ -30452,9 +30452,6 @@
                 },
                 {
                     "name": "linux"
-                },
-                {
-                    "name": "linux"
                 }
             ]
         },
@@ -30880,9 +30877,6 @@
                 },
                 {
                     "name": "linux"
-                },
-                {
-                    "name": "linux"
                 }
             ]
         },
@@ -30983,6 +30977,9 @@
             "cvss_score": 7.8,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  drm/amdkfd: Fix double release compute pasid  If kfd_process_device_init_vm returns failure after vm is converted to compute vm and",
             "affected_software": [
+                {
+                    "name": "linux"
+                },
                 {
                     "name": "linux"
                 },
@@ -83014,9 +83011,6 @@
             "cvss_score": 7.1,
             "description": "In the Linux kernel, the following vulnerability has been resolved:  habanalabs/gaudi: fix shift out of bounds  When validating NIC queues, queue offset calculation must be performed only for NIC queu",
             "affected_software": [
-                {
-                    "name": "linux"
-                },
                 {
                     "name": "linux"
                 },
