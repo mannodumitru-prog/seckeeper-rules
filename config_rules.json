@@ -1,6 +1,6 @@
 {
     "meta": {
-        "version": "2.1.0",
+        "version": "2.2.0",
         "description": "系统静态安全配置与服务基线全局规则库",
         "last_updated": "2026-06-30",
         "last_reviewed": "2026-07-01",
@@ -16,7 +16,11 @@
             "severity": "high",
             "category": "ssh",
             "description": "允许root直接SSH登录会增加被暴力破解的风险",
-            "remediation": "在 /etc/ssh/sshd_config 中设置 PermitRootLogin no 并重启 sshd"
+            "remediation": "在 /etc/ssh/sshd_config 中设置 PermitRootLogin no 并重启 sshd",
+            "applies_when": {
+                "any_paths_exist": ["/etc/ssh/sshd_config"],
+                "any_processes": ["sshd", "ssh"]
+            }
         },
         {
             "check_name": "SSH密码认证",
@@ -27,7 +31,11 @@
             "severity": "high",
             "category": "ssh",
             "description": "启用密码认证可能遭受密码爆破攻击，建议使用密钥认证",
-            "remediation": "设置 PasswordAuthentication no，改用公钥认证"
+            "remediation": "设置 PasswordAuthentication no，改用公钥认证",
+            "applies_when": {
+                "any_paths_exist": ["/etc/ssh/sshd_config"],
+                "any_processes": ["sshd", "ssh"]
+            }
         },
         {
             "check_name": "SSH禁止空密码登录",
@@ -38,7 +46,11 @@
             "severity": "high",
             "category": "ssh",
             "description": "允许空密码登录可导致未授权访问",
-            "remediation": "设置 PermitEmptyPasswords no"
+            "remediation": "设置 PermitEmptyPasswords no",
+            "applies_when": {
+                "any_paths_exist": ["/etc/ssh/sshd_config"],
+                "any_processes": ["sshd", "ssh"]
+            }
         },
         {
             "check_name": "SSH最大认证尝试次数",
@@ -49,7 +61,11 @@
             "severity": "medium",
             "category": "ssh",
             "description": "认证尝试次数过多，易被暴力破解",
-            "remediation": "设置 MaxAuthTries 为 3"
+            "remediation": "设置 MaxAuthTries 为 3",
+            "applies_when": {
+                "any_paths_exist": ["/etc/ssh/sshd_config"],
+                "any_processes": ["sshd", "ssh"]
+            }
         },
         {
             "check_name": "Nginx隐藏版本号",
@@ -60,7 +76,11 @@
             "severity": "low",
             "category": "nginx",
             "description": "显示Nginx版本号会暴露漏洞信息",
-            "remediation": "在 http 块中添加 server_tokens off;"
+            "remediation": "在 http 块中添加 server_tokens off;",
+            "applies_when": {
+                "any_paths_exist": ["/etc/nginx/nginx.conf", "/usr/local/nginx/conf/nginx.conf"],
+                "any_processes": ["nginx"]
+            }
         },
         {
             "check_name": "MySQL本地绑定地址",
@@ -71,7 +91,11 @@
             "severity": "high",
             "category": "mysql",
             "description": "MySQL监听所有接口，增加被攻击面",
-            "remediation": "设置 bind-address = 127.0.0.1 或使用防火墙限制"
+            "remediation": "设置 bind-address = 127.0.0.1 或使用防火墙限制",
+            "applies_when": {
+                "any_paths_exist": ["/etc/mysql/my.cnf", "/etc/my.cnf", "/etc/mysql/mysql.conf.d/mysqld.cnf"],
+                "any_processes": ["mysqld", "mariadbd"]
+            }
         },
         {
             "check_name": "防火墙状态",
