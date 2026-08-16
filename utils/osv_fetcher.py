@@ -1,40 +1,32 @@
-import requests
+#!/usr/bin/env python3
+"""OSV单包查询诊断工具；不负责写入SecKeeper规则库。"""
+
+import argparse
 import json
+import requests
 
-def fetch_osv_vulnerabilities(package_name, ecosystem="Linux"):
-    """
-    通过 OSV.dev API 获取漏洞情报
-    ecosystem 参数对于不同系统至关重要，例如 'Debian', 'Alpine', 'PyPI'
-    """
-    url = "https://api.osv.dev/v1/query"
-    payload = {
-        "package": {
-            "name": package_name,
-            "ecosystem": ecosystem
-        }
-    }
-    
-    try:
-        response = requests.post(url, json=payload, timeout=10)
-        if response.status_code == 200:
-            return response.json().get('vulns', [])
-    except Exception as e:
-        print(f"⚠️ OSV API 请求失败: {e}")
-    return []
 
-# 测试一下是否能获取到数据
-if __name__ == "__main__":
-    # 比如我们想关注 OpenSSL 的漏洞
-    vulns = fetch_osv_vulnerabilities("openssl", ecosystem="Debian")
-    print(f"✅ 成功获取到 {len(vulns)} 个漏洞条目")
-    if vulns:
-        print(json.dumps(vulns[0], indent=2))
+def fetch_osv_vulnerabilities(package_name: str, ecosystem: str = "Debian"):
+    response = requests.post(
+        "https://api.osv.dev/v1/query",
+        json={"package": {"name": package_name, "ecosystem": ecosystem}},
+        timeout=20,
+    )
+    response.raise_for_status()
+    return response.json().get("vulns", [])
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Query OSV without modifying repository files")
+    parser.add_argument("package", nargs="?", default="openssl")
+    parser.add_argument("--ecosystem", default="Debian")
+    args = parser.parse_args()
+    vulnerabilities = fetch_osv_vulnerabilities(args.package, args.ecosystem)
+    print(f"Found {len(vulnerabilities)} OSV records for {args.ecosystem}/{args.package}.")
+    if vulnerabilities:
+        print(json.dumps(vulnerabilities[0], ensure_ascii=False, indent=2))
+    return 0
 
 
 if __name__ == "__main__":
-    # 测试拉取 openssl 的漏洞，看看能不能拿到数据
-    vulns = fetch_osv_vulnerabilities("openssl", ecosystem="Debian")
-    print(f"Found {len(vulns)} vulnerabilities for openssl.")
-    # 如果有数据，打印第一个看看结构
-    if vulns:
-        print(json.dumps(vulns[0], indent=2))
+    raise SystemExit(main())
