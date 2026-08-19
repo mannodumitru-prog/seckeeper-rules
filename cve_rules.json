@@ -1,8 +1,8 @@
 {
     "meta": {
         "version": "1.0.0",
-        "total_rules": 7635,
-        "last_updated": "2026-08-18",
+        "total_rules": 7636,
+        "last_updated": "2026-08-19",
         "filter": {
             "year_gte": 2016,
             "cvss_v3_gte": 7.0
@@ -139431,6 +139431,44 @@
                 "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/53xxx/CVE-2026-53362.json",
                 "https://nvd.nist.gov/vuln/detail/CVE-2026-53362",
                 "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-53365",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "vsock/virtio: fix zerocopy completion for multi-skb sends",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.12.97",
+                    "version_start_including": "6.7.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.18.34",
+                    "version_start_including": "6.13.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.0.11",
+                    "version_start_including": "6.19.0"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://git.kernel.org/stable/c/293fe8f2d1b5ac464ca16a8eba09571bbbb34ba9",
+                "https://git.kernel.org/stable/c/76b995bc57bd90cb6e954e1966fbd8786da47f0d",
+                "https://git.kernel.org/stable/c/ae38d9179190a956e2a87a69ef1dd6f451b51c4d",
+                "https://git.kernel.org/stable/c/b3155f2b78db21e99256bcf7eb902f24ff6d5338",
+                "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/53xxx/CVE-2026-53365.json",
+                "https://nvd.nist.gov/vuln/detail/CVE-2026-53365",
+                "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git",
+                "https://github.com/MaherAzzouzi/vsockdrop"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
