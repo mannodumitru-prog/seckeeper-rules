@@ -1,8 +1,8 @@
 {
     "meta": {
         "version": "1.0.0",
-        "total_rules": 7636,
-        "last_updated": "2026-08-19",
+        "total_rules": 7637,
+        "last_updated": "2026-08-21",
         "filter": {
             "year_gte": 2016,
             "cvss_v3_gte": 7.0
@@ -180928,6 +180928,26 @@
                 }
             ],
             "remediation": "Upgrade target components to fixed secure version."
+        },
+        {
+            "cve_id": "CVE-2026-5435",
+            "cvss_score": 7.3,
+            "severity": "high",
+            "description": "The deprecated functions ns_printrrf, ns_printrr and fp_nquery in the GNU C Library version 2.2 and newer fail to enforce the caller-supplied buffer length, and can result in an out-of-bounds write when printing TSIG records.",
+            "affected_software": [
+                {
+                    "name": "glibc",
+                    "version_end_excluding": "2.43-3"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-5435"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
         },
         {
             "cve_id": "CVE-2026-63883",
