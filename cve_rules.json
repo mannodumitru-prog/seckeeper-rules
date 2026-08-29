@@ -1,8 +1,8 @@
 {
     "meta": {
         "version": "1.0.0",
-        "total_rules": 7791,
-        "last_updated": "2026-08-28",
+        "total_rules": 7815,
+        "last_updated": "2026-08-29",
         "filter": {
             "year_gte": 2016,
             "cvss_v3_gte": 7.0
@@ -18007,6 +18007,62 @@
             "offline_supported": true
         },
         {
+            "cve_id": "CVE-2026-74752",
+            "cvss_score": 9.8,
+            "severity": "critical",
+            "description": "sctp: validate cookie AUTH state before use",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.10",
+                    "version_start_including": "2.6.24"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://git.kernel.org/stable/c/3dbb44d88b1e94dd31fe43588af7437b34b44d56",
+                "https://git.kernel.org/stable/c/88619b117be1daf633ce32210570ce35a0bd1c98",
+                "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/74xxx/CVE-2026-74752.json",
+                "https://nvd.nist.gov/vuln/detail/CVE-2026-74752",
+                "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-80519",
+            "cvss_score": 9.8,
+            "severity": "critical",
+            "description": "ovpn: finish crypto callback cleanup before peer release",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.18.46",
+                    "version_start_including": "6.16.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.10",
+                    "version_start_including": "6.19.0"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://git.kernel.org/stable/c/4b0de8be288f5fbec5d8ee64ed4e8b14bf19b517",
+                "https://git.kernel.org/stable/c/9e163917a86c6adfbe150e13f4c73653a54616de",
+                "https://git.kernel.org/stable/c/a3a676495c6419e0cca04d6a67227604e92a3d5a",
+                "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/80xxx/CVE-2026-80519.json",
+                "https://nvd.nist.gov/vuln/detail/CVE-2026-80519",
+                "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2026-80528",
             "cvss_score": 9.8,
             "severity": "critical",
@@ -18020,6 +18076,66 @@
             "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
             "references": [
                 "https://security-tracker.debian.org/tracker/CVE-2026-80528"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-80557",
+            "cvss_score": 9.8,
+            "severity": "critical",
+            "description": "libceph: fix OOB read in decode_watchers() via missing bounds check",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "5.10.267",
+                    "version_start_including": "4.9.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "5.15.218",
+                    "version_start_including": "5.11.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.1.185",
+                    "version_start_including": "5.16.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.6.154",
+                    "version_start_including": "6.2.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.12.106",
+                    "version_start_including": "6.7.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.18.47",
+                    "version_start_including": "6.13.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.10",
+                    "version_start_including": "6.19.0"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://git.kernel.org/stable/c/00ead17c7de137a692edee59f2772e6af687e8eb",
+                "https://git.kernel.org/stable/c/1c824e7c75bb4adf19553dd4ea944a5d83096be8",
+                "https://git.kernel.org/stable/c/7130d94846dadbb97b6b7f4d78a3a7bba6e3daa1",
+                "https://git.kernel.org/stable/c/85479b7d65b4ebcb07fbbe57230976793974ab4a",
+                "https://git.kernel.org/stable/c/c59219a6b62d74936963983e5815524c3de8dd79",
+                "https://git.kernel.org/stable/c/cb8246e5846dbbe34930903a90c7a90dd8e5910b",
+                "https://git.kernel.org/stable/c/eab3eeb68bfc639d74f27256f05546af5c4f787d",
+                "https://git.kernel.org/stable/c/f161be39201eb5f9b1f58fb8f90b8a9cd3931eb6",
+                "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/80xxx/CVE-2026-80557.json",
+                "https://nvd.nist.gov/vuln/detail/CVE-2026-80557"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
@@ -18863,6 +18979,31 @@
             "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
             "references": [
                 "https://security-tracker.debian.org/tracker/CVE-2026-72318"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-74751",
+            "cvss_score": 9.4,
+            "severity": "critical",
+            "description": "riscv: lib: Fix ZBB strnlen reading past count boundary",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.10",
+                    "version_start_including": "7.1.0"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://git.kernel.org/stable/c/5d588c684833e678a0008eb69c33190f01a65f4b",
+                "https://git.kernel.org/stable/c/e697e30f3dd2da3a1df7dc0980546d5b53aea4b6",
+                "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/74xxx/CVE-2026-74751.json",
+                "https://nvd.nist.gov/vuln/detail/CVE-2026-74751",
+                "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
@@ -42019,6 +42160,66 @@
                 "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/74xxx/CVE-2026-74711.json",
                 "https://nvd.nist.gov/vuln/detail/CVE-2026-74711",
                 "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-80536",
+            "cvss_score": 8.4,
+            "severity": "high",
+            "description": "xfs: bounds-check buffer log item's dirty bitmap",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "5.10.267",
+                    "version_start_including": "2.6.12"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "5.15.218",
+                    "version_start_including": "5.11.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.1.185",
+                    "version_start_including": "5.16.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.6.154",
+                    "version_start_including": "6.2.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.12.106",
+                    "version_start_including": "6.7.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.18.46",
+                    "version_start_including": "6.13.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.10",
+                    "version_start_including": "6.19.0"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://git.kernel.org/stable/c/7e32d4eebae6ca24f8a673c107fd7eca1f47afc2",
+                "https://git.kernel.org/stable/c/813f8136a2ce1fee266d02a7df73db6e8a541604",
+                "https://git.kernel.org/stable/c/acb4e26295e7f0e685815a3fd3d70bd8329cefa1",
+                "https://git.kernel.org/stable/c/b7528b42813f02724a78fce1da24d69d1bfc4d38",
+                "https://git.kernel.org/stable/c/edaf5b6bd625356893da20d69a259b34a9de2694",
+                "https://git.kernel.org/stable/c/f3859c35a4fbc1c1c58431f684f808e43696891d",
+                "https://git.kernel.org/stable/c/f7b5fa83e2c192be922121b764415fa8c7549ea1",
+                "https://git.kernel.org/stable/c/f8288214459ead7e87d26e5822f62c14a4f2ed6b",
+                "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/80xxx/CVE-2026-80536.json",
+                "https://nvd.nist.gov/vuln/detail/CVE-2026-80536"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
@@ -159542,6 +159743,31 @@
             "offline_supported": true
         },
         {
+            "cve_id": "CVE-2026-74747",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "ipvs: revalidate ihl to prevent out-of-bounds access",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.10",
+                    "version_start_including": "2.6.12"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://git.kernel.org/stable/c/5365f012451fce2453f13a568dcb72ea534c1e4d",
+                "https://git.kernel.org/stable/c/d93660df4dd1d116f608ada4a29a80a5d6f0a6ed",
+                "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/74xxx/CVE-2026-74747.json",
+                "https://nvd.nist.gov/vuln/detail/CVE-2026-74747",
+                "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2026-74748",
             "cvss_score": 7.8,
             "severity": "high",
@@ -159555,6 +159781,62 @@
             "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
             "references": [
                 "https://security-tracker.debian.org/tracker/CVE-2026-74748"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-74753",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "perf: Reject exited events as group leaders",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.18.46",
+                    "version_start_including": "6.18.39"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.10",
+                    "version_start_including": "7.1.4"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://git.kernel.org/stable/c/7a03413f31c196ab3894f988cdce0bb47b4fec42",
+                "https://git.kernel.org/stable/c/7ce010275c531475f9d6e7efb11b9e522c74ed2e",
+                "https://git.kernel.org/stable/c/fa091f46c3833fb22384f10eade2b4e1e1d0b278",
+                "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/74xxx/CVE-2026-74753.json",
+                "https://nvd.nist.gov/vuln/detail/CVE-2026-74753",
+                "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-80521",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "af_unix: Unlink scc_entry in unix_del_edge().",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.10",
+                    "version_start_including": "6.10.0"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://git.kernel.org/stable/c/594d905195024b228c962627ae5ae7c17bd582a4",
+                "https://git.kernel.org/stable/c/e3702470ced94fad74d71e2232f022d2eb752a6d",
+                "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/80xxx/CVE-2026-80521.json",
+                "https://nvd.nist.gov/vuln/detail/CVE-2026-80521",
+                "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
@@ -159622,6 +159904,37 @@
             "offline_supported": true
         },
         {
+            "cve_id": "CVE-2026-80537",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "xfs: fix off-by-one in rtrefcount btree root level validation",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.18.46",
+                    "version_start_including": "6.14.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.10",
+                    "version_start_including": "6.19.0"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://git.kernel.org/stable/c/8a0ecae2ecda9f9a83a496ed05c42c4b1f5c3f2d",
+                "https://git.kernel.org/stable/c/cc3144da377de5fb422d44a2311f978623f7c900",
+                "https://git.kernel.org/stable/c/ccebfc309441e0b37b2e6ece90f18810a489d326",
+                "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/80xxx/CVE-2026-80537.json",
+                "https://nvd.nist.gov/vuln/detail/CVE-2026-80537",
+                "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2026-80540",
             "cvss_score": 7.8,
             "severity": "high",
@@ -159655,6 +159968,81 @@
             "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
             "references": [
                 "https://security-tracker.debian.org/tracker/CVE-2026-80541"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-80544",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "s390/zcrypt: Improve EP11 CPRB domain handling with ASN.1 parsing",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.10",
+                    "version_start_including": "7.1.0"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://git.kernel.org/stable/c/0864a163783bff109b548266921829ea794edc93",
+                "https://git.kernel.org/stable/c/db21b2cf6dd0af5ffd08931e0a9fcda5a0473220",
+                "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/80xxx/CVE-2026-80544.json",
+                "https://nvd.nist.gov/vuln/detail/CVE-2026-80544",
+                "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-80545",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "s390/zcrypt: Improve EP11 CPRB length and overflow checks",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.10",
+                    "version_start_including": "7.1.0"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://git.kernel.org/stable/c/17ac0bc866fc624cd05f022dcd8b730c0af11bb1",
+                "https://git.kernel.org/stable/c/2976b9d2e716c7e5487ca7c29a7bd076cf9adf08",
+                "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/80xxx/CVE-2026-80545.json",
+                "https://nvd.nist.gov/vuln/detail/CVE-2026-80545",
+                "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-80546",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "s390/zcrypt: Improve CCA CPRB length and overflow checks",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.10",
+                    "version_start_including": "7.1.0"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://git.kernel.org/stable/c/35ac6754ba6da45fd193f5ce3f665f7490b830d5",
+                "https://git.kernel.org/stable/c/50fe5133dcb46449daf2435fa705264364411129",
+                "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/80xxx/CVE-2026-80546.json",
+                "https://nvd.nist.gov/vuln/detail/CVE-2026-80546",
+                "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
@@ -159802,6 +160190,55 @@
             "offline_supported": true
         },
         {
+            "cve_id": "CVE-2026-80572",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "Input: byd - synchronize timer deletion before freeing private data",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.1.185",
+                    "version_start_including": "4.6.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.6.154",
+                    "version_start_including": "6.2.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.12.106",
+                    "version_start_including": "6.7.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.18.46",
+                    "version_start_including": "6.13.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.10",
+                    "version_start_including": "6.19.0"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://git.kernel.org/stable/c/28d984a66b9e14be74986167b6ad40b5e0daf19a",
+                "https://git.kernel.org/stable/c/2e509ef60ee41a2da0deb062c262bb530143fb37",
+                "https://git.kernel.org/stable/c/84b205297fa15f97510342221d8c9a0119711478",
+                "https://git.kernel.org/stable/c/8dbfd8e32a13e116790780ed0be82b5a05eb9916",
+                "https://git.kernel.org/stable/c/c83e79c0842ed29860648bcce5022ef0ba5001c6",
+                "https://git.kernel.org/stable/c/ee944a706a18322b4a2599eebe8040a2994e928f",
+                "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/80xxx/CVE-2026-80572.json",
+                "https://nvd.nist.gov/vuln/detail/CVE-2026-80572",
+                "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2026-80575",
             "cvss_score": 7.8,
             "severity": "high",
@@ -159815,6 +160252,136 @@
             "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
             "references": [
                 "https://security-tracker.debian.org/tracker/CVE-2026-80575"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-80579",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "fbdev: clear fb_info->mode before deleting a videomode",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.10",
+                    "version_start_including": "2.6.12"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://git.kernel.org/stable/c/95e647d2a5304a8fd11f1ba3c8502de700650131",
+                "https://git.kernel.org/stable/c/ce7fef961c63229b22dec415fb988899f479d61f",
+                "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/80xxx/CVE-2026-80579.json",
+                "https://nvd.nist.gov/vuln/detail/CVE-2026-80579",
+                "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-80580",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "fbdev: bound mode sysfs output to the sysfs buffer",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.10",
+                    "version_start_including": "2.6.12"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://git.kernel.org/stable/c/873a1aa15c313263f2e18b38cf525623cc4fabf6",
+                "https://git.kernel.org/stable/c/d15d51fb26e830af58f3f21964f1c09c239077ea",
+                "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/80xxx/CVE-2026-80580.json",
+                "https://nvd.nist.gov/vuln/detail/CVE-2026-80580",
+                "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-80582",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "drm/shmem_helper: Check VMA boundaries for PMD mappings",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.10",
+                    "version_start_including": "7.0.0"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://git.kernel.org/stable/c/12803e89a1e593fd1e784dfe7453f5e392ccaff2",
+                "https://git.kernel.org/stable/c/617bbd08714857c1613d7c550d43a9092ec0fb97",
+                "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/80xxx/CVE-2026-80582.json",
+                "https://nvd.nist.gov/vuln/detail/CVE-2026-80582",
+                "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-80583",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "ASoC: codecs: lpass-tx-macro: Fix enum kcontrol accesses",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "5.15.218",
+                    "version_start_including": "5.12.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.1.185",
+                    "version_start_including": "5.16.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.6.154",
+                    "version_start_including": "6.2.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.12.106",
+                    "version_start_including": "6.7.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.18.47",
+                    "version_start_including": "6.13.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.10",
+                    "version_start_including": "6.19.0"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://git.kernel.org/stable/c/1ba381759e45d5d0442452cfa5c42e836191a568",
+                "https://git.kernel.org/stable/c/2ed3601e9db08fbdb071bd3d7bd8f115d6d871b0",
+                "https://git.kernel.org/stable/c/3ee3c26ceee562079596abc9bc3307dd56dab4ed",
+                "https://git.kernel.org/stable/c/48b76879f5bfc8584b99052510ac645c6ade8d2b",
+                "https://git.kernel.org/stable/c/b6baab796d11fb84c0e9444ffca91af5eab22c25",
+                "https://git.kernel.org/stable/c/dbc81b518f6936131bfd858be71cd4295136809c",
+                "https://git.kernel.org/stable/c/f84f2c81d792cf1e65571108a3bdd2c29e09e995",
+                "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/80xxx/CVE-2026-80583.json",
+                "https://nvd.nist.gov/vuln/detail/CVE-2026-80583",
+                "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
@@ -182905,6 +183472,37 @@
             "offline_supported": true
         },
         {
+            "cve_id": "CVE-2026-74741",
+            "cvss_score": 7.5,
+            "severity": "high",
+            "description": "net: ngbe: fix NULL pointer dereference in non-MSI-X interrupt enabling",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.18.46",
+                    "version_start_including": "6.16.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.10",
+                    "version_start_including": "6.19.0"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://git.kernel.org/stable/c/0ab482b2195edc000262f0eae1cdcb416b8f335d",
+                "https://git.kernel.org/stable/c/5f3a13e0bb5ebcc1ca2dfda42ea40b9f3c2be6ea",
+                "https://git.kernel.org/stable/c/cef4c5b9aca24651d069adf9462b221df6a2a669",
+                "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/74xxx/CVE-2026-74741.json",
+                "https://nvd.nist.gov/vuln/detail/CVE-2026-74741",
+                "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2026-74742",
             "cvss_score": 7.5,
             "severity": "high",
@@ -182925,6 +183523,87 @@
             "offline_supported": true
         },
         {
+            "cve_id": "CVE-2026-74745",
+            "cvss_score": 7.5,
+            "severity": "high",
+            "description": "eth: bnxt: avoid deadlock when canceling IRQ affinity notifier",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.10",
+                    "version_start_including": "6.15.0"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://git.kernel.org/stable/c/51e96fa31f7e7eac2cba8f854e24d36600cc040b",
+                "https://git.kernel.org/stable/c/8b1118fc5a5d2cdc21cc07b5106921ad4f77c544",
+                "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/74xxx/CVE-2026-74745.json",
+                "https://nvd.nist.gov/vuln/detail/CVE-2026-74745",
+                "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-74750",
+            "cvss_score": 7.5,
+            "severity": "high",
+            "description": "ovpn: defer key slot crypto freeing to workqueue",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.10",
+                    "version_start_including": "6.16.0"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://git.kernel.org/stable/c/0f77ed5ee91946ea63e29f2e0ff9dc9e722d8da3",
+                "https://git.kernel.org/stable/c/2da3dfa1ddfe55a065f484750c83660e3bd4ac00",
+                "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/74xxx/CVE-2026-74750.json",
+                "https://nvd.nist.gov/vuln/detail/CVE-2026-74750",
+                "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-80520",
+            "cvss_score": 7.5,
+            "severity": "high",
+            "description": "ovpn: fix NULL dereference when killing missing key",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.18.46",
+                    "version_start_including": "6.16.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.10",
+                    "version_start_including": "6.19.0"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://git.kernel.org/stable/c/41d44ac7a61e2f74453af40d4fe1b82af9ea0ada",
+                "https://git.kernel.org/stable/c/a47a080d06ee9d94dc6a2da0fc2b9beeeedb92b3",
+                "https://git.kernel.org/stable/c/acf32a5dff082044cf0fd9492f3c10b7357c15ee",
+                "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/80xxx/CVE-2026-80520.json",
+                "https://nvd.nist.gov/vuln/detail/CVE-2026-80520",
+                "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2026-80527",
             "cvss_score": 7.5,
             "severity": "high",
@@ -182938,6 +183617,36 @@
             "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
             "references": [
                 "https://security-tracker.debian.org/tracker/CVE-2026-80527"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-80588",
+            "cvss_score": 7.5,
+            "severity": "high",
+            "description": "mptcp: reclaim forward-allocated memory on RX path errors",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.18.46"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.10",
+                    "version_start_including": "6.19.0"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://git.kernel.org/stable/c/41b49a8b914ec7dcb03eae93fb27f3c464078644",
+                "https://git.kernel.org/stable/c/473f1a5ab2abc98dd9e74b95b9c23c66c47535cc",
+                "https://git.kernel.org/stable/c/8277f48a06d3aa1441f6d0b6998ccc0360d30ed8",
+                "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/80xxx/CVE-2026-80588.json",
+                "https://nvd.nist.gov/vuln/detail/CVE-2026-80588",
+                "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
@@ -205807,6 +206516,31 @@
             "offline_supported": true
         },
         {
+            "cve_id": "CVE-2026-80523",
+            "cvss_score": 7.1,
+            "severity": "high",
+            "description": "clk: spacemit: k3: set hdma clock as critical",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.10",
+                    "version_start_including": "7.0.0"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://git.kernel.org/stable/c/bb81b608db6342e5adccb6aabe900d739dc7cddb",
+                "https://git.kernel.org/stable/c/eb525edd48907795c0d4e498ff57ad168070b289",
+                "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/80xxx/CVE-2026-80523.json",
+                "https://nvd.nist.gov/vuln/detail/CVE-2026-80523",
+                "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2026-80530",
             "cvss_score": 7.1,
             "severity": "high",
@@ -205820,6 +206554,37 @@
             "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
             "references": [
                 "https://security-tracker.debian.org/tracker/CVE-2026-80530"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-80538",
+            "cvss_score": 7.1,
+            "severity": "high",
+            "description": "xfs: propagate errors from xfs_rtginode_load",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.18.46",
+                    "version_start_including": "6.13.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.10",
+                    "version_start_including": "6.19.0"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://git.kernel.org/stable/c/61c5165f02deb2eed9b6b539bb279e6629fee652",
+                "https://git.kernel.org/stable/c/b7e53968cb8882c2d276429ea8550848a4940874",
+                "https://git.kernel.org/stable/c/ec19cea4ef1ce9d6e2e3f7e9e7bf88ede31176e7",
+                "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/80xxx/CVE-2026-80538.json",
+                "https://nvd.nist.gov/vuln/detail/CVE-2026-80538",
+                "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
