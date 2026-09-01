@@ -1,8 +1,8 @@
 {
     "meta": {
         "version": "1.0.0",
-        "total_rules": 7890,
-        "last_updated": "2026-08-30",
+        "total_rules": 7891,
+        "last_updated": "2026-09-01",
         "filter": {
             "year_gte": 2016,
             "cvss_v3_gte": 7.0
@@ -11007,6 +11007,26 @@
                 }
             ],
             "remediation": "Upgrade target components to fixed secure version."
+        },
+        {
+            "cve_id": "CVE-2026-63073",
+            "cvss_score": 9.8,
+            "severity": "critical",
+            "description": "Issue summary: OpenSSL CMP response validation passed an unexpected response sender distinguished name directly as the format string to `ERR_raise_data()`.  Impact summary: A malicious or intercepted CMP endpoint can crash a CMP client that enforces an expected sender or uses a pinned server certificate whose subject becomes the default expected sender.  CWE: CWE-134 (Use of Externally-Controlled Format String)  Description: When validating a received CMP message, ossl_cmp_msg_check_update() converts the peer-supplied sender distinguished name with X509_NAME_oneline() and passes it directly as the format argument to ERR_raise_data(). Percent characters survive the conversion, so a sender DN such as \"CN=%s%n\" reaches BIO_vsnprintf() as an attacker-controlled format string with no matching variadic arguments. This path is only reached when the caller configures an expected sender or pins a server certificate, which is the normal configuration for a CMP client validating server responses.",
+            "affected_software": [
+                {
+                    "name": "openssl",
+                    "version_end_excluding": "3.5.7-1~deb13u2"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-63073"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
         },
         {
             "cve_id": "CVE-2026-63800",
