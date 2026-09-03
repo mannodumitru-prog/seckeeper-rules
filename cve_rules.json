@@ -1,8 +1,8 @@
 {
     "meta": {
         "version": "1.0.0",
-        "total_rules": 7892,
-        "last_updated": "2026-09-02",
+        "total_rules": 7894,
+        "last_updated": "2026-09-03",
         "filter": {
             "year_gte": 2016,
             "cvss_v3_gte": 7.0
@@ -147322,6 +147322,26 @@
             "offline_supported": true
         },
         {
+            "cve_id": "CVE-2026-64054",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  net: shaper: reject duplicate leaves in GROUP request  net_shaper_nl_group_doit() does not deduplicate NET_SHAPER_A_LEAVES entries. When userspace supplies the same leaf handle twice, the same old-parent pointer lands twice in old_nodes[]. The cleanup loop double frees the parent. Of course the same parent may still be in old_nodes[] twice if we are moving multiple of its leaves.  Note that this patch also implicitly fixes the fact that the i >= leaves_count path forgets to set ret.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.0.12-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-64054"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2026-64057",
             "cvss_score": 7.8,
             "severity": "high",
@@ -147371,6 +147391,30 @@
                 "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/64xxx/CVE-2026-64058.json",
                 "https://nvd.nist.gov/vuln/detail/CVE-2026-64058",
                 "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-64063",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  netfs: Fix streaming write being overwritten  In order to avoid reading whilst writing, netfslib will allow \"streaming writes\" in which dirty data is stored directly into folios without reading them first.  Such folios are marked dirty but may not be marked uptodate. If a folio is entirely written by a streaming write, uptodate will be set, otherwise it will have a netfs_folio struct attached to ->private recording the dirty region.  In the event that a partially written streaming write page is to be overwritten entirely by a single write(), netfs_perform_write() will try to copy over it, but doesn't discard the netfs_folio if it succeeds; further, it doesn't correctly handle a partial copy that overwrites some of the dirty data.  Fix this by the following:   (1) If the folio is successfully overwritten, free the netfs_folio struct      before marking the page uptodate.   (2) If the copy to the folio partially fails, ",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.12.94-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.0.12-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-64063"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
