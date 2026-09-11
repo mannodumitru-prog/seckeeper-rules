@@ -1,8 +1,8 @@
 {
     "meta": {
         "version": "1.0.0",
-        "total_rules": 7941,
-        "last_updated": "2026-09-10",
+        "total_rules": 7943,
+        "last_updated": "2026-09-11",
         "filter": {
             "year_gte": 2016,
             "cvss_v3_gte": 7.0
@@ -39357,6 +39357,43 @@
             "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
             "references": [
                 "https://security-tracker.debian.org/tracker/CVE-2026-80734"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-80914",
+            "cvss_score": 8.8,
+            "severity": "high",
+            "description": "Bluetooth: ISO: fix use-after-free of listener socket in iso_conn_ready",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.12.109",
+                    "version_start_including": "6.0.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.18.50",
+                    "version_start_including": "6.13.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.4",
+                    "version_start_including": "6.19.0"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://git.kernel.org/stable/c/03288b7447c9e572f8ab82fc29cfb4ca719ab210",
+                "https://git.kernel.org/stable/c/2387cd06a2c0b416f05028b02bba1089f54c28d9",
+                "https://git.kernel.org/stable/c/49fd7116f76b860b230843700fb7423ab5331e1f",
+                "https://git.kernel.org/stable/c/560bef609fa5992745929e8d7d458b9d88dd2830",
+                "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/80xxx/CVE-2026-80914.json",
+                "https://nvd.nist.gov/vuln/detail/CVE-2026-80914",
+                "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
@@ -187689,6 +187726,43 @@
                 "https://git.kernel.org/stable/c/cfc686a1174aa904dcad9b9a7c5e46b484d27e4e",
                 "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/80xxx/CVE-2026-80720.json",
                 "https://nvd.nist.gov/vuln/detail/CVE-2026-80720",
+                "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-80924",
+            "cvss_score": 7.5,
+            "severity": "high",
+            "description": "crypto: krb5 - use kfree_sensitive() for derived key buffers",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.18.49",
+                    "version_start_including": "6.15.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.13",
+                    "version_start_including": "6.19.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.3",
+                    "version_start_including": "7.2.0"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://git.kernel.org/stable/c/731a5b6fb4c1705f9405d9029dd64ea81e336207",
+                "https://git.kernel.org/stable/c/91b96dc9cc250cd16751f53de525cf3442ca0962",
+                "https://git.kernel.org/stable/c/a1bf79365794783b19f5b09e8a23f7ee311e8931",
+                "https://git.kernel.org/stable/c/f7d53dd3f267e46a784f219a75072f2f400d42b9",
+                "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/80xxx/CVE-2026-80924.json",
+                "https://nvd.nist.gov/vuln/detail/CVE-2026-80924",
                 "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
             ],
             "verification_method": "version_match",
