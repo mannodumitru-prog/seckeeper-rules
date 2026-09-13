@@ -1,8 +1,8 @@
 {
     "meta": {
         "version": "1.0.0",
-        "total_rules": 7943,
-        "last_updated": "2026-09-11",
+        "total_rules": 7944,
+        "last_updated": "2026-09-13",
         "filter": {
             "year_gte": 2016,
             "cvss_v3_gte": 7.0
@@ -184197,6 +184197,26 @@
             "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
             "references": [
                 "https://security-tracker.debian.org/tracker/CVE-2026-54874"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-54876",
+            "cvss_score": 7.5,
+            "severity": "high",
+            "description": "Issue summary: A malicious TLS server can cause a memory leak in a TLS client that has enabled OCSP response checking by sending an OCSP response that contains no single response entries.  Impact summary: An attacker can leak an attacker-tunable amount of memory per TLS handshake in a victim client application. A long-running client that repeatedly connects to a malicious server can have its memory exhausted, resulting in a Denial of Service.  CWE: CWE-401: Missing Release of Memory after Effective Lifetime  Description: The affected function is called during X.509 certificate chain verification when OCSP response checking is enabled with the X509_V_FLAG_OCSP_RESP_CHECK or X509_V_FLAG_OCSP_RESP_CHECK_ALL verification flags, for example when a TLS client verifies an OCSP response stapled into the TLS handshake by the server.  When the received BasicOCSPResponse contains an empty SEQUENCE OF SingleResponse, which is permitted on the wire and accepted by the OpenSSL decoder, the OCSP_BASI",
+            "affected_software": [
+                {
+                    "name": "openssl",
+                    "version_end_excluding": "3.6.4-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-54876"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
