@@ -1,8 +1,8 @@
 {
     "meta": {
         "version": "1.0.0",
-        "total_rules": 8222,
-        "last_updated": "2026-09-14",
+        "total_rules": 8223,
+        "last_updated": "2026-09-15",
         "filter": {
             "year_gte": 2016,
             "cvss_v3_gte": 7.0
@@ -171892,6 +171892,26 @@
                 "https://github.com/CVEProject/cvelistV5/tree/main/cves/2025/38xxx/CVE-2025-38413.json",
                 "https://nvd.nist.gov/vuln/detail/CVE-2025-38413",
                 "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-19499",
+            "cvss_score": 7.7,
+            "severity": "high",
+            "description": "Calling strfmon and strfmon_l in the GNU C Library version 2.38 to 2.44 can write past the end of the caller-supplied output buffer when a conversion uses right-justified width padding.  Exploitation requires an application code path that calls strfmon or strfmon_l with right-justified width padding into a destination buffer that is large enough for the padding to succeed but too small for the internal memmove call. The field width or format may be attacker-influenced or a fixed susceptible pattern in the caller.  At the time of publication, no network-facing application impact is known.",
+            "affected_software": [
+                {
+                    "name": "glibc",
+                    "version_end_excluding": "2.43-5"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-19499"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
