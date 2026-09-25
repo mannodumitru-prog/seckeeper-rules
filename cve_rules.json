@@ -1,8 +1,8 @@
 {
     "meta": {
         "version": "1.0.0",
-        "total_rules": 8556,
-        "last_updated": "2026-09-19",
+        "total_rules": 8616,
+        "last_updated": "2026-09-25",
         "filter": {
             "year_gte": 2016,
             "cvss_v3_gte": 7.0
@@ -21603,6 +21603,46 @@
             "offline_supported": true
         },
         {
+            "cve_id": "CVE-2026-93207",
+            "cvss_score": 9.8,
+            "severity": "critical",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  SUNRPC: Zero rpc_gss_wire_cred at svcauth_gss_decode_credbody() entry  svcauth_gss_decode_credbody() writes the caller's rpc_gss_wire_cred field by field and assigns gc_ctx.len only on the success tail.  The caller storage is svcdata->clcred, which lives in the per-svc_rqst gss_svc_data and is reused across requests.  Early decode failures leave partially decoded state mixed with residue from the prior request.  The trailing body_len tightness check is the sharpest case: xdr_stream_decode_opaque_inline() has already written gc_ctx.data with a borrowed inline pointer into the current request's XDR pages, but gc_ctx.len retains its prior value.  Once the request pages are released the pooled clcred carries a dangling pointer paired with a stale length.  Zero the caller's rpc_gss_wire_cred at function entry so that every early-return path leaves a deterministic all-zero cred. On the trailing tightness-check path, gc_ctx.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-93207"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-97413",
+            "cvss_score": 9.8,
+            "severity": "critical",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  RDMA/rtrs-srv: Fix integer underflow in process_read and process_write  usr_len is read from a network-supplied message field (le16_to_cpu) and used to compute data_len = off - usr_len without validating that usr_len <= off. A malicious RDMA client can send usr_len > off causing an integer underflow, resulting in data_len wrapping to a huge size_t value which is then passed to the rdma_ev callback as a memory length, leading to out-of-bounds memory access.  Fix by reading and validating usr_len <= off before rtrs_srv_get_ops_ids() in both process_read() and process_write(), ensuring the early return path acquires no reference and has no resource leak.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-97413"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2024-58006",
             "cvss_score": 9.6,
             "severity": "critical",
@@ -27101,6 +27141,26 @@
                 "https://git.kernel.org/stable/c/cf36fa5357a2fb25776a568d13a3653da7d99bcb",
                 "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/90xxx/CVE-2026-90414.json",
                 "https://nvd.nist.gov/vuln/detail/CVE-2026-90414"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-93228",
+            "cvss_score": 9.1,
+            "severity": "critical",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  svcrdma: Reject Write/Reply chunks with segcount 0  A peer can send a Write or Reply chunk whose segcount field is zero. xdr_check_write_chunk() only rejects segcount > rc_maxpages, so zero passes the range check, and xdr_inline_decode(stream, 0) returns the current (non-NULL) cursor without advancing. The function returns true and pcl_alloc_write() then links a struct svc_rdma_chunk with ch_segcount == 0 onto rc_write_pcl or rc_reply_pcl.  An earlier patch in this series made pcl_for_each_segment() safe for ch_segcount == 0, so this no longer drives the memory walk it used to. Rejecting the malformed frame at the decode boundary is still worthwhile as defense in depth: it keeps degenerate zero-segment chunks off the parsed chunk lists entirely, so any future consumer that walks ch_segments directly cannot observe one, and it makes the zero-floor easy to backport to trees where the macro change is more intrusive. RFC ",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-93228"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
@@ -45348,6 +45408,166 @@
             "offline_supported": true
         },
         {
+            "cve_id": "CVE-2026-93280",
+            "cvss_score": 8.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  greybus: audio: bound the topology section sizes against the fetched size  gb_audio_gb_get_topology() fetches a topology blob of a module-supplied size, and gbaudio_tplg_parse_data() then walks it by adding the module-supplied size_dais, size_controls and size_widgets fields to form the control, widget and route section offsets. Those le32 sizes are never checked against the fetched blob, so a module reporting a small topology size but large section sizes makes the offsets point past the allocation, and parsing reads out of bounds.  Reject a topology whose section sizes do not fit within the fetched size before it is parsed.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-93280"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-93790",
+            "cvss_score": 8.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  wifi: iwlwifi: mvm: fix out-of-bounds tid_data access in BA notif  mvmsta->tid_data was indexed by the TFD loop counter 'i' instead of the actual TID value 'tid'. This writes lq_color into a random tid_data slot unrelated to the BA entry. Since multi-TID blockack is not really in use, 'i' was always 0 and no harm was done. Add a out-of-bound check before accessing the array.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-93790"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-93793",
+            "cvss_score": 8.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  wifi: iwlwifi: mvm: validate TX_CMD response layout  TX_CMD parsing uses frame_count to walk status entries and then read the trailing SCD SSN. Make the minimum-length check follow that exact runtime layout calculation before parsing the payload.  For new TX API, reject TX_CMD responses with frame_count != 1 and warn/return in the aggregation handler to document that aggregated accounting is expected via BA notifications.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-93793"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-93799",
+            "cvss_score": 8.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  wifi: iwlwifi: mvm: validate sta_id in BA window status notif  BA_WINDOW_STATUS_NOTIFICATION_ID extracts a 5-bit sta_id from the firmware notification and uses it to index fw_id_to_mac_id[] without bounds checking. Validate sta_id before array access to prevent out-of-bounds indexing.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-93799"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-93806",
+            "cvss_score": 8.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  wifi: cfg80211: validate assoc response length before status and IE access  cfg80211_rx_assoc_resp() initialises the status and response-IE fields of cfg80211_connect_resp_params from the management frame before proving that the frame is long enough for those offsets. S1G and regular association responses also have different IE offsets, but the S1G path only patched resp_ie after the unsafe initialiser had already run.  Defer resp_ie, resp_ie_len, and status to after the link-iteration loop. Use a bool to remember whether the frame is S1G, then validate the appropriate minimum length and set all three fields in a single if/else block. Funnel short-frame and SME-reject cleanup through a shared free_bss label for the abandon paths.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-93806"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-97409",
+            "cvss_score": 8.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  nvme-fc: Do not cancel requests in io target before it is initialized  A new nvme-fc controller in CONNECTING state sees admin request timeout schedules ctrl->ioerr_work to abort inflight requests. This ends up calling __nvme_fc_abort_outstanding_ios() which aborts requests in both admin and io tagsets. In case fc_ctrl->tag_set was not initialized we see the warning below. This is because ctrl.queue_count is initialized early in nvme_fc_alloc_ctrl().  nvme nvme0: NVME-FC{0}: starting error recovery Connectivity Loss INFO: trying to register non-static key. The code is fine but needs lockdep annotation, or maybe lpfc 0000:ab:00.0: queue 0 connect admin queue failed (-6). you didn't initialize this object before use? turning off the locking correctness validator. Workqueue: nvme-reset-wq nvme_fc_ctrl_ioerr_work [nvme_fc] Call Trace:  <TASK>  dump_stack_lvl+0x57/0x80  register_lock_class+0x567/0x580  __lock_acquire+0x330",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-97409"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-97442",
+            "cvss_score": 8.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  wifi: ath11k: fix invalid data access in ath11k_dp_rx_h_undecap_nwifi  In certain cases, hardware might provide packets with a length greater than the maximum native Wi-Fi header length. This can lead to accessing and modifying fields in the header within the ath11k_dp_rx_h_undecap_nwifi() function for the DP_RX_DECAP_TYPE_NATIVE_WIFI decap type and potentially result in invalid data access and memory corruption.  Kernel stack is corrupted in: ath11k_dp_rx_h_undecap+0x6b0/0x6b0 [ath11k] Call trace:  ath11k_dp_rx_h_mpdu+0x0/0x2e8 [ath11k]  ath11k_dp_rx_h_mpdu+0x1e0/0x2e8 [ath11k]  ath11k_dp_rx_wbm_err+0x1e0/0x450 [ath11k]  ath11k_dp_rx_process_wbm_err+0x2fc/0x460 [ath11k]  ath11k_dp_service_srng+0x2e0/0x348 [ath11k]  Add a sanity check before processing the SKB to prevent invalid data access in the undecap native Wi-Fi function for the DP_RX_DECAP_TYPE_NATIVE_WIFI decap type.  This adapted from the discussion/patch of ",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-97442"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-97509",
+            "cvss_score": 8.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  thunderbolt: Keep XDomain reference during the lifetime of a service  This is needed because we release the service ID in tb_service_release() and the ID array is owned by the parent XDomain.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-97509"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2023-28840",
             "cvss_score": 8.7,
             "severity": "high",
@@ -51350,6 +51570,106 @@
             "offline_supported": true
         },
         {
+            "cve_id": "CVE-2026-93827",
+            "cvss_score": 8.4,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  virtio-fs: avoid double-free on failed queue setup  virtio_fs_setup_vqs() allocates fs->vqs and fs->mq_map before calling virtio_find_vqs(). If virtio_find_vqs() fails, the error path frees both pointers and returns an error to virtio_fs_probe().  virtio_fs_probe() then drops the last kobject reference, and virtio_fs_ktype_release() frees fs->vqs and fs->mq_map again. This leaves dangling pointers in struct virtio_fs and can trigger a double-free during probe failure cleanup.  Set fs->vqs and fs->mq_map to NULL immediately after kfree() in the virtio_fs_setup_vqs() error path so that the later kobject release sees an uninitialized state and kfree(NULL) becomes harmless.  This can be reproduced when a broken virtio-fs device advertises more request queues than the transport actually provides. In that case virtio_find_vqs() fails while setting up the extra queue, and the probe path reaches the double-free cleanup sequen",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-93827"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-97450",
+            "cvss_score": 8.4,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  ACPICA: validate handler object type in two places  ACPICA: validate handler object type in acpi_ev_has_default_handler() and acpi_ev_find_region_handler().",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-97450"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-97451",
+            "cvss_score": 8.4,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  ACPICA: Fix integer overflow in acpi_ex_opcode_3A_1T_1R() (mid_op)  Add overflow check for Index + Length to prevent integer overflow when calculating the truncation length. This prevents negative size parameter being passed to memcpy().",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-97451"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-97452",
+            "cvss_score": 8.4,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  ACPICA: Prevent adding invalid references  Prevent adding references for local, argument, and debug objects in acpi_ut_copy_simple_object().",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-97452"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-97455",
+            "cvss_score": 8.4,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  ACPICA: Fix use-after-free in acpi_ds_terminate_control_method()  Fix use-after-free issue in acpi_ds_terminate_control_method() by clearing references to method locals and arguments.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-97455"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2019-9500",
             "severity": "high",
             "cvss_score": 8.3,
@@ -54501,6 +54821,26 @@
                 "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/93xxx/CVE-2026-93107.json",
                 "https://nvd.nist.gov/vuln/detail/CVE-2026-93107",
                 "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-97433",
+            "cvss_score": 8.2,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  nvme: validate FDP configuration descriptor sizes  Validate descriptor sizes while walking the FDP configurations log so dsze == 0 or a descriptor past the log end cannot cause unbounded iteration or reads past the buffer.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-97433"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
@@ -59022,6 +59362,106 @@
                 "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/90xxx/CVE-2026-90301.json",
                 "https://nvd.nist.gov/vuln/detail/CVE-2026-90301",
                 "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-93221",
+            "cvss_score": 8.1,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  nfsd: convert nfsd_net boolean flags to unsigned long flags word  nfsd_net contains several boolean fields that are accessed from concurrent contexts without serialization.  In particular, nfsd4_end_grace() guards its drain path with a plain bool:      if (nn->grace_ended)             return;     nn->grace_ended = true;  The read and the write are independent, and nothing in struct nfsd_net serializes them.  At least two contexts can reach this code with no lock held:      laundromat path       laundry_wq kworker         nfs4_laundromat()           nfsd4_end_grace()      RECLAIM_COMPLETE path       nfsd compound kthread         nfsd4_reclaim_complete()           inc_reclaim_complete()             nfsd4_end_grace()  Both callers can observe grace_ended == false on different CPUs, both store true, and both proceed into nfsd4_record_grace_done(), which invokes the active client_tracking_ops->grace_done callback. For trac",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-93221"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-93224",
+            "cvss_score": 8.1,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  svcrdma: Fix unmatched rn_unregister on failed accept  When svc_rdma_accept() takes the errout path before rpcrdma_rn_register() has succeeded, the existing cleanup block calls rpcrdma_rn_unregister(dev, &newxprt->sc_rn) unconditionally. svcxprt_rdma is kzalloc'd, so on that path sc_rn.rn_index is 0 and sc_rn.rn_done is NULL; the unregister therefore xa_erase()s another caller's slot 0 and performs an unmatched kref_put() on the rpcrdma_device's rd_kref.  The same errout also brackets the cleanup with svc_xprt_get()/ svc_xprt_put() around the kref_init() birth reference. The kref goes 1 -> 2 -> 1 and never reaches 0, so the svcxprt_rdma (and the net/ns_tracker it pinned) is leaked on every failed accept.  rpcrdma_rn_register() writes rn->rn_done last, only after xa_alloc() and kref_get() have both succeeded, so rn_done == NULL is a natural \"never registered\" sentinel. Guard rpcrdma_rn_unregister() with an early return",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-93224"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-93282",
+            "cvss_score": 8.1,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  ksmbd: fix maximum allowed access checks  The DACL permission check looks for an ACE matching the current user and falls back to the Everyone ACE. It does not consider an Authenticated Users ACE, even though an authenticated session is a member of that well-known group.  As a result, opening a file whose access is granted through S-1-5-11 can incorrectly fail with STATUS_ACCESS_DENIED. Treat an Authenticated Users ACE as a fallback entry alongside Everyone.  The maximal access calculation also combines access masks from every ACE, regardless of whether its SID applies to the current user. This can grant rights belonging to an unrelated principal. Process only ACEs applying to the user, Everyone, or Authenticated Users, and accumulate allowed and denied masks in ACL order. Preserve explicitly requested access bits so they are validated against the resulting maximal mask.  When ACCESS_SYSTEM_SECURITY is denied, report S",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-93282"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-93786",
+            "cvss_score": 8.1,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  ksmbd: preserve VFS inherited POSIX ACL mask  The VFS initializes a child's POSIX ACL from the parent's default ACL and the requested creation mode. Do not mutate the parent ACL or overwrite the child's VFS-computed access and default ACLs afterwards.  This preserves restrictive ACL_MASK entries and prevents SMB object creation from widening effective permissions.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-93786"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-93787",
+            "cvss_score": 8.1,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  smb: client: bound dirent name against end of SMB response in cifs_filldir  cifs_filldir() copies the entry name out of an SMB1 TRANS2_FIND_FIRST / FIND_NEXT response using a length (de.namelen) supplied by the server. The kmalloc'd SMB response buffer is bounded, but nothing checks that de.name + de.namelen still lies inside that buffer before the eventual filldir64() -> verify_dirent_name() -> memchr() reads namelen bytes.  A hostile SMB1 server that returns an oversized FileNameLength in a directory entry therefore causes memchr() to read past the end of the response slab buffer. Reachable from any user who can list a directory on a CIFS mount served by an attacker-controlled server (getdents64() on the mounted directory):    BUG: KASAN: slab-out-of-bounds in memchr+0x71/0x80   Read of size 1 at addr ffff88800e0640cc by task poc/115   Call Trace:    dump_stack_lvl+0x64/0x80    print_report+0xce/0x620    kasan_repor",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-93787"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
@@ -181773,6 +182213,326 @@
             "offline_supported": true
         },
         {
+            "cve_id": "CVE-2026-93237",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  LoongArch: Add DIRECT_MAP_PHYSMEM_END definition  get_free_mem_region() and mhp_get_pluggable_range() bound their search to DIRECT_MAP_PHYSMEM_END. LoongArch does not define it, so the fallback in include/linux/mm.h applies: under CONFIG_SPARSEMEM_VMEMMAP it is (1ULL << MAX_PHYSMEM_BITS) - 1, a compile-time constant that does not adapt to the CPU's physical address space bits (cpu_pabits, probed from CPUCFG1).  The vmemmap window only covers physical space below 2^(cpu_pabits+1) (i.e. VMEMMAP_SIZE), so on CPUs with fewer physical address bits than MAX_PHYSMEM_BITS the fallback allows get_free_mem_region() to return a ZONE_DEVICE region outside the vmemmap window; vmemmap_populate() then wraps the memmap range around and maps it into low memory, silently corrupting the page tables. The same search also picked the top-of- address-space region that crashed memmap_init_zone_device() with amdkfd on Loongson-3C6000 in 6.16 ",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-93237"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-93250",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  vxlan: mdb: Fix use-after-free in vxlan_mdb_flush()  vxlan_mdb_flush() iterates over the MDB entries using hlist_for_each_entry_safe(), which only tolerates the removal of the current entry. Contrary to the comment above the loop, the removal of an entry can trigger the removal of another entry.  Flushing the remotes of a (*, G) entry also removes the (S, G) entries that were created for its source list, once they are left without remotes:  vxlan_mdb_remotes_flush() -> vxlan_mdb_remote_del()    -> vxlan_mdb_remote_srcs_del()       -> vxlan_mdb_remote_src_del()          -> vxlan_mdb_remote_src_fwd_del()             -> __vxlan_mdb_del()                -> vxlan_mdb_entry_put()  Such an entry can be located after the (*, G) entry in the list, as vxlan_mdb_entry_get() returns an existing entry without moving it to the head of the list. This order is obtained by adding the (S, G) entry before the (*, G) entry, the latter wi",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-93250"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-93262",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  md/raid5-ppl: fix use-after-free in ppl_do_flush()  The loop in ppl_do_flush() continues iterating after calling ppl_io_unit_finished(), touching io->pending_flushes and leading to a use-after-free.  Add a break statement to stop the loop once io is freed.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-93262"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-93277",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  RDMA/bnxt_re: Validate udata before executing commands  The destroy callbacks currently zero the udata output after tearing down driver resources. If the userspace access fails, uverbs preserves the uobject and allows the destroy callback to run again, even though the driver resource has already been freed.  Call ib_no_udata_io() before teardown so udata failures are detected while the resource is still intact, then return success after teardown completes.  As part of this change, move ib_respond_empty_udata() to the start of the create and modify flows. While this is not strictly required for general create flows, as the core layer unwinds uobjects on failure, it is necessary for create AH. In _rdma_create_ah(), the HW object is otherwise leaked.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-93277"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-93287",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  i2c: smbus: reject oversized block transfers in the common path  The SMBus block transfer length data->block[0] is validated in i2c_smbus_xfer_emulated() but that check runs too late for tracepoints and is skipped entirely when the adapter provides a native smbus_xfer implementation. This allows user-controlled oversized block lengths to reach tracepoint memcpy calls and driver callbacks unchecked.  Add an early validation in __i2c_smbus_xfer() that rejects block transfers whose caller-supplied length is zero or exceeds I2C_SMBUS_BLOCK_MAX before any tracepoint fires or driver callback runs. data->block[0] is filled in by the device on SMBus block reads, so the check is scoped to operations where the length is actually supplied by the caller. This is consistent with the existing -EINVAL convention in the emulated path and protects all downstream consumers at once: the smbus_write tracepoint, all native smbus_xfer driv",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.3-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-93287"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-93288",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  netfilter: nfnetlink_log: wait for rcu grace period before freeing pernet state  sashiko reports: \"nfnl_log_net_exit() calls nf_log_unset(), which clears the logger pointer without an RCU grace period.  Immediately after, ops_free_list() frees the per-net state while concurrent packets might still be executing nf_log_packet() under rcu_read_lock().\"  Clear the pointer via .pre_exit to make sure rcu readers have completed before pernet storage is free'd.  The change in nf_log_syslog.c is only done for consistency: it doesn't use pernet data.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-93288"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-93782",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  vhost-scsi: flush backend after device ioctls  vhost-scsi translates guest response descriptors into userspace iovecs when commands are submitted.  Target-core completes those commands asynchronously, so VHOST_SET_MEM_TABLE can replace the memory table while an in-flight command still retains response iovecs translated through the old table.  If the old mapping is reused after VHOST_SET_MEM_TABLE returns, command completion can write the response to an unrelated userspace object.  Flush the vhost-scsi backend after vhost_dev_ioctl() handles a device ioctl.  This waits for in-flight commands that can still use the old response iovecs before the ioctl returns.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-93782"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-93798",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  btrfs: fix reloc root cleanup in merge_reloc_roots()  If the root we got has zero root refs in its root item, we are resetting the root's ->reloc_root without using barriers like we do everywhere else. Sashiko complained about this while reviewing another patch, and it's correct (see the Link tag below).  Also, we should not clear BTRFS_ROOT_DEAD_RELOC_TREE from the root unless the root points to the reloc root we have.  Fix this by using clear_reloc_root(), which issues the memory barrier after setting the root's ->reloc_root to NULL and before clearing the bit BTRFS_ROOT_DEAD_RELOC_TREE from the root.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-93798"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-93813",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  btrfs: tree-checker: validate INODE_REF's namelen  [BUG] A crafted btrfs image can trigger the following crash:    BUG: unable to handle page fault for address: ffffd1dc42884000   #PF: supervisor write access in kernel mode   #PF: error_code(0x0002) - not-present page   CPU: 9 UID: 0 PID: 1034 Comm: poc Not tainted 7.1.0-rc4-custom+ #383 PREEMPT(full)  46af0a92938a63be7132e0dfd71e62327c51d5c2   Hardware name: QEMU Standard PC (Q35 + ICH9, 2009), BIOS unknown 02/02/2022   RIP: 0010:memcpy+0xc/0x10   Call Trace:    <TASK>    read_extent_buffer+0xe4/0x100 [btrfs 3cf0785dd58fec8c5ff84633b772f17ce1f92a8f]    btrfs_get_name+0x15e/0x1e0 [btrfs 3cf0785dd58fec8c5ff84633b772f17ce1f92a8f]    reconnect_path+0x165/0x390    exportfs_decode_fh_raw+0x337/0x400    ? drop_caches_sysctl_handler+0xb0/0xb0    </TASK>   ---[ end trace 0000000000000000 ]---   RIP: 0010:memcpy+0xc/0x10   Kernel panic - not syncing: Fatal exception  [CAUSE] T",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-93813"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-93817",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  perf: Fix addr_filter_ranges lifetime  Lee Jia Jie reported that since event::addr_filter_ranges is used under RCU, it should be RCU freed.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-93817"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-97415",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  btrfs: tree-checker: validate names in ROOT_REF and ROOT_BACKREF  ROOT_REF and ROOT_BACKREF items contain a struct btrfs_root_ref followed by the subvolume name. Several readers assume that this layout is already valid and then use the on-disk name length directly. A corrupted item can therefore make those readers address bytes outside the item, and BTRFS_IOC_GET_SUBVOL_INFO can copy too many bytes into its fixed-size UAPI name buffer.  Validate ROOT_REF and ROOT_BACKREF items in tree-checker before any reader uses them. Reject records that do not contain a non-empty name, whose name_len does not exactly describe the remaining item payload, or whose name exceeds BTRFS_NAME_LEN.  For BTRFS_IOC_GET_SUBVOL_INFO, copy only the validated on-disk name_len instead of deriving the copy length from the item size. The ioctl result is zeroed when allocated. That leaves the existing trailing zero byte untouched.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-97415"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-97421",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  RDMA/umem: Be careful about boundary conditions in ib_umem_find_best_pgsz()  Several corner cases, especially important on 32 bits:  - umem->iova is u64, the function argument should pass in u64 or   iova will be truncated - Check that the length is not too large for the iova - Check that lengths > 4G don't overflow the GENMASK",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-97421"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-97429",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  drm/amdkfd: fix UAF race in destroy_queue_cpsch  wait_on_destroy_queue() drops locks to wait for queue resume, allowing a concurrent destroy to free the queue. Use is_being_destroyed flag to serialize destruction.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-97429"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-97478",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  virt: acrn: Fix irqfd use-after-free during eventfd shutdown  acrn_irqfd_deassign() and the eventfd EPOLLHUP wakeup can race and free the same struct hsm_irqfd:    CPU0                                 CPU1   ----                                 ----   eventfd_release()     wake_up_poll(EPOLLHUP)       hsm_irqfd_wakeup()         queue_work(&irqfd->shutdown)                                        acrn_irqfd_deassign()                                          hsm_irqfd_shutdown()                                            list_del_init()                                            eventfd_ctx_remove_wait_queue()                                            eventfd_ctx_put()                                          kfree(irqfd)   hsm_irqfd_shutdown_work()     container_of(work, ..., shutdown)     irqfd->vm                  <-- use-after-free  The deassign path freed the irqfd while a shutdown work item was already queued by ",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-97478"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-97497",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  drm/amdkfd: Check bounds for allocate_sdma_queue restore_sdma_id  allocate_sdma_queue has an option where the sdma queue id can be specified (used by CRIU). We weren't bounds-checking that value.  Confirm it's less than the maximum number of queues.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-97497"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-97513",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  media: chips-media: wave5: Release m2m_ctx after Instance Removed from List  Possible use after free if IRQ thread manages to obtain spinlock between m2m_ctx release and wave5_release function removing stream instance from list of active instances. The IRQ thread looks for the m2m_ctx which is freed so null pointer dereference occurs.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-97513"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2018-1000026",
             "severity": "high",
             "cvss_score": 7.7,
@@ -182721,6 +183481,126 @@
                 "https://git.kernel.org/stable/c/ee0403520cdbcf87e853df9aaa9b518a0684ed38",
                 "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/93xxx/CVE-2026-93165.json",
                 "https://nvd.nist.gov/vuln/detail/CVE-2026-93165"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-93265",
+            "cvss_score": 7.7,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  PCI/pwrctrl: tc9563: Fix parsing the integrated Ethernet MAC Endpoint node  DSP3 has an integrated Ethernet MAC Endpoint which has its own set of config registers for configuring settings such as ASPM. The Endpoint device has two physical functions and those two functions share the same settings.  Parse the Endpoint node under DSP3 instead of parsing both functions.  The existing parsing logic also has one OOB issue as parsing both functions will result in accessing past the tc9563_pwrctrl->cfg array.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-93265"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-97428",
+            "cvss_score": 7.7,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  drm/amdgpu: harden FRU PIA parsing with bounded helpers  Replace the open-coded TLV walk with fru_pia_advance() and fru_pia_copy_field() helpers that bound every read by the actual EEPROM data length, preventing out-of-bounds reads on truncated or malformed FRU data.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-97428"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-97444",
+            "cvss_score": 7.7,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  ACPICA: add boundary checks in two places  Add boundary checks in acpi_ps_get_next_namestring() and acpi_ps_peek_opcode() to prevent out-of-bounds access.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-97444"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-97445",
+            "cvss_score": 7.7,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  ACPICA: Enhance buffer validation in acpi_ut_walk_aml_resources()  Enhance buffer validation in acpi_ut_walk_aml_resources() to prevent buffer overflows.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-97445"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-97448",
+            "cvss_score": 7.7,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  ACPICA: Add validation for node in acpi_ns_build_normalized_path()  Add validation for node in acpi_ns_build_normalized_path() to prevent use-after-free vulnerabilities.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-97448"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-97454",
+            "cvss_score": 7.7,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  ACPICA: add boundary checks in acpi_ps_get_next_field()  Add boundary checks in acpi_ps_get_next_field() to prevent out-of-bounds access.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-97454"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
@@ -208049,6 +208929,46 @@
             "offline_supported": true
         },
         {
+            "cve_id": "CVE-2026-93826",
+            "cvss_score": 7.5,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  HID: hidpp: fix potential UAF in hidpp_connect_event()  If input_register_device() fails, we call input_free_device(), but keep stale pointer to the old device in hidpp->input, which could potentially lead to UAF. Fix that by resetting it to NULL before returning from hidpp_connect_event().",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-93826"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-93830",
+            "cvss_score": 7.5,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  net: stmmac: xgmac2: disable RBUE in default RX interrupt mask  Enabling the RX Buffer Unavailable (RBUE) interrupt is counterproductive and can trigger a MAC interrupt storm under heavy RX pressure. When the DMA runs out of RX descriptors it fires RBUE continuously until software refills the ring.  However, RBUE is redundant: the normal RX completion interrupt (RIE) already triggers NAPI, which processes completed descriptors and refills the ring, causing the DMA to resume. The RBUE handler itself only sets handle_rx - the same outcome as RIE.  On Agilex5 under heavy RX pressure, the MAC interrupt (which includes RBUE) was observed firing 1,821,811,555 times against only 2,618,627 actual RX completions - a ~695x ratio - confirming the severity of the storm.  RBUE does not provide OOM recovery. If page_pool is exhausted, stmmac_rx_refill() cannot advance the DMA tail pointer, the DMA stays suspended, and RBUE fires ag",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-93830"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2026-9545",
             "cvss_score": 7.5,
             "severity": "high",
@@ -208082,6 +209002,46 @@
             "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
             "references": [
                 "https://security-tracker.debian.org/tracker/CVE-2026-9546"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-97417",
+            "cvss_score": 7.5,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  netfilter: nf_conntrack: use get_unaligned_be32() in tcp_sack()  The timestamp-only fast path dereferences the option stream as *(__be32 *)ptr, which assumes 4-byte alignment that the TCP option stream does not guarantee. Use get_unaligned_be32() instead, which reads the value safely and already returns host byte order, so the htonl() on the comparison constant can be dropped.  This matches the existing get_unaligned_be32() use later in the same function.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-97417"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-97508",
+            "cvss_score": 7.5,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  thunderbolt: Set tb->root_switch to NULL when domain is stopped  Similarly what we do with the firmware connection manager. This makes tb_xdp_handle_request() return error to the remote host. However, we need to make sure we keep the uuid alive so that we can reply until the whole domain is released.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-97508"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
@@ -208821,6 +209781,46 @@
             "offline_supported": true
         },
         {
+            "cve_id": "CVE-2026-93225",
+            "cvss_score": 7.4,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  phy: fsl-imx8mq-usb: fix typec switch leak on probe error path  If probe fails after imx95_usb_phy_get_tca() succeeds, the typec switch leaks because the only cleanup path was in .remove(), which never runs on probe failure.  Use devm_add_action_or_reset() so the switch is cleaned up on both probe failure and driver removal. The imx95_usb_phy_put_tca() is no longer needed, it will be removed in .remove() too.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-93225"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-93260",
+            "cvss_score": 7.4,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  powerpc/xive: propagate IPI init errors to prevent use-after-free  When xive_init_ipis() fails (e.g. irq_domain_alloc_irqs() fails), the error path frees the global xive_ipis array.  However, xive_smp_probe() previously ignored this failure and proceeded to call xive_setup_cpu_ipi(), which dereferences the already-freed xive_ipis pointer -- a use-after-free.  Now that xive_smp_probe() returns int (previous patch), propagate the error from xive_init_ipis() and xive_setup_cpu_ipi() through xive_smp_probe().  Check the return value in both pnv_smp_probe() and pSeries_smp_probe() so that IPI setup is aborted cleanly on failure, avoiding the use-after-free.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-93260"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2026-9547",
             "cvss_score": 7.4,
             "severity": "high",
@@ -208834,6 +209834,26 @@
             "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
             "references": [
                 "https://security-tracker.debian.org/tracker/CVE-2026-9547"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-97474",
+            "cvss_score": 7.4,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  wifi: iwlwifi: mld: purge async notifications upon nic error  This fixes a kernel panic in reconfig failure:  1. we have a BSS connection 2. we have a NAN connection 3. FW error occurs 4. reconfig restores the BSS connection 5. however, restoring the NAN connection fails due to a FW error. 6. erroneously, ieee80211_handle_reconfig_failure is called and marks all    interfaces as not-in-driver (will be fixed in a different patch). 7. mac80211 frees the links of the BSS connection but doesn't tell the    driver about that, as it thinks that this vif is not in the driver. 8. in ieee80211_stop_device, *ALL* wiphy works are getting flushed    (erroneously?) 9. Therefore, async_handlers_wk is being executed, processing the    statistics notification that was received after we restored the BSS    connection. 10. the notification handler dereferences fw_id_to_bss_conf[id], which is     now a dangling pointer, as mac80211 alre",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-97474"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
@@ -233292,6 +234312,126 @@
             "offline_supported": true
         },
         {
+            "cve_id": "CVE-2026-93229",
+            "cvss_score": 7.1,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  nfsd: add missing read barrier to rpc_status_get dumpit seqcount retry  The hand-rolled seqcount-like protocol in nfsd_nl_rpc_status_get_dumpit() is missing a read memory barrier (smp_rmb) before its second counter check.  The standard kernel read_seqcount_retry() includes smp_rmb() to ensure that all data reads complete before the counter is re-checked.  Without this barrier, on weakly-ordered architectures (ARM, POWER), the CPU may reorder field reads past the second counter check, making the retry logic ineffective: it could observe a consistent counter pair while reading fields that have been concurrently modified by the writer.  Add smp_rmb() before the second counter check to order the field reads ahead of it, matching the barrier semantics of the standard seqcount read-side.  The begin-side smp_load_acquire() already pairs with the smp_store_release() in nfsd_dispatch(); with the smp_rmb() now ordering the fiel",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-93229"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-93816",
+            "cvss_score": 7.1,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  f2fs: validate inline dentry name lengths before conversion  Inline dentry conversion copies names out of the inline dentry area before checking that each recorded name length fits in the available filename slots.  A corrupted image can therefore make the conversion path read past the inline filename storage while building the regular dentry block.  Validate each inline dentry name length against the inline filename area before copying it.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-93816"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-97437",
+            "cvss_score": 7.1,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  ntfs3: fix out-of-bounds read in ntfs_dir_emit() and hdr_find_e()  The bounds check in ntfs_dir_emit() compares fname->name_len (a character count) against e->size (a byte count) without accounting for the 2-byte-per-character UTF-16LE encoding or the ATTR_FILE_NAME header size:    if (fname->name_len + sizeof(struct NTFS_DE) > le16_to_cpu(e->size))  This computes: name_len + 16 > e_size  The correct check must account for the ATTR_FILE_NAME header (66 bytes before the name) and the UTF-16LE character size (2 bytes each):    sizeof(NTFS_DE) + offsetof(ATTR_FILE_NAME, name) +   name_len * sizeof(short) > e_size  Which computes: 16 + 66 + name_len * 2 > e_size  The correct calculation already exists as fname_full_size() in ntfs.h and is used in cmp_fnames(), namei.c, and fslog.c, but was not used in the readdir path.  A crafted NTFS image with an index entry containing a small e->size but large fname->name_len bypasses ",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-97437"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-97438",
+            "cvss_score": 7.1,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  fs/ntfs3: validate index entry key bounds  [BUG] A malformed NTFS directory index entry can advertise a key_size larger than the bytes actually present in its NTFS_DE payload. Directory lookup then passes that malformed key to cmp_fnames(), which can read past the end of the kmalloc'ed index buffer.  BUG: KASAN: slab-out-of-bounds in fname_full_size fs/ntfs3/ntfs.h:590 [inline] BUG: KASAN: slab-out-of-bounds in cmp_fnames+0x1ea/0x230 fs/ntfs3/index.c:46 Read of size 1 at addr ffff88801c313018 by task syz.6.3365/9279  Call Trace:  __dump_stack lib/dump_stack.c:94 [inline]  dump_stack_lvl+0xbe/0x130 lib/dump_stack.c:120  print_address_description mm/kasan/report.c:378 [inline]  print_report+0xd1/0x650 mm/kasan/report.c:482  kasan_report+0xfb/0x140 mm/kasan/report.c:595  __asan_report_load1_noabort+0x14/0x30 mm/kasan/report_generic.c:378  fname_full_size fs/ntfs3/ntfs.h:590 [inline]  cmp_fnames+0x1ea/0x230 fs/ntfs3/index",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-97438"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-97496",
+            "cvss_score": 7.1,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  drm/amdkfd: Fix OOB memory exposure in get_wave_state()  The get_wave_state() function for v9 trusts cp_hqd_cntl_stack_size and cp_hqd_cntl_stack_offset values read directly from the MQD, which are written by GPU microcode and fully attacker-controlled on the CRIU-restore path (via AMDKFD_IOC_RESTORE_PROCESS with H3).  this leads to an unbounded copy_to_user() that can leak adjacent GTT/kernel memory. If offset > size, integer underflow produces a ~4 GiB read length, if size is set to 1 MiB against a 4 KiB allocation, we leak 1 MiB of adjacent kernel memory (other queues' MQDs, ring buffers, KASLR pointers).  Fix by clamping both cp_hqd_cntl_stack_size to the actual allocated buffer size (q->ctl_stack_size) and cp_hqd_cntl_stack_offset to the clamped size before performing arithmetic and copy_to_user().  This ensures we never read beyond the allocated kernel BO regardless of attacker-supplied MQD field values.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-97496"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-97520",
+            "cvss_score": 7.1,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  gfs2: move quota_init qc iterator increment  Move qc++ from the loop body into the for-loop increment expression in gfs2_quota_init().  This keeps iterator progression explicit and avoids mixing pointer advance with duplicate-slot handling in the loop body.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-97520"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2016-10010",
             "severity": "high",
             "cvss_score": 7.0,
@@ -239648,6 +240788,66 @@
                 "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/93xxx/CVE-2026-93176.json",
                 "https://nvd.nist.gov/vuln/detail/CVE-2026-93176",
                 "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-93796",
+            "cvss_score": 7.0,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  wifi: iwlwifi: pcie: null RX pointers after free  When iwl_pcie_tx_init() fails after RX init, nic init unwinds via iwl_pcie_rx_free().  The freed RX members stayed non-NULL on the live transport object, so later teardown or retry could touch stale RX state. Set rx_pool, global_table, rxq, and alloc_page to NULL after free to make repeated cleanup and retry paths safe.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-93796"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-93801",
+            "cvss_score": 7.0,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  smb/client: zero-initialize stack-allocated cifs_open_info_data  Stack-allocated cifs_open_info_data may contain random data. This can make some fields have wrong value if they are not set later.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-93801"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-93810",
+            "cvss_score": 7.0,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  cachefiles: Fix double fput  Fix a double fput() in error handling in cachefiles_create_tmpfile().",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-93810"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
