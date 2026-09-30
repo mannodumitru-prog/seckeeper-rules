@@ -1,8 +1,8 @@
 {
     "meta": {
         "version": "1.0.0",
-        "total_rules": 8685,
-        "last_updated": "2026-09-26",
+        "total_rules": 8688,
+        "last_updated": "2026-09-30",
         "filter": {
             "year_gte": 2016,
             "cvss_v3_gte": 7.0
@@ -54724,6 +54724,26 @@
             "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
             "references": [
                 "https://security-tracker.debian.org/tracker/CVE-2026-82209"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-84782",
+            "cvss_score": 8.2,
+            "severity": "high",
+            "description": "Issue summary: The DTLS retransmission logic does not correctly handle a handshake message write that is suspended part-way through. The retransmitted message can be read past the message buffer and the retransmission overwrites the internal state the suspended write needs to resume correctly.  Impact summary: The retransmitted message can disclose a heap memory to the peer as plaintext handshake data or cause a crash and a Denial of Service when the read reaches an unmapped memory region.  CWE: CWE-125: Out-of-bounds Read  Description: DTLS handshake messages can be written out in multiple fragments, and a write can suspend mid-message (returning WANT_WRITE) if the underlying transport temporarily cannot accept more data. While such a write is suspended, the DTLS retransmission timer may independently fire and ask the retransmission logic to resend an earlier, already-acknowledged-as-sent message from its retransmit queue.  The retransmission logic reused the same internal buffer and ",
+            "affected_software": [
+                {
+                    "name": "openssl",
+                    "version_end_excluding": "3.5.7-1~deb13u3"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-84782"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
@@ -206833,6 +206853,26 @@
             "offline_supported": true
         },
         {
+            "cve_id": "CVE-2026-72897",
+            "cvss_score": 7.5,
+            "severity": "high",
+            "description": "Issue summary: A TLS server that calls SSL_set_SSL_CTX() to switch a connection to a different SSL_CTX part way through a handshake may access memory beyond the end of an internal array if the replacement context knows about more provider signature algorithms than the context the connection was created from. Applications which never call SSL_set_SSL_CTX() are not affected.  Impact summary: A remote peer may be able to cause a small out-of-bounds read, and in some circumstances a fixed-value out-of-bounds write, on the server heap. This may lead to a Denial of Service.  CWE: CWE-787: Out-of-bounds Write  Description: A TLS connection records how many certificate slots it has when it is created, taken from the SSL_CTX that created it: the built-in certificate types plus one slot for each provider TLS-SIGALG entry that context was aware of. That count sizes an internal array of per-slot certificate validity flags.  An application may replace a connection's SSL_CTX part way through the han",
+            "affected_software": [
+                {
+                    "name": "openssl",
+                    "version_end_excluding": "3.5.7-1~deb13u3"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-72897"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2026-74281",
             "cvss_score": 7.5,
             "severity": "high",
@@ -208555,6 +208595,26 @@
             "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
             "references": [
                 "https://security-tracker.debian.org/tracker/CVE-2026-82208"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-84784",
+            "cvss_score": 7.5,
+            "severity": "high",
+            "description": "Issue summary: A malicious remote peer may flood the local QUIC stack with NEW_CONNECTION_ID frames by avoiding a limit check on how many connection IDs the remote QUIC stack can use.  Impact summary: The local QUIC stack sends a RETIRE_CONN_ID frame for every NEW_CONNECTION_ID frame it receives. The RETIRE_CONN_ID frame is dispatched via the Control Frame Queue (CFQ). If the remote peer also withholds ACKs, then it can force the local stack to allocate ~400MB (depending on ACK delay).  CWE: CWE-770: Allocation of Resources Without Limits or Throttling  Description: RFC 9000 sections 5.1.1 and 5.1.2 [1] describe the mechanism by which a remote peer can notify the local QUIC stack to change the destination connection ID (a.k.a. CID) the local stack uses to identify the connection at the remote peer. Each CID is associated with a sequence number. The sequence number is transmitted in NEW_CONNECTION_ID and RETIRE_CONNECTION_ID frames to identify the CID which is being either associated wi",
+            "affected_software": [
+                {
+                    "name": "openssl",
+                    "version_end_excluding": "3.5.7-1~deb13u3"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-84784"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
