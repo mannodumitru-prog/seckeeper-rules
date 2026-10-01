@@ -1,8 +1,8 @@
 {
     "meta": {
         "version": "1.0.0",
-        "total_rules": 8688,
-        "last_updated": "2026-09-30",
+        "total_rules": 8689,
+        "last_updated": "2026-10-01",
         "filter": {
             "year_gte": 2016,
             "cvss_v3_gte": 7.0
@@ -204689,6 +204689,26 @@
                 "https://git.kernel.org/stable/c/bd69a825485168ef74e815ecb286754b570fdcc7",
                 "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/53xxx/CVE-2026-53397.json",
                 "https://nvd.nist.gov/vuln/detail/CVE-2026-53397"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-54873",
+            "cvss_score": 7.5,
+            "severity": "high",
+            "description": "Issue summary: QUIC process may keep memory for QUIC packet buffer for much longer period than necessary.  Impact summary: Remote peer can exploit this vulnerability by sending maliciously crafted packets, making the local QUIC stack to keep the memory for packet buffers allocated. The time for which the memory remains allocated is entirely under the control of the potentially malicious remote peer.  CWE: CWE-770: Allocation of Resources Without Limits or Throttling  Description: To save copy operation from the packet buffer to the stream reassemble buffer the QUIC stack leaves the stream data on the packet buffer waiting to be copied to a buffer provided by the local receiving application. The QUIC stack releases a reference to the packet buffer only after the data are copied to the application buffer. This design is more efficient for legitimate data transfers but enables an attacker to allocate a lot more memory than actually required by the data kept in the receiving stream buffer.",
+            "affected_software": [
+                {
+                    "name": "openssl",
+                    "version_end_excluding": "3.5.7-1~deb13u3"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-54873"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
