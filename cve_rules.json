@@ -1,8 +1,8 @@
 {
     "meta": {
         "version": "1.0.0",
-        "total_rules": 8745,
-        "last_updated": "2026-10-08",
+        "total_rules": 8746,
+        "last_updated": "2026-10-09",
         "filter": {
             "year_gte": 2016,
             "cvss_v3_gte": 7.0
@@ -238161,6 +238161,26 @@
             "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
             "references": [
                 "https://security-tracker.debian.org/tracker/CVE-2026-97520"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-98136",
+            "cvss_score": 7.1,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  ntfs: bound $AttrDef table walk to the loaded table size  ntfs_attr_find_in_attrdef() walks the in-memory $AttrDef table, but the loop condition bounds only the start of each entry, not the whole entry:  \tfor (ad = vol->attrdef; (u8 *)ad - (u8 *)vol->attrdef < \t\t\tvol->attrdef_size && ad->type; ++ad)  struct attr_def is 160 bytes; the guard reads ad->type at offset 128 and the loop body reads further fields. vol->attrdef is kvzalloc(i_size), where i_size is the on-disk $AttrDef data size, checked in load_and_init_attrdef() only as 0 < i_size <= 0x7fffffff. A volume whose $AttrDef data size is smaller than one entry (e.g. 120 bytes) makes the read of ad->type run past the allocation. Creating a file reaches this through ntfs_attr_size_bounds_check() and reads out of bounds:    BUG: KASAN: slab-out-of-bounds in ntfs_attr_find_in_attrdef+0x66/0xa0   Read of size 4 at addr ffff888005833280 by task init/1    ntfs_attr_find_",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.7-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-98136"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
