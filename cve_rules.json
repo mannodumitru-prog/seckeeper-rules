@@ -1,8 +1,8 @@
 {
     "meta": {
         "version": "1.0.0",
-        "total_rules": 8750,
-        "last_updated": "2026-10-14",
+        "total_rules": 8752,
+        "last_updated": "2026-10-16",
         "filter": {
             "year_gte": 2016,
             "cvss_v3_gte": 7.0
@@ -23883,6 +23883,66 @@
                 "https://git.kernel.org/stable/c/bab5a851e44a3601d31f2aa8043f385bb50ac5d9",
                 "https://git.kernel.org/stable/c/fb10e0e9b220a2eed08931a60dbaad9a2370c908",
                 "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/90xxx/CVE-2026-90049.json"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-99999",
+            "cvss_score": 9.3,
+            "severity": "critical",
+            "description": "ipv4: validate checksum_start before completing checksum",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "5.10.272",
+                    "version_start_including": "2.6.27"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "5.15.223",
+                    "version_start_including": "5.11.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.1.190",
+                    "version_start_including": "5.16.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.6.159",
+                    "version_start_including": "6.2.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.12.113",
+                    "version_start_including": "6.7.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.18.57",
+                    "version_start_including": "6.13.0"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.11",
+                    "version_start_including": "6.19.0"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "http://www.openwall.com/lists/oss-security/2026/10/15/5",
+                "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git",
+                "https://git.kernel.org/stable/c/0fab003ef4698e0628060a45a48f14b43ba2a40a",
+                "https://git.kernel.org/stable/c/32a8b0adaa18e52aaa0b246b5ffe683075354dbb",
+                "https://git.kernel.org/stable/c/6785011f8b16abf40b1e9d8b2e332232b3e68822",
+                "https://git.kernel.org/stable/c/94524b7b32691de2e2ce162c04d6cbc9106e5cbf",
+                "https://git.kernel.org/stable/c/a464d950f31c89565cbaae038cc60db04fe01956",
+                "https://git.kernel.org/stable/c/a65f69e0f38ffbed1b128029e09097436416dc8b",
+                "https://git.kernel.org/stable/c/c3e33464746166264334641dc850a36eef7e6326",
+                "https://git.kernel.org/stable/c/f3e835af6226f1dd12160cbd696081e9b6155de0"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
@@ -59978,6 +60038,26 @@
                 "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/90xxx/CVE-2026-90301.json",
                 "https://nvd.nist.gov/vuln/detail/CVE-2026-90301",
                 "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-92392",
+            "cvss_score": 8.1,
+            "severity": "high",
+            "description": "During an upload, curl mishandles HTTP/2 `RST_STREAM` received from the server (with reason `HTTP_1_1_REQUIRED` or `REFUSED_STREAM`) leading to a use after free of a `struct Curl_easy` object.",
+            "affected_software": [
+                {
+                    "name": "curl",
+                    "version_end_excluding": "8.14.1-2+deb13u7"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-92392"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
