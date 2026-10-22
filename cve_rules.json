@@ -1,8 +1,8 @@
 {
     "meta": {
         "version": "1.0.0",
-        "total_rules": 8752,
-        "last_updated": "2026-10-16",
+        "total_rules": 8755,
+        "last_updated": "2026-10-22",
         "filter": {
             "year_gte": 2016,
             "cvss_v3_gte": 7.0
@@ -102339,6 +102339,31 @@
             "remediation": "Upgrade target components to fixed secure version."
         },
         {
+            "cve_id": "CVE-2024-41008",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "drm/amdgpu: change vm->task_info handling",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.6.160",
+                    "version_start_including": "4.2.0"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://git.kernel.org/stable/c/251840f22eff35c25de531a3fcb523df94c128c0",
+                "https://git.kernel.org/stable/c/b8f67b9ddf4f8fe6dd536590712b5912ad78f99c",
+                "https://github.com/CVEProject/cvelistV5/tree/main/cves/2024/41xxx/CVE-2024-41008.json",
+                "https://nvd.nist.gov/vuln/detail/CVE-2024-41008",
+                "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2024-41009",
             "cvss_score": 7.8,
             "severity": "high",
@@ -130501,6 +130526,39 @@
             "remediation": "Upgrade target components to fixed secure version."
         },
         {
+            "cve_id": "CVE-2025-38656",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "wifi: iwlwifi: Fix error code in iwl_op_mode_dvm_start()",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.6.160",
+                    "version_start_including": "6.6.102"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.12.114",
+                    "version_start_including": "6.12.42"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://git.kernel.org/stable/c/1d068272c21d886d06526454b68368100ba0a720",
+                "https://git.kernel.org/stable/c/5c432da1ee191e9f7830dd516456706063d7bec3",
+                "https://git.kernel.org/stable/c/991e2066f6009d3cb898413058c62dbcc92bd6d2",
+                "https://git.kernel.org/stable/c/cf80c02a9fdb6c5bc8508beb6a0f6a1294fc32f6",
+                "https://git.kernel.org/stable/c/f95598a133a905fd937354ad902773d05593b8b9",
+                "https://github.com/CVEProject/cvelistV5/tree/main/cves/2025/38xxx/CVE-2025-38656.json",
+                "https://nvd.nist.gov/vuln/detail/CVE-2025-38656",
+                "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2025-38659",
             "cvss_score": 7.8,
             "severity": "high",
@@ -140139,6 +140197,37 @@
                 }
             ],
             "remediation": "Upgrade target components to fixed secure version."
+        },
+        {
+            "cve_id": "CVE-2025-71074",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "functionfs: fix the open/removal races",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.6.160",
+                    "version_start_including": "2.6.35"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.12.114",
+                    "version_start_including": "6.7.0"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://git.kernel.org/stable/c/585a656283c954337036422afcd9cb70dd4135e7",
+                "https://git.kernel.org/stable/c/75240e5e51c6e6d67a3039384125fa54259a3926",
+                "https://git.kernel.org/stable/c/e5bf5ee266633cb18fff6f98f0b7d59a62819eee",
+                "https://github.com/CVEProject/cvelistV5/tree/main/cves/2025/71xxx/CVE-2025-71074.json",
+                "https://nvd.nist.gov/vuln/detail/CVE-2025-71074",
+                "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
         },
         {
             "cve_id": "CVE-2025-71075",
