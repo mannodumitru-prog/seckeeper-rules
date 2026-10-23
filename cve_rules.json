@@ -1,8 +1,8 @@
 {
     "meta": {
         "version": "1.0.0",
-        "total_rules": 8755,
-        "last_updated": "2026-10-22",
+        "total_rules": 8762,
+        "last_updated": "2026-10-23",
         "filter": {
             "year_gte": 2016,
             "cvss_v3_gte": 7.0
@@ -60158,6 +60158,26 @@
             "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
             "references": [
                 "https://security-tracker.debian.org/tracker/CVE-2026-93787"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-94300",
+            "cvss_score": 8.1,
+            "severity": "high",
+            "description": "Replaying GSS-TSIG signed UDP messages can result in memory corruption in \"`named`\".  An attacker who can capture a previously signed UDP message can replay it while the negotiated TSIG key is still valid. By also sending crafted queries to a zone the attacker controls, the attacker may potentially achieve remote code execution. This issue affects BIND 9 versions 9.11.0 through 9.18.50, 9.20.0 through 9.20.29, 9.21.0 through 9.21.26, 9.11.3-S1 through 9.18.50-S1, and 9.20.9-S1 through 9.20.29-S1.",
+            "affected_software": [
+                {
+                    "name": "bind9",
+                    "version_end_excluding": "1:9.20.30-1~deb13u1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-94300"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
@@ -141075,6 +141095,26 @@
             "offline_supported": true
         },
         {
+            "cve_id": "CVE-2026-100072",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  ACPI: platform: Use acpi_bus_get_primary_device()  The acpi_get_first_physical_node() usage in acpi_platform_fill_resource() and acpi_create_platform_device() is generally unsafe because in theory the device returned by it may be freed at any time [1].  It is also inefficient because acpi_get_first_physical_node() is called multiple times for the same argument which can be avoided.  Address these issues by using acpi_bus_get_primary_device() instead of acpi_get_first_physical_node() and adjusting the code to call it just once at the beginning of and acpi_create_platform_device() and drop the device reference acquired by it upon the return from that function.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-100072"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2026-106583",
             "cvss_score": 7.8,
             "severity": "high",
@@ -184657,6 +184697,26 @@
             "offline_supported": true
         },
         {
+            "cve_id": "CVE-2026-98149",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  bpf: Fix percpu map update indexing with sparse CPU IDs  Per-CPU array, hash, and cgroup storage map updates without BPF_F_CPU or BPF_F_ALL_CPUS use a value buffer whose per-CPU slots are packed in possible-CPU order. The buffer is sized as:    round_up(value_size, 8) * num_possible_cpus()  The update paths iterate over possible CPUs, but use the logical CPU ID to calculate the source offset:    value + size * cpu  This only works when possible CPU IDs are contiguous starting at zero.  For example, with a possible CPU mask of 0,2-3, the buffer contains three slots corresponding to CPUs 0, 2, and 3. CPU2 is therefore expected to use slot 1 and CPU3 slot 2. Instead, the current code uses slots 2 and 3 respectively, causing incorrect per-CPU values and an out-of-bounds read from the update buffer for CPU3.  The corresponding lookup paths already use a dense offset while iterating over possible CPUs. Do the same for the a",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.7-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-98149"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2026-98156",
             "cvss_score": 7.8,
             "severity": "high",
@@ -202860,6 +202920,26 @@
             "offline_supported": true
         },
         {
+            "cve_id": "CVE-2026-19630",
+            "cvss_score": 7.5,
+            "severity": "high",
+            "description": "In a BIND resolver, inbound DNS protocol messages with a particular structure will result in additional processing, with no limit imposed by BIND.  A DNS message with a maliciously large number of such structures will cause BIND to consume disproportionate amounts of CPU time and memory during processing. This issue affects BIND 9 versions 9.11.0 through 9.18.50, 9.20.0 through 9.20.29, 9.21.0 through 9.21.26, 9.11.3-S1 through 9.18.50-S1, and 9.20.9-S1 through 9.20.29-S1.",
+            "affected_software": [
+                {
+                    "name": "bind9",
+                    "version_end_excluding": "1:9.20.30-1~deb13u1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-19630"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2026-19666",
             "cvss_score": 7.5,
             "severity": "high",
@@ -212268,6 +212348,46 @@
             "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
             "references": [
                 "https://security-tracker.debian.org/tracker/CVE-2026-9546"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-96888",
+            "cvss_score": 7.5,
+            "severity": "high",
+            "description": "A BIND resolver that is configured with both a \"redirect\" zone and \"qname-minimization strict\" may abort with an assertion failure while processing the redirect. This issue affects BIND 9 versions 9.16.0 through 9.18.50, 9.20.0 through 9.20.29, 9.21.0 through 9.21.26, 9.16.8-S1 through 9.18.50-S1, and 9.20.9-S1 through 9.20.29-S1.",
+            "affected_software": [
+                {
+                    "name": "bind9",
+                    "version_end_excluding": "1:9.20.30-1~deb13u1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-96888"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-97313",
+            "cvss_score": 7.5,
+            "severity": "high",
+            "description": "A recursive BIND server that receives a query with recursion desired (RD=1) followed by a non-recursive query (RD=0) may exit with an assertion failure, resulting in a denial of service. To be vulnerable, the BIND server must allow recursive queries and have at least two RPZ zones configured: one with the default setting of \"recursive-only yes\", and the other with \"recursive-only no\". This issue affects BIND 9 versions 9.16.0 through 9.18.50, 9.20.0 through 9.20.29, 9.21.0 through 9.21.26, 9.11.3-S1 through 9.18.50-S1, and 9.20.9-S1 through 9.20.29-S1.",
+            "affected_software": [
+                {
+                    "name": "bind9",
+                    "version_end_excluding": "1:9.20.30-1~deb13u1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-97313"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
@@ -238438,6 +238558,30 @@
             "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
             "references": [
                 "https://security-tracker.debian.org/tracker/CVE-2026-98136"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-98155",
+            "cvss_score": 7.1,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  accel/qaic: Address potential out-of-bounds read in resp_worker()  Although 'commit 2feec5ae5df7 (\"accel/qaic: Handle DBC deactivation if the owner went away\")' fixes the scenario it was intended for by walking the message and only decoding QAIC_TRANS_DEACTIVATE_FROM_DEV, if present, it skipped over the bounds checking code that is included in decode_message(). This could lead to issues such as reading past the slab allocation's end, infinite loops or kernel panics. For those issues to happen, a malformed wire message is needed to be sent from the device.  Instead of duplicating the bounds checking code already present in decode_message(), use the function inside resp_worker().",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.12.111-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.7-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-98155"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
