@@ -1,8 +1,8 @@
 {
     "meta": {
         "version": "1.0.0",
-        "total_rules": 8762,
-        "last_updated": "2026-10-23",
+        "total_rules": 8763,
+        "last_updated": "2026-10-24",
         "filter": {
             "year_gte": 2016,
             "cvss_v3_gte": 7.0
@@ -184566,6 +184566,26 @@
                 "https://git.kernel.org/stable/c/debac3a20dec524a59625cf10fa2f18571127824",
                 "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/98xxx/CVE-2026-98073.json",
                 "https://nvd.nist.gov/vuln/detail/CVE-2026-98073"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-98093",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  ASoC: fsl_micfil: balance mclk enable/disable  hw_params() enables mclk unconditionally and hw_free() disables it unconditionally, but the PCM core does not guarantee 1:1 pairing: hw_free() can run without hw_params(), and hw_params() can be called multiple times from the SETUP state. This triggers an \"already disabled\" WARN() in the first case and leaks an enable reference in the second, leaving the clock ungateable.  Guard both sides with the existing mclk_flag, as fsl_sai.c does with mclk_streams.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.7-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-98093"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
