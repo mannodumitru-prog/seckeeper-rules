@@ -1,8 +1,8 @@
 {
     "meta": {
         "version": "1.0.0",
-        "total_rules": 8866,
-        "last_updated": "2026-10-29",
+        "total_rules": 8868,
+        "last_updated": "2026-10-30",
         "filter": {
             "year_gte": 2016,
             "cvss_v3_gte": 7.0
@@ -26875,6 +26875,26 @@
                 "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/80xxx/CVE-2026-80945.json",
                 "https://nvd.nist.gov/vuln/detail/CVE-2026-80945",
                 "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-86411",
+            "cvss_score": 9.1,
+            "severity": "critical",
+            "description": "An `ftp://` transfer configured with `CURLUSESSL_NONE` can reuse a pooled FTP control connection that a previous easy handle upgraded with `STARTTLS` and authenticated using a client certificate. The second handle performs neither a new TLS handshake nor a new FTP login, so the server continues to authorize it under the first handle's certificate identity.",
+            "affected_software": [
+                {
+                    "name": "curl",
+                    "version_end_excluding": "8.22.0-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-86411"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
@@ -60257,6 +60277,26 @@
             "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
             "references": [
                 "https://security-tracker.debian.org/tracker/CVE-2026-8286"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-86409",
+            "cvss_score": 8.1,
+            "severity": "high",
+            "description": "Setting `CURLOPT_AWS_SIGV4` to NULL but does not disable SigV4 authentication, contrary to expectations and documentation. A subsequent transfer on the same handle still sends an `Authorization: AWS4-HMAC-SHA256` header to whatever URL isset next, leaking state information.",
+            "affected_software": [
+                {
+                    "name": "curl",
+                    "version_end_excluding": "8.22.0-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-86409"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
