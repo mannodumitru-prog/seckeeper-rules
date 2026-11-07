@@ -1,8 +1,8 @@
 {
     "meta": {
         "version": "1.0.0",
-        "total_rules": 8929,
-        "last_updated": "2026-11-05",
+        "total_rules": 8931,
+        "last_updated": "2026-11-07",
         "filter": {
             "year_gte": 2016,
             "cvss_v3_gte": 7.0
@@ -32148,6 +32148,34 @@
                 }
             ],
             "remediation": "Upgrade target components to fixed secure version."
+        },
+        {
+            "cve_id": "CVE-2024-9143",
+            "cvss_score": 8.8,
+            "severity": "high",
+            "description": "Issue summary: Use of the low-level GF(2^m) elliptic curve APIs with untrusted explicit values for the field polynomial can lead to out-of-bounds memory reads or writes.  Impact summary: Out of bound memory writes can lead to an application crash or even a possibility of a remote code execution, however, in all the protocols involving Elliptic Curve Cryptography that we're aware of, either only \"named curves\" are supported, or, if explicit curve parameters are supported, they specify an X9.62 encoding of binary (GF(2^m)) curves that can't represent problematic input values. Thus the likelihood of existence of a vulnerable application is low.  In particular, the X9.62 encoding is used for ECC keys in X.509 certificates, so problematic inputs cannot occur in the context of processing X.509 certificates.  Any problematic use-cases would have to be using an \"exotic\" curve encoding.  The affected APIs include: EC_GROUP_new_curve_GF2m(), EC_GROUP_new_from_params(), and various supporting BN_",
+            "affected_software": [
+                {
+                    "name": "openssl",
+                    "version_end_excluding": "3.0.15-1~deb12u1"
+                },
+                {
+                    "name": "openssl",
+                    "version_end_excluding": "3.3.2-2"
+                },
+                {
+                    "name": "openssl",
+                    "version_end_excluding": "3.3.2-2"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2024-9143"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
         },
         {
             "cve_id": "CVE-2025-15467",
@@ -218631,6 +218659,30 @@
                 }
             ],
             "remediation": "Upgrade target components to fixed secure version."
+        },
+        {
+            "cve_id": "CVE-2024-12797",
+            "cvss_score": 7.4,
+            "severity": "high",
+            "description": "Issue summary: Clients using RFC7250 Raw Public Keys (RPKs) to authenticate a server may fail to notice that the server was not authenticated, because handshakes don't abort as expected when the SSL_VERIFY_PEER verification mode is set.  Impact summary: TLS and DTLS connections using raw public keys may be vulnerable to man-in-middle attacks when server authentication failure is not detected by clients.  RPKs are disabled by default in both TLS clients and TLS servers.  The issue only arises when TLS clients explicitly enable RPK use by the server, and the server, likewise, enables sending of an RPK instead of an X.509 certificate chain.  The affected clients are those that then rely on the handshake to fail when the server's RPK fails to match one of the expected public keys, by setting the verification mode to SSL_VERIFY_PEER.  Clients that enable server-side raw public keys can still find out that raw public key verification failed by calling SSL_get_verify_result(), and those that ",
+            "affected_software": [
+                {
+                    "name": "openssl",
+                    "version_end_excluding": "3.4.1-1"
+                },
+                {
+                    "name": "openssl",
+                    "version_end_excluding": "3.4.1-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2024-12797"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
         },
         {
             "cve_id": "CVE-2024-27052",
