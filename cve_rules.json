@@ -1,8 +1,8 @@
 {
     "meta": {
         "version": "1.0.0",
-        "total_rules": 8931,
-        "last_updated": "2026-11-07",
+        "total_rules": 8932,
+        "last_updated": "2026-11-08",
         "filter": {
             "year_gte": 2016,
             "cvss_v3_gte": 7.0
@@ -58441,6 +58441,26 @@
                 "https://github.com/CVEProject/cvelistV5/tree/main/cves/2025/68xxx/CVE-2025-68799.json",
                 "https://nvd.nist.gov/vuln/detail/CVE-2025-68799",
                 "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-123158",
+            "cvss_score": 8.1,
+            "severity": "high",
+            "description": "sshd in OpenSSH before 10.6p2 on Linux, when musl libc is used without PAM, lacks a workaround for a password authentication bypass (related to misinterpretation of whether a string is intended to be a password hash). For some configurations of accounts, any password between 256 and 1024 characters succeeds. An example of a platform using musl libc without PAM is Alpine Linux.",
+            "affected_software": [
+                {
+                    "name": "openssh",
+                    "version_end_excluding": "1:10.6p2-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-123158"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
