@@ -1,8 +1,8 @@
 {
     "meta": {
         "version": "1.0.0",
-        "total_rules": 8935,
-        "last_updated": "2026-11-12",
+        "total_rules": 8944,
+        "last_updated": "2026-11-14",
         "filter": {
             "year_gte": 2016,
             "cvss_v3_gte": 7.0
@@ -156675,6 +156675,34 @@
             "offline_supported": true
         },
         {
+            "cve_id": "CVE-2026-63822",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  wifi: ath11k: fix warning when unbinding  If there is an error during some initialization related to firmware, the buffers dp->tx_ring[i].tx_status are released. However this is released again when the device is unbinded (ath11k_pci), and we get: WARNING: CPU: 0 PID: 6231 at mm/slub.c:4368 free_large_kmalloc+0x57/0x90 Call Trace: free_large_kmalloc ath11k_dp_free ath11k_core_deinit ath11k_pci_remove ...  The issue is always reproducible from a VM because the MSI addressing initialization is failing.  In order to fix the issue, just set the buffers to NULL after releasing in order to avoid the double free.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.1.177-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.12.95-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.3-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-63822"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2026-63823",
             "cvss_score": 7.8,
             "severity": "high",
@@ -156788,6 +156816,30 @@
                 "https://git.kernel.org/stable/c/cb481e59ea6cae3b7796ac1d7a22b6b24c3f3c0b",
                 "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/63xxx/CVE-2026-63824.json",
                 "https://nvd.nist.gov/vuln/detail/CVE-2026-63824"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-63826",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  fbdev: fix use-after-free in store_modes()  store_modes() replaces a framebuffer's modelist with modes from userspace. On success it frees the old modelist with fb_destroy_modelist(). Two fields still point into that freed list.  One pointer is fb_display[i].mode, the mode a console is using. fbcon_new_modelist() moves these pointers to the new list. It only does so for consoles still mapped to the framebuffer. An unmapped console is skipped and keeps its stale pointer. Unbinding fbcon, for example, sets con2fb_map[i] to -1 but leaves fb_display[i].mode set. An FBIOPUT_VSCREENINFO ioctl with FB_ACTIVATE_INV_MODE later reaches fbcon_mode_deleted(). That function reads the stale fb_display[i].mode through fb_mode_is_equal(). The read is a use-after-free.  The other pointer is fb_info->mode, the current mode. It is set through the mode sysfs attribute. store_modes() does not update fb_info->mode, so it is left pointing i",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.12.95-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.3-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-63826"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
@@ -163503,6 +163555,34 @@
             "offline_supported": true
         },
         {
+            "cve_id": "CVE-2026-64455",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  USB: chaoskey: Fix slab-use-after-free in chaoskey_release()  The chaoskey driver has a use-after-free bug in its release routine. If the user closes the device file after the USB device has been unplugged, a debugging log statement will try to access the usb_interface structure after it has been deallocated:  \tBUG: KASAN: slab-use-after-free in dev_driver_string (drivers/base/core.c:2406) \tRead of size 8 at addr ffff888168e8a0b8 by task chaoskey_raw_re/10106  \tHardware name: QEMU Ubuntu 24.04 PC v2 (i440FX + PIIX, arch_caps fix, 1996), BIOS 1.16.3-debian-1.16.3-2 04/01/2014 \tCall Trace: \t <TASK> \t dump_stack_lvl (lib/dump_stack.c:94 lib/dump_stack.c:120) \t print_report (mm/kasan/report.c:378 mm/kasan/report.c:482) \t kasan_report (mm/kasan/report.c:595) \t dev_driver_string (drivers/base/core.c:2406) \t __dynamic_dev_dbg (lib/dynamic_debug.c:906) \t chaoskey_release (drivers/usb/misc/chaoskey.c:323) \t __fput (fs/file_tab",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.1.180-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.12.96-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.4-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-64455"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2026-64463",
             "cvss_score": 7.8,
             "severity": "high",
@@ -163659,6 +163739,62 @@
                 "https://git.kernel.org/stable/c/faa070c7ad8ba25dcd0b12d7cdbb419e336f5391",
                 "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/64xxx/CVE-2026-64469.json",
                 "https://nvd.nist.gov/vuln/detail/CVE-2026-64469"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-64470",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  Bluetooth: btusb: fix use-after-free on marvell probe failure  Make sure to stop any TX URBs submitted during Marvell OOB wakeup configuration on later probe failures to avoid use-after-free in the completion callback.  This issue was reported by Sashiko while reviewing a fix for a wakeup source leak in the btusb probe errors paths.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.1.180-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.12.96-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.4-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-64470"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-64471",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  Bluetooth: btusb: fix use-after-free on registration failure  Make sure to release the sibling interfaces in case controller registration fails to avoid use-after-free and double-free when they are eventually disconnected.  This issue was reported by Sashiko while reviewing a fix for a wakeup source leak in the btusb probe errors paths.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.1.180-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.12.96-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.4-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-64471"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
@@ -186431,6 +186567,30 @@
             "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
             "references": [
                 "https://security-tracker.debian.org/tracker/CVE-2026-98093"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-98107",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  Bluetooth: L2CAP: fix out-of-bounds write in l2cap_ecred_connect  l2cap_chan_connect() tries to ensure there are no more than L2CAP_ECRED_CONN_SCID_MAX pending ECRED channels, so they fit in the same L2CAP_ECRED_CONN_REQ that l2cap_ecred_connect() constructs.  However, the check only counts deferred channels.  If 6 L2CAP sockets are connected at the same time in order DDDDND (D=deferred, N=non-deferred), the last can bump the total to max+1.  It results to one __le16 written out of bounds of the scid array, and an invalid ECRED_CONN_REQ being sent.  Fix by leaving room for the non-deferred pending ECRED channels in the counting in l2cap_chan_connect(), so the limit can't be exceeded.  Move counting under same critical section where the channel is added. Although race conditions involving this appear unreachable, it's easier to see.  Also add WARN_ON_ONCE check in l2cap_ecred_defer_connect() to make this less brittle.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.12.111-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.7-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-98107"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
@@ -239348,6 +239508,30 @@
             "offline_supported": true
         },
         {
+            "cve_id": "CVE-2026-63838",
+            "cvss_score": 7.1,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  ASoC: rsnd: Fix potential out-of-bounds access of component_dais[]  component_dais[RSND_MAX_COMPONENT] is initially zero-initialized and later populated in rsnd_dai_of_node(). However, the existing boundary check:   if (i >= RSND_MAX_COMPONENT)  does not guarantee that the last valid element remains zero. As a result, the loop can rely on component_dais[RSND_MAX_COMPONENT] being zero, which may lead to an out-of-bounds access.  Found by Linux Verification Center (linuxtesting.org) with SVACE.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.12.94-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.0.10-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-63838"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2026-63902",
             "cvss_score": 7.1,
             "severity": "high",
@@ -240677,6 +240861,58 @@
                 "https://git.kernel.org/stable/c/cc27aea4d454abfb385ee2c9499c78b96db9b728",
                 "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/64xxx/CVE-2026-64452.json",
                 "https://nvd.nist.gov/vuln/detail/CVE-2026-64452"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-64477",
+            "cvss_score": 7.1,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  x86,fs/resctrl: Prevent out-of-bounds access while offlining CPU when SNC enabled  The architecture updates the cpu_mask in a domain's header to track which online CPUs are associated with the domain. When this mask becomes empty the architecture initiates offline of the domain that includes calling on resctrl fs to offline the domain. If it is a monitoring domain in which LLC occupancy is tracked resctrl fs forces the limbo handler to clear all busy RMID state associated with the domain.  The limbo handler always reads the current event value associated with a busy RMID irrespective of it being checked as part of regular \"is it still busy\" check or whether it will be forced released anyway. When reading an RMID on a system with SNC enabled the \"logical RMID\" is converted to the \"physical RMID\" and this conversion requires the NUMA node ID of the resctrl monitoring domain that is in turn determined by querying the NUM",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.12.96-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.4-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-64477"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-64487",
+            "cvss_score": 7.1,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  ALSA: caiaq: fix out-of-bounds read in the Traktor Kontrol S4 input parser  snd_usb_caiaq_tks4_dispatch() decodes the Traktor Kontrol S4 input stream in fixed 16-byte (TKS4_MSGBLOCK_SIZE) message blocks. On every iteration it advances buf and subtracts the block size while looping on \"while (len)\".  len is urb->actual_length. That value is supplied by the device and is not guaranteed to be a multiple of 16. When a final short block leaves len between 1 and 15, the loop runs once more, reads up to buf[15], and then does \"len -= TKS4_MSGBLOCK_SIZE\". As len is unsigned this underflows to a huge value. The loop then keeps iterating and walking buf far past the end of the 512-byte ep4_in_buf, reading out of bounds until a bogus block id happens to be hit.  Iterate only while a full message block is available. This stops the unsigned underflow and silently drops any trailing partial block, which carries no complete control ",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.1.180-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.12.96-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.4-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-64487"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
