@@ -1,8 +1,8 @@
 {
     "meta": {
         "version": "1.0.0",
-        "total_rules": 8944,
-        "last_updated": "2026-11-14",
+        "total_rules": 8964,
+        "last_updated": "2026-11-17",
         "filter": {
             "year_gte": 2016,
             "cvss_v3_gte": 7.0
@@ -27022,6 +27022,86 @@
             "offline_supported": true
         },
         {
+            "cve_id": "CVE-2026-86413",
+            "cvss_score": 9.1,
+            "severity": "critical",
+            "description": "When using an *ambient user* in a first transfer doing Negotiate authentication and asked to follow redirects, curl could pass on its credential details to an unrelated second origin when asked to redirect there.",
+            "affected_software": [
+                {
+                    "name": "curl",
+                    "version_end_excluding": "8.23.0~rc1-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-86413"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-86414",
+            "cvss_score": 9.1,
+            "severity": "critical",
+            "description": "An HTTP proxy can trick libcurl into sending the origin's credentials (Basic password, or a Negotiate/Kerberos ticket) to the proxy itself, by answering the `CONNECT` tunnel request with 401 `WWW-Authenticate:` instead of the expected 407 `Proxy-Authenticate:`.",
+            "affected_software": [
+                {
+                    "name": "curl",
+                    "version_end_excluding": "8.23.0~rc1-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-86414"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-87861",
+            "cvss_score": 9.1,
+            "severity": "critical",
+            "description": "When using ambient user credentials, an HTTP request directed to one origin may be dispatched over a connection previously authenticated via Negotiate for a different origin, leaving the request's intended credentials unused.",
+            "affected_software": [
+                {
+                    "name": "curl",
+                    "version_end_excluding": "8.23.0~rc1-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-87861"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-87866",
+            "cvss_score": 9.1,
+            "severity": "critical",
+            "description": "When built with wolfSSL, curl can successfully validate a pinned public key hash against a key the TLS peer does not possess. During the TLS handshake, wolfSSL validates the connection, but curl's subsequent re-parsing of the same certificate - tricked by a manipulated validity length field - extracts and matches a different embedded key, incorrectly authorizing the pinned public key.",
+            "affected_software": [
+                {
+                    "name": "curl",
+                    "version_end_excluding": "8.23.0~rc1-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-87866"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2026-8924",
             "cvss_score": 9.1,
             "severity": "critical",
@@ -27851,6 +27931,26 @@
             "offline_supported": true
         },
         {
+            "cve_id": "CVE-2026-92388",
+            "cvss_score": 9.1,
+            "severity": "critical",
+            "description": "When an FTP wildcard `LIST` operation fails, libcurl omits the restoration path meant for successful listings, leaving the write callback set to the internal listing parser and the write callback data pointing directly to the easy handle. Subsequent reuse of this handle triggers an immediate crash, and cloning it via `curl_easy_duphandle()` copies this corrupted state into the duplicate. If the original handle is subsequently freed, executing a transfer on the cloned handle causes a heap use-after-free read against the dangling handle reference; alternatively, reusing the original or cloned handle while changing only  `CURLOPT_WRITEDATA` (and omitting `CURLOPT_WRITEFUNCTION`) results in type confusion, forcing the internal parser to interpret incoming server response bytes into memory at the application-supplied write data pointer.",
+            "affected_software": [
+                {
+                    "name": "curl",
+                    "version_end_excluding": "8.23.0~rc1-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-92388"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2026-93228",
             "cvss_score": 9.1,
             "severity": "critical",
@@ -27864,6 +27964,26 @@
             "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
             "references": [
                 "https://security-tracker.debian.org/tracker/CVE-2026-93228"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-94265",
+            "cvss_score": 9.1,
+            "severity": "critical",
+            "description": "When processing an HTTP redirect to a URL containing userinfo (a `username:password` component), curl might erroneously retain and re-transmit the original host's HTTP Negotiate authentication state. Consequently, a malicious server can trigger a redirect containing arbitrary userinfo to force curl to send a freshly minted Kerberos ticket—generated using the ambient identity of the client process to an untrusted third-party host, effectively bypassing the domain-scoping restrictions normally enforced by the absence of `--location-trusted`.",
+            "affected_software": [
+                {
+                    "name": "curl",
+                    "version_end_excluding": "8.23.0~rc2-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-94265"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
@@ -58448,6 +58568,46 @@
             "offline_supported": true
         },
         {
+            "cve_id": "CVE-2026-107928",
+            "cvss_score": 8.1,
+            "severity": "high",
+            "description": "When curl is built with GnuTLS, a malicious WebSocket server can make curl send memory past its send buffer. This is due to an out of bounds read following when `gnutls_record_send()` returns a number of bytes sent **greater than the number of bytes it was given to send**. GnuTLS does that after a blocked send.",
+            "affected_software": [
+                {
+                    "name": "curl",
+                    "version_end_excluding": "8.23.0-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-107928"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-107929",
+            "cvss_score": 8.1,
+            "severity": "high",
+            "description": "When `CURLOPT_INTERFACE` (or the command line tool's `--interface` option) is set with one of the documented prefixes (`if!`, `host!`, `ifhost!`), that binding is not part of the connection reuse key, so a later transfer asking for a different source can silently reuse an existing connection and go out from the earlier transfer's source address",
+            "affected_software": [
+                {
+                    "name": "curl",
+                    "version_end_excluding": "8.23.0-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-107929"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2026-123158",
             "cvss_score": 8.1,
             "severity": "high",
@@ -60631,6 +60791,86 @@
             "offline_supported": true
         },
         {
+            "cve_id": "CVE-2026-86410",
+            "cvss_score": 8.1,
+            "severity": "high",
+            "description": "A flaw in the curl command line tool's logic makes it only set SSH host verification options when interacting directly using SFTP or SCP, and not as a result of following a redirect.",
+            "affected_software": [
+                {
+                    "name": "curl",
+                    "version_end_excluding": "8.23.0~rc1-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-86410"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-86412",
+            "cvss_score": 8.1,
+            "severity": "high",
+            "description": "A remote HTTP server can set a cookie that curl accepts and writes to a Netscape cookie jar but cannot reload. On the next invocation using the same path for `--cookie` and `--cookie-jar`, curl fails before connecting, then the cleanup procedure replaces the jar with an empty file, deleting cookies for unrelated domains.",
+            "affected_software": [
+                {
+                    "name": "curl",
+                    "version_end_excluding": "8.23.0~rc1-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-86412"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-87862",
+            "cvss_score": 8.1,
+            "severity": "high",
+            "description": "Importing a `includeSubDomains` parent HSTS entry before a longer-lived child entry, silently drops the child. Consequently, when the parent expires, the child's valid HSTS policy is lost, causing curl to issue unencrypted HTTP requests rather than upgrading to HTTPS.",
+            "affected_software": [
+                {
+                    "name": "curl",
+                    "version_end_excluding": "8.23.0~rc1-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-87862"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-87863",
+            "cvss_score": 8.1,
+            "severity": "high",
+            "description": "An authenticated HTTPS origin can supply an HSTS `max-age` value that the parser accepts, but time serialization later fails to process. On 64-bit systems, extreme max-age values compute an absolute expiry within standard time integer limits that exceeds calendar time structure bounds. During cache saves, the original HSTS file is truncated before writing a temporary replacement; when serialization fails, the temporary file is deleted, leaving an empty or partial cache. Because the save error is silently ignored during cleanup, curl exits successfully despite the data loss.",
+            "affected_software": [
+                {
+                    "name": "curl",
+                    "version_end_excluding": "8.23.0~rc1-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-87863"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2026-87864",
             "cvss_score": 8.1,
             "severity": "high",
@@ -61214,6 +61454,66 @@
                 "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/90xxx/CVE-2026-90301.json",
                 "https://nvd.nist.gov/vuln/detail/CVE-2026-90301",
                 "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-92386",
+            "cvss_score": 8.1,
+            "severity": "high",
+            "description": "When writing a long cookie name and value to a Netscape cookie jar, a remote HTTP server can make `curl` write a record that exceeds its line-length parsing limit. Consequently, any subsequent `curl` invocation reading from that same cookie jar using `--cookie` silently aborts parsing prematurely upon encountering the too long line, ignoring all subsequent valid cookies in the file.",
+            "affected_software": [
+                {
+                    "name": "curl",
+                    "version_end_excluding": "8.23.0~rc1-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-92386"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-92387",
+            "cvss_score": 8.1,
+            "severity": "high",
+            "description": "By permanently omitting the final control-response line, a malicious FTP, IMAP, POP3, or SMTP server can exploit libcurl and completely bypass its configured transfer timeout mechanism, indefinitely blocking all concurrent transfers bound to the same multi-handle.",
+            "affected_software": [
+                {
+                    "name": "curl",
+                    "version_end_excluding": "8.23.0~rc1-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-92387"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-92389",
+            "cvss_score": 8.1,
+            "severity": "high",
+            "description": "libcurl's TFTP state machine fails to validate state transitions against the requested transfer direction, accepting opening server responses for both reads and writes interchangeably. A malicious TFTP server can respond to a download request in a way that forces the client into transmit mode, prompting libcurl to consume and transmit data from the handle's persistent `CURLOPT_READDATA` pointer - including data remaining from unrelated prior operations, such as an HTTP POST request executed on a reused handle.",
+            "affected_software": [
+                {
+                    "name": "curl",
+                    "version_end_excluding": "8.23.0~rc1-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-92389"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
@@ -215456,6 +215756,26 @@
             "offline_supported": true
         },
         {
+            "cve_id": "CVE-2026-86415",
+            "cvss_score": 7.5,
+            "severity": "high",
+            "description": "libcurl's connection cache match function never considers the automatic client certificate option, so a cached, already authenticated Schannel connection can be handed to a transfer that got redirected to a different origin, even though the code explicitly switched off the auto client cert option for that transfer to prevent exactly this.",
+            "affected_software": [
+                {
+                    "name": "curl",
+                    "version_end_excluding": "8.23.0~rc1-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-86415"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2026-8932",
             "cvss_score": 7.5,
             "severity": "high",
@@ -217199,6 +217519,46 @@
             "remediation": "Upgrade target components to fixed secure version."
         },
         {
+            "cve_id": "CVE-2026-92390",
+            "cvss_score": 7.5,
+            "severity": "high",
+            "description": "When invoked with `--remote-header-name` (`-J`), curl fails to preserve its documented anti-clobbering protection if an intermediate 103 Early Hints response precedes the final HTTP response, or if an `ETag` header is processed before `Content-Disposition` under `--etag-save`. This flaw allows an HTTP(S) server to overwrite an existing local file specified in the `Content-Disposition` header despite the presence of the `-J` non-overwrite constraint.",
+            "affected_software": [
+                {
+                    "name": "curl",
+                    "version_end_excluding": "8.23.0~rc1-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-92390"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-92391",
+            "cvss_score": 7.5,
+            "severity": "high",
+            "description": "A deeply nested multipart MIME structure constructed via the public API causes a stack overflow in libcurl during normal cleanup operations. An excessive recursion depth within `curl_mime_free` leads to unbounded stack frame allocation during structure traversal, ultimately crashing the host process.",
+            "affected_software": [
+                {
+                    "name": "curl",
+                    "version_end_excluding": "8.23.0~rc1-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-92391"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2026-93151",
             "cvss_score": 7.5,
             "severity": "high",
@@ -217287,6 +217647,26 @@
             "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
             "references": [
                 "https://security-tracker.debian.org/tracker/CVE-2026-93830"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-94266",
+            "cvss_score": 7.5,
+            "severity": "high",
+            "description": "libcurl could accidentally return a URL for `curl_easy_getinfo()`'s `CURLINFO_EFFECTIVE_URL` option containing credentials, even though neither the URL provided to libcurl nor the redirected URL did.",
+            "affected_software": [
+                {
+                    "name": "curl",
+                    "version_end_excluding": "8.23.0~rc2-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-94266"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
@@ -219244,6 +219624,26 @@
             "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
             "references": [
                 "https://security-tracker.debian.org/tracker/CVE-2026-74356"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-87865",
+            "cvss_score": 7.4,
+            "severity": "high",
+            "description": "When libcurl uses libssh2 with a hashed `known_hosts` file, an unrelated initial entry can cause host key validation to report a key *mismatch* as a *missing* key to the `CURLOPT_SSH_KEYFUNCTION` callback.",
+            "affected_software": [
+                {
+                    "name": "curl",
+                    "version_end_excluding": "8.23.0~rc1-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-87865"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
