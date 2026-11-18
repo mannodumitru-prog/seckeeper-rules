@@ -1,8 +1,8 @@
 {
     "meta": {
         "version": "1.0.0",
-        "total_rules": 8964,
-        "last_updated": "2026-11-17",
+        "total_rules": 8970,
+        "last_updated": "2026-11-18",
         "filter": {
             "year_gte": 2016,
             "cvss_v3_gte": 7.0
@@ -26143,6 +26143,40 @@
             "offline_supported": true
         },
         {
+            "cve_id": "CVE-2026-64257",
+            "cvss_score": 9.1,
+            "severity": "critical",
+            "description": "smb: client: reject overlapping data areas in SMB2 responses",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "5.11",
+                    "version_start_including": "5.10.261"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "5.16",
+                    "version_start_including": "5.15.212"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://git.kernel.org/stable/c/36bfa52459e45c0d5b668de2f1c91f6dc5c67775",
+                "https://git.kernel.org/stable/c/445ece263131780dee273d727a4d6f11934feec7",
+                "https://git.kernel.org/stable/c/4a9d2657d3e05f6ed09c148cb127b4e58702275f",
+                "https://git.kernel.org/stable/c/57cba95f0e97c6f6e45e6731da30aff091bd7460",
+                "https://git.kernel.org/stable/c/8986c932905ea508d66da421eb2eb6e676ace1fe",
+                "https://git.kernel.org/stable/c/fdafa1e68dc75045b7b617e6e7d2854950804d83",
+                "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/64xxx/CVE-2026-64257.json",
+                "https://nvd.nist.gov/vuln/detail/CVE-2026-64257",
+                "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2026-64269",
             "cvss_score": 9.1,
             "severity": "critical",
@@ -46986,6 +47020,34 @@
                 "https://git.kernel.org/stable/c/ed03d547598c92a036f20e89156540995cac889a",
                 "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/98xxx/CVE-2026-98451.json",
                 "https://nvd.nist.gov/vuln/detail/CVE-2026-98451",
+                "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-98870",
+            "cvss_score": 8.8,
+            "severity": "high",
+            "description": "ksmbd: remove stale channels from all sessions on teardown",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "5.16",
+                    "version_start_including": "5.15.222"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://git.kernel.org/stable/c/9cd6d714d3ca0cff296542dc989696884e41970f",
+                "https://git.kernel.org/stable/c/a15cae16f4432a5ad919ee633e31b07178492955",
+                "https://git.kernel.org/stable/c/b10665730fbf6b5e45fe422badcbbc3f0df96ef5",
+                "https://git.kernel.org/stable/c/b145f9b56c87f9c23ad5464ab0844dbc1de12b36",
+                "https://git.kernel.org/stable/c/f8200bb4994e65a2e5c5b314789eeae39078619d",
+                "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/98xxx/CVE-2026-98870.json",
+                "https://nvd.nist.gov/vuln/detail/CVE-2026-98870",
                 "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
             ],
             "verification_method": "version_match",
@@ -142546,6 +142608,35 @@
             "remediation": "Upgrade target components to fixed secure version."
         },
         {
+            "cve_id": "CVE-2025-71145",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "usb: phy: isp1301: fix non-OF device reference imbalance",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "5.11",
+                    "version_start_including": "5.10.248"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://git.kernel.org/stable/c/03bbdaa4da8c6ea0c8431a5011db188a07822c8a",
+                "https://git.kernel.org/stable/c/43e58abad6c08c5f0943594126ef4cd6559aac0b",
+                "https://git.kernel.org/stable/c/5d3df03f70547d4e3fc10ed4381c052eff51b157",
+                "https://git.kernel.org/stable/c/7501ecfe3e5202490c2d13dc7e181203601fcd69",
+                "https://git.kernel.org/stable/c/75c5d9bce072abbbc09b701a49869ac23c34a906",
+                "https://git.kernel.org/stable/c/b4b64fda4d30a83a7f00e92a0c8a1d47699609f3",
+                "https://github.com/CVEProject/cvelistV5/tree/main/cves/2025/71xxx/CVE-2025-71145.json",
+                "https://nvd.nist.gov/vuln/detail/CVE-2025-71145",
+                "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2025-71152",
             "severity": "high",
             "cvss_score": 7.8,
@@ -188874,6 +188965,26 @@
             "offline_supported": true
         },
         {
+            "cve_id": "CVE-2026-98869",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  bpf: Infer zext_dst based on static register liveness analysis  As reported in the thread [1], the verifier's 32-bit operations zero extension logic is broken. This logic is responsible for correct semantics of 32-bit operations on s390 architecture.  According to BPF semantics, operation `w1 += 1` is supposed to zero extend the upper half of the register `r1`. On s390 the JIT relies on the verifier emitting explicit zero extension before such operations.  The verifier attempts to minimize the amount of zero extensions inserted by tracking whether upper halves of the 64-bit registers are ever used. Previously such tracking worked as follows:  - bpf_reg_state->subreg_def field was set by do_check_insn()   for each operation defining lower but not the upper halves   of the register. - Whenever an operation reading the whole register was verified,   the verifier checked register's subreg_def and set   bpf_insn_aux_data->",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.3.3-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-98869"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2026-98889",
             "cvss_score": 7.8,
             "severity": "high",
@@ -212023,6 +212134,34 @@
             "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
             "references": [
                 "https://security-tracker.debian.org/tracker/CVE-2026-63076"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-63834",
+            "cvss_score": 7.5,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  batman-adv: tp_meter: restrict number of unacked list entries  When the unacked_list is unbound, an attacker could send messages with small lengths and appropriated seqno + gaps to force the receiver to allocate more and more unacked_list entries. And the end either causing an out-of-memory situation or increase the management overhead for the (large) list that significant portions of CPU cycles are wasted in searching through the list.  When limiting the list to a specific number, it is important to still correctly add a new entry to the list. But if the list became larger than the limit, the last entry of the list (with the highest seqno) must be dropped to still allow the earlier seqnos to finish and therefore to continue the process. Otherwise, the process might get stuck with too high seqnos which are not handled by batadv_tp_ack_unordered().",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.1.177-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.12.95-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.3-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-63834"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
@@ -239925,6 +240064,34 @@
             "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
             "references": [
                 "https://security-tracker.debian.org/tracker/CVE-2026-63838"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-63892",
+            "cvss_score": 7.1,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  thunderbolt: property: Reject dir_len < 4 to prevent size_t underflow  On the non-root path, __tb_property_parse_dir() takes dir_len from entry->length (u16 widened to size_t).  Two distinct OOB conditions follow when entry->length < 4:  1. The non-root path begins with kmemdup(&block[dir_offset],    sizeof(*dir->uuid), ...) which always reads 4 dwords from    dir_offset.  tb_property_entry_valid() only enforces    dir_offset + entry->length <= block_len, so a crafted entry    with dir_offset close to the end of the property block and    entry->length in 0..3 passes that gate but lets the UUID copy    run off the block (e.g. dir_offset = 497, dir_len = 3 in a    500-dword block reads block[497..501]).  2. After the kmemdup, content_len = dir_len - 4 underflows size_t    to ~SIZE_MAX, nentries becomes SIZE_MAX / 4, and the entry    walk runs OOB on each iteration until an entry fails    validation or the kernel oopses ",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.1.176-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.12.94-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.0.12-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-63892"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
