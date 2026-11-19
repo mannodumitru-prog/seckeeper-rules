@@ -1,8 +1,8 @@
 {
     "meta": {
         "version": "1.0.0",
-        "total_rules": 8970,
-        "last_updated": "2026-11-18",
+        "total_rules": 8979,
+        "last_updated": "2026-11-19",
         "filter": {
             "year_gte": 2016,
             "cvss_v3_gte": 7.0
@@ -164292,6 +164292,30 @@
             "offline_supported": true
         },
         {
+            "cve_id": "CVE-2026-64517",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  drm/xe/gsc: Fix double-free of managed BO in error path  The error path in xe_gsc_init_post_hwconfig() explicitly frees a BO allocated with xe_managed_bo_create_pin_map() via xe_bo_unpin_map_no_vm(). Since the managed BO already has a devm cleanup action registered, this causes a double-free when devm unwinds during probe failure.  Remove the explicit free and let devm handle it, consistent with all other xe_managed_bo_create_pin_map() callers.  (cherry picked from commit 71d61e3e299a17139e47f980a4d6f425b2c59bf7)",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.12.94-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.0.12-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-64517"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2026-64529",
             "cvss_score": 7.8,
             "severity": "high",
@@ -164820,6 +164844,34 @@
                 "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/64xxx/CVE-2026-64563.json",
                 "https://nvd.nist.gov/vuln/detail/CVE-2026-64563",
                 "https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-64565",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  Input: ims-pcu - fix heap-buffer-overflow in ims_pcu_process_data()  The `ims_pcu_process_data()` processes incoming URB data byte by byte. However, it fails to check if the `read_pos` index exceeds IMS_PCU_BUF_SIZE.  If a malicious USB device sends a packet larger than IMS_PCU_BUF_SIZE, `read_pos` will increment indefinitely. Moreover, since `read_pos` is located immediately after `read_buf`, the attacker can overwrite `read_pos` itself to arbitrarily control the index.  This manipulated `read_pos` is subsequently used in `ims_pcu_handle_response()` to copy data into `cmd_buf`, leading to a heap buffer overflow.  Specifically, an attacker can overwrite the `cmd_done.wait.head` located at offset 136 relative to `cmd_buf` in the `ims_pcu_handle_response()`. Consequently, when the driver calls `complete(&pcu->cmd_done)`, it triggers a control flow hijack by using the manipulated pointer.  Fix this by adding a bounds che",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.1.187-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.12.101-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.3-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-64565"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
@@ -186958,6 +187010,30 @@
             "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
             "references": [
                 "https://security-tracker.debian.org/tracker/CVE-2026-98093"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-98103",
+            "cvss_score": 7.8,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  igmp: convert struct ip_sf_list to RCU  Commit 23d2b94043ca (\"igmp: Add ip_mc_list lock in ip_check_mc_rcu\") added spin_lock_bh(&im->lock) to ip_check_mc_rcu() to prevent a use-after-free while iterating im->sources during concurrent deletions.  However, ip_check_mc_rcu() is called from RCU read-side critical sections in packet receive and route lookup fast paths (e.g. __mkroute_output(), ip_route_input_rcu(), and __udp4_lib_rcv()).  When igmpv3_send_cr() or igmpv3_send_report() holds &pmc->lock and calls add_grec() -> igmpv3_newpack() -> ip_route_output_ports(), an XFRM policy matching a multicast destination triggers xfrm_tmpl_resolve_one() -> xfrm4_get_saddr() -> __mkroute_output() -> ip_check_mc_rcu(). This attempts to acquire &im->lock while &pmc->lock is already held on the same CPU, triggering a lockdep recursive locking warning / deadlock.  Fix this by converting IPv4 struct ip_sf_list to RCU, mirroring the IP",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.12.111-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.7-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-98103"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
@@ -241578,6 +241654,58 @@
             "offline_supported": true
         },
         {
+            "cve_id": "CVE-2026-64518",
+            "cvss_score": 7.1,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  tcp: Fix out-of-bounds access for twsk in tcp_ao_established_key().  lockdep_sock_is_held() was added in tcp_ao_established_key() by the cited commit.  It can be called from tcp_v[46]_timewait_ack() with twsk.  Since it does not have sk->sk_lock, the lockdep annotation results in out-of-bound access.    $ pahole -C tcp_timewait_sock vmlinux | grep size   \t/* size: 288, cachelines: 5, members: 8 */   $ pahole -C sock vmlinux | grep sk_lock   \tsocket_lock_t              sk_lock;              /*   440   192 */  Let's not use lockdep_sock_is_held() for TCP_TIME_WAIT.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.12.94-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.0.12-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-64518"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-64544",
+            "cvss_score": 7.1,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  crypto: asymmetric_keys - fix OOB read in pefile_digest_pe_contents  pefile_digest_pe_contents() computes the trailing-data hash length as pelen - (hashed_bytes + certs_size). A crafted PE can make the addition exceed pelen, causing the unsigned subtraction to underflow to ~4 GiB. This is passed to crypto_shash_update() which reads out of bounds and panics on unmapped vmalloc guard pages.   BUG: unable to handle page fault for address: ffffc900038d8000  Oops: Oops: 0000 [#1] SMP KASAN NOPTI  RIP: 0010:sha256_blocks_generic (lib/crypto/sha256.c:152)  Call Trace:   <TASK>   __sha256_update (lib/crypto/sha256.c:208)   crypto_sha256_update (crypto/sha256.c:142)   verify_pefile_signature (crypto/asymmetric_keys/verify_pefile.c:436)   kexec_kernel_verify_pe_sig (kernel/kexec_file.c:151)   __do_sys_kexec_file_load (kernel/kexec_file.c:406)   do_syscall_64 (arch/x86/entry/syscall_64.c:94)   entry_SYSCALL_64_after_hwframe (arc",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.1.180-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.12.100-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.5-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-64544"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
             "cve_id": "CVE-2026-64546",
             "cvss_score": 7.1,
             "severity": "high",
@@ -241631,6 +241759,62 @@
                 "https://git.kernel.org/stable/c/faaa1e1155833e7d4ce7e3cfaf64c0d636b190db",
                 "https://github.com/CVEProject/cvelistV5/tree/main/cves/2026/64xxx/CVE-2026-64546.json",
                 "https://nvd.nist.gov/vuln/detail/CVE-2026-64546"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-64549",
+            "cvss_score": 7.1,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  Bluetooth: bpa10x: avoid OOB read of revision string in bpa10x_setup()  bpa10x_setup() sends the vendor command 0xfc0e and passes the response to bt_dev_info() and hci_set_fw_info() as a \"%s\" string starting at skb->data + 1, without checking the length:  \tbt_dev_info(hdev, \"%s\", (char *)(skb->data + 1)); \thci_set_fw_info(hdev, \"%s\", skb->data + 1);  A device that returns a one-byte response (status only) leaves skb->data + 1 past the end of the data, and the %s walk reads adjacent slab memory until it meets a NUL. The same happens when the payload is not NUL-terminated within skb->len. The out-of-bounds bytes end up in the kernel log and the firmware-info debugfs file.  Print the revision string with a bounded \"%.*s\" limited to skb->len - 1 instead. This keeps the string readable for well-behaved devices while never reading past the received data, and does not fail setup, so a device returning a short or unterminated",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.1.180-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.12.100-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.5-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-64549"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-64571",
+            "cvss_score": 7.1,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  wifi: p54: validate RX frame length in p54_rx_eeprom_readback()  p54_rx_eeprom_readback() copies the requested EEPROM slice out of a device-supplied readback frame without checking that the skb actually holds that many bytes. Commit da1b9a55ff11 (\"wifi: p54: prevent buffer-overflow in p54_rx_eeprom_readback()\") closed the destination overflow by copying a fixed priv->eeprom_slice_size (and rejecting a mismatched advertised len), but the source side is still unbounded: nothing verifies the frame is long enough to supply that many bytes.  A malicious USB device can send a short frame whose advertised len matches priv->eeprom_slice_size while the payload is truncated. The equality check passes and memcpy() reads past the end of the skb, leaking adjacent heap:    BUG: KASAN: slab-out-of-bounds in p54_rx (drivers/net/wireless/intersil/p54/txrx.c:507)   Read of size 1016 at addr ffff88800f077114 by task swapper/0/0   Call T",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.1.187-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.12.101-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.1.6-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-64571"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
@@ -245106,6 +245290,62 @@
             "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
             "references": [
                 "https://security-tracker.debian.org/tracker/CVE-2026-97520"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-98077",
+            "cvss_score": 7.1,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  netfilter: nf_conntrack_sip: fix OOB read in sip_skip_whitespace()  sip_skip_whitespace() returns dptr unchanged when its own loop exhausts the buffer (dptr == limit), instead of NULL like its sibling sip_follow_continuation() returns on its own \"no more data\" path.  ct_sip_get_header() only checks for NULL after calling it:    dptr = sip_skip_whitespace(dptr, limit);   if (dptr == NULL)           break;   if (*dptr != ':' || ++dptr >= limit)           break;  so a recognized header name followed only by spaces/tabs running to the exact end of the SIP payload, with no colon, makes the very next statement read one byte past the buffer.  Make both \"no more data\" outcomes return NULL, matching the convention sip_follow_continuation() already uses and that both existing callers already check for.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.1.190-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.12.111-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.7-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-98077"
+            ],
+            "verification_method": "version_match",
+            "verification_engine": "osv_version_range",
+            "verification_safety": "version_probe",
+            "offline_supported": true
+        },
+        {
+            "cve_id": "CVE-2026-98088",
+            "cvss_score": 7.1,
+            "severity": "high",
+            "description": "In the Linux kernel, the following vulnerability has been resolved:  scsi: mpt3sas: Avoid out-of-bounds cpumask_of_node() call in _base_assign_reply_queues()  dev_to_node() can return NUMA_NO_NODE (-1) on systems without NUMA topology information for the PCI device, such as single-socket boards that don't expose device-to-node affinity. Passing -1 directly into cpumask_of_node() indexes node_to_cpumask_map[-1], an out-of-bounds array read caught by UBSAN:    UBSAN: array-index-out-of-bounds in arch/x86/include/asm/topology.h:72:28   index -1 is out of range for type 'cpumask *[1024]'  Fall back to cpu_online_mask when no NUMA node is available, rather than assuming dev_to_node() always returns a valid node index.",
+            "affected_software": [
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.1.190-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "6.12.111-1"
+                },
+                {
+                    "name": "linux",
+                    "version_end_excluding": "7.2.7-1"
+                }
+            ],
+            "remediation": "请升级受影响组件至厂商发布的已修复安全版本，并结合发行版安全公告确认回移补丁状态。",
+            "references": [
+                "https://security-tracker.debian.org/tracker/CVE-2026-98088"
             ],
             "verification_method": "version_match",
             "verification_engine": "osv_version_range",
